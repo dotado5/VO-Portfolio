@@ -1,0 +1,11 @@
+.work-experience-section {
+  @apply w-full px-[150px] flex flex-col items-start;
+}
+
+.work-experience-list {
+  @apply flex flex-col mt-[2rem];
+}
+
+.work-experience-section h1 {
+  @apply flex items-center gap-[10px] text-[#303030] text-[24px] font-[700];
+}

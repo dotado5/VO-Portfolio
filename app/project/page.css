@@ -1,0 +1,9 @@
+@reference "../../styles/globals.css";
+
+.snapshot {
+  @apply w-full h-full object-cover px-[150px];
+}
+
+.slider {
+  @apply flex items-center gap-[10px];
+}

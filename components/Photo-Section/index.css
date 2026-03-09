@@ -1,0 +1,16 @@
+@reference "../../styles/globals.css";
+
+.photo-section {
+  @apply w-full mt-[60px] px-[150px];
+}
+
+.my-photo {
+  @apply flex gap-[10px] text-[#303030] text-[24px] font-[700] mb-[15px];
+}
+
+.photos {
+  @apply w-full gap-3;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+}

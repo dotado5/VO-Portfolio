@@ -1,0 +1,21 @@
+@reference "../../styles/globals.css";
+
+.selected-work-section {
+  @apply w-full mx-auto py-24 px-[150px];
+}
+
+.selected-work-header {
+  @apply flex items-center gap-3 mb-10;
+}
+
+.selected-work-folder {
+  @apply text-[#2a2a2a] fill-[#2a2a2a];
+}
+
+.selected-work-section-title {
+  @apply text-xl md:text-2xl font-black uppercase tracking-widest text-[#2a2a2a];
+}
+
+.selected-work-list {
+  @apply flex flex-col gap-12 md:gap-20;
+}

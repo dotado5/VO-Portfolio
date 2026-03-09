@@ -1,0 +1,33 @@
+@reference "../../styles/globals.css";
+
+.about-me-page {
+  @apply flex flex-col mt-[100px];
+}
+
+.about-images-container {
+  @apply relative my-12 flex flex-col gap-5 sm:flex-row sm:gap-0 px-[150px];
+}
+
+.left-image {
+  @apply relative z-10 rotate-0 sm:-rotate-3 md:-rotate-3;
+}
+
+.right-image {
+  @apply relative z-20 ml-0 rotate-0 sm:-ml-[30px] sm:rotate-3 md:-ml-[50px] md:rotate-3;
+}
+
+.about-image {
+  @apply rounded-[20px] object-cover transition-transform duration-300 hover:scale-[1.02];
+}
+
+.about-me {
+  @apply flex flex-col gap-5 px-[150px];
+}
+
+.about-me p {
+  @apply text-[24px] leading-[29px] font-bold text-[#696969];
+}
+
+.about-me span {
+  @apply text-[20px] leading-[22px] font-medium text-[#696969];
+}

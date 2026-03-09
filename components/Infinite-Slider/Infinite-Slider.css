@@ -1,0 +1,26 @@
+.infinite-slider-container {
+  @apply overflow-hidden w-full;
+}
+
+.infinite-slider-track {
+  @apply flex w-fit;
+  animation: scroll var(--animation-duration, 30s) linear infinite;
+}
+
+.infinite-slider-content {
+  @apply flex items-center gap-[10px] shrink-0;
+  padding-right: 10px; /* Match the gap */
+}
+
+.infinite-slider-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

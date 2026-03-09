@@ -1,0 +1,69 @@
+@reference "../../styles/globals.css";
+
+.hero {
+  @apply w-full min-h-[70vh] flex flex-col justify-center px-[150px];
+}
+
+/* Profile Image Styling */
+.profile-wrapper {
+  @apply mb-5 relative inline-block w-[200px] h-[200px];
+
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+}
+
+.profile-wrapper:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.profile-image {
+  @apply w-full h-full object-cover;
+}
+
+/* Typography Styling */
+.hero-title {
+  @apply text-[54px] font-bold leading-[1.1] text-[#525252] tracking-tight mb-8 flex flex-col;
+}
+
+.hero-description {
+  @apply text-[22px] text-[#696969] max-w-2xl leading-[22px] mb-2;
+}
+
+.hero-details {
+  @apply text-[18px] text-black mb-4;
+}
+
+/* Social Links Styling */
+.social-links {
+  @apply flex items-center space-x-8;
+}
+
+.social-link {
+  @apply flex items-center text-[16px] font-bold text-zinc-800 no-underline transition-colors hover:text-black;
+}
+
+.social-ink-icon {
+  @apply ml-1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .hero {
+    @apply px-10;
+  }
+  .hero-title {
+    @apply text-[48px];
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    @apply px-6;
+  }
+  .hero-title {
+    @apply text-[36px];
+  }
+  .social-links {
+    @apply flex-col space-x-0 space-y-4 items-start;
+  }
+}

@@ -1,0 +1,49 @@
+@reference "../../styles/globals.css";
+
+.work-details-header {
+  @apply flex flex-col md:flex-row justify-between items-start gap-10 md:gap-20 w-full mt-[150px] px-5 sm:px-10 lg:px-[150px] mb-[60px];
+}
+
+.header-left {
+  @apply flex flex-col gap-1 max-w-[700px];
+}
+
+.client-image-wrapper {
+  @apply w-[100px] h-[70px] relative overflow-hidden rounded-md;
+}
+
+.client-image {
+  @apply object-cover w-full h-full;
+}
+
+.project-title {
+  @apply text-[#303030] text-[32px] sm:text-[40px] md:text-[36px] font-bold leading-[1.1] tracking-tight;
+}
+
+.project-date {
+  @apply bg-[#737373] text-[#F1F1F1] text-[14px] font-medium px-4 py-1.5 rounded-full w-fit tracking-wide mt-2;
+}
+
+.header-right {
+  @apply flex flex-col gap-4 shrink-0 md:pt-4;
+}
+
+.info-block {
+  @apply flex flex-col;
+}
+
+.info-label {
+  @apply text-[#303030] text-[14px] font-medium uppercase tracking-wider;
+}
+
+.info-value {
+  @apply text-[#696969] text-[20px] font-medium leading-tight;
+}
+
+.skills-list {
+  @apply flex flex-col gap-0.5 text-[#696969] text-[20px] font-medium leading-tight;
+}
+
+.skills-list li {
+  @apply list-none;
+}

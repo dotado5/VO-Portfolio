@@ -1,0 +1,53 @@
+@reference "../../styles/globals.css";
+
+.selected-work-box {
+  @apply flex flex-col md:flex-row gap-6 md:gap-12 lg:gap-16 items-center w-full;
+}
+
+.selected-work-box.reverse {
+  @apply md:flex-row-reverse;
+}
+
+.selected-work-image-container {
+  @apply w-full md:w-[55%] aspect-[4/3] rounded-[24px] border-[3px] border-[#9ca3af] overflow-hidden relative bg-white;
+}
+
+.selected-work-image {
+  @apply object-cover;
+}
+
+.selected-work-content {
+  @apply w-full md:w-[45%] flex flex-col justify-center items-start lg:pr-10;
+}
+
+.selected-work-content.reverse {
+  @apply lg:pr-0 lg:pl-10;
+}
+
+.selected-work-date-badge {
+  @apply bg-[#757575] text-white text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 sm:mb-4;
+}
+
+.selected-work-title {
+  @apply text-xl sm:text-2xl md:text-[26px] font-extrabold text-[#2a2a2a] mb-2 sm:mb-3 leading-tight;
+}
+
+.selected-work-description {
+  @apply text-[#5a5a5a] text-sm sm:text-[15px] md:text-base mb-5 sm:mb-6 leading-relaxed max-w-md;
+}
+
+.selected-work-link {
+  @apply flex items-center gap-2 text-xs sm:text-sm font-bold text-[#4a4a4a] uppercase transition-colors cursor-pointer;
+}
+
+.selected-work-link:hover {
+  @apply text-black;
+}
+
+.selected-work-link-icon {
+  @apply bg-[#4a4a4a] text-white rounded-sm p-[2px] flex items-center justify-center transition-colors;
+}
+
+.selected-work-link:hover .selected-work-link-icon {
+  @apply bg-black;
+}

@@ -1,0 +1,25 @@
+@reference "../../styles/globals.css";
+
+.project-section {
+  @apply flex flex-col md:flex-row gap-8 px-[150px] py-16;
+}
+
+.section-title-wrapper {
+  @apply md:w-[250px] shrink-0;
+}
+
+.section-title {
+  @apply text-base font-bold uppercase tracking-tight text-[#1A1A1A];
+}
+
+.section-content {
+  @apply flex-1 flex flex-col gap-6;
+}
+
+.content-paragraph {
+  @apply text-lg text-[#666666] leading-[1.6] max-w-[800px];
+}
+
+.content-paragraph.font-bold {
+  @apply text-[#333333] font-bold;
+}

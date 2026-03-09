@@ -1,0 +1,37 @@
+@reference "../../styles/globals.css";
+
+.navbar {
+  @apply top-0 left-0 w-full z-50  border-b border-gray-100 py-4 flex items-center justify-between px-[150px] h-[45px] mt-[35px];
+}
+
+.logo {
+  @apply h-[45px];
+}
+
+.nav-links {
+  @apply hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide text-gray-600;
+}
+
+.nav-link {
+  @apply flex items-center hover:text-black transition-colors uppercase no-underline text-inherit;
+}
+
+.nav-link-disabled {
+  @apply text-[#A1A1A1] cursor-not-allowed uppercase text-sm;
+}
+
+.nav-link-icon {
+  @apply mx-2 h-4 w-4;
+}
+
+.cta {
+  @apply flex items-center text-sm font-semibold tracking-tight no-underline;
+}
+
+.cta-text {
+  @apply mr-3 text-gray-800 uppercase transition-colors;
+}
+
+.cta:hover .cta-text {
+  @apply text-black;
+}
