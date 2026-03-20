@@ -1,12 +1,13 @@
 @reference "../../styles/globals.css";
 
 .hero {
-  @apply w-full min-h-[70vh] flex flex-col justify-center px-[150px];
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
 }
 
 /* Profile Image Styling */
 .profile-wrapper {
-  @apply mb-5 relative inline-block w-[200px] h-[200px];
+  @apply mb-8 relative inline-block w-[150px] h-[150px] md:w-[200px] md:h-[200px];
 
   transform: rotate(-3deg);
   transition: transform 0.3s ease;
@@ -17,53 +18,44 @@
 }
 
 .profile-image {
-  @apply w-full h-full object-cover;
+  @apply w-full h-full object-cover rounded-2xl;
 }
 
 /* Typography Styling */
 .hero-title {
-  @apply text-[54px] font-bold leading-[1.1] text-[#525252] tracking-tight mb-8 flex flex-col;
+  @apply text-4xl sm:text-5xl md:text-6xl lg:text-[54px] font-bold leading-[1.1] text-[#525252] tracking-tight mb-8 flex flex-col;
 }
 
 .hero-description {
-  @apply text-[22px] text-[#696969] max-w-2xl leading-[22px] mb-2;
+  @apply text-lg sm:text-xl md:text-[22px] text-[#696969] max-w-2xl leading-relaxed mb-4;
 }
 
 .hero-details {
-  @apply text-[18px] text-black mb-4;
+  @apply text-base sm:text-lg md:text-[18px] text-black mb-8;
 }
 
 /* Social Links Styling */
 .social-links {
-  @apply flex items-center space-x-8;
+  @apply flex flex-wrap items-center gap-6 md:gap-8;
 }
 
 .social-link {
-  @apply flex items-center text-[16px] font-bold text-zinc-800 no-underline transition-colors hover:text-black;
+  @apply flex items-center text-sm sm:text-base font-bold text-zinc-800 no-underline transition-colors hover:text-black;
 }
 
-.social-ink-icon {
-  @apply ml-1;
+.social-link img {
+  @apply ml-1 w-3 h-3 md:w-4 md:h-4;
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
-  .hero {
-    @apply px-10;
-  }
-  .hero-title {
-    @apply text-[48px];
-  }
-}
-
 @media (max-width: 640px) {
   .hero {
-    @apply px-6;
+    @apply py-12;
   }
   .hero-title {
-    @apply text-[36px];
+    @apply mb-6;
   }
   .social-links {
-    @apply flex-col space-x-0 space-y-4 items-start;
+    @apply grid grid-cols-2 gap-4;
   }
 }

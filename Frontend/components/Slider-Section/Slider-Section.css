@@ -1,7 +1,10 @@
+@reference "../../styles/globals.css";
+
 .slider-section {
   @apply flex flex-col gap-[10px];
 }
 
 .exploration {
-  @apply flex items-center gap-[10px] text-[#303030] text-[24px] font-[700] pl-[150px];
+  @apply flex items-center gap-[10px] text-[#303030] text-[20px] md:text-[24px] font-[700];
+  padding-left: var(--spacing-responsive-px);
 }

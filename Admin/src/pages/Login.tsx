@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
 import { LogIn, Mail, Lock, Loader2 } from "lucide-react";
 import { AuthService } from "../services/auth.service";
@@ -17,7 +17,7 @@ const Login: React.FC = () => {
     try {
       const user = await AuthService.signIn({ email, password });
       showToast.success(`Welcome back!!! ${user.user.email}`);
-      navigate("/dashboard");
+      navigate("/");
     } catch (error: any) {
       showToast.error(
         error.response?.data?.message ||
@@ -84,7 +84,7 @@ const Login: React.FC = () => {
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary" disabled={isLoading}>
+        <button className="btn btn-primary" disabled={isLoading} type="submit">
           {isLoading ? (
             <Loader2 className="animate-spin" size={20} />
           ) : (
@@ -92,27 +92,6 @@ const Login: React.FC = () => {
           )}
           {isLoading ? "Signing in..." : "Sign In"}
         </button>
-
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: "1.5rem",
-            color: "var(--text-secondary)",
-            fontSize: "0.875rem",
-          }}
-        >
-          Don't have an account?{" "}
-          <Link
-            to="/signup"
-            style={{
-              color: "var(--accent-primary)",
-              fontWeight: "600",
-              textDecoration: "none",
-            }}
-          >
-            Sign up
-          </Link>
-        </p>
       </form>
     </AuthLayout>
   );

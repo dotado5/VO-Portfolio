@@ -6,11 +6,18 @@ export const AuthService = {
   async signUp(dto: AuthDto): Promise<AuthResponse> {
     const { data } = await api.post("/auth/signup", dto);
     useAuthStore.getState().setAuth(data);
+
     return data;
   },
 
   async signIn(dto: AuthDto): Promise<AuthResponse> {
-    const { data } = await api.post("/auth/signin", dto);
+    console.log("dto", dto);
+
+    const { data } = await api.post("/auth/signin", {
+      email: dto.email,
+      password: dto.password,
+    });
+
     useAuthStore.getState().setAuth(data);
     return data;
   },

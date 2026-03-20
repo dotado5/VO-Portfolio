@@ -3,3 +3,5 @@
 .photo-card {
   @apply border-[5px] border-[#A1A1A1] rounded-[20px] bg-white w-[135px] h-[135px];
 }
+
+

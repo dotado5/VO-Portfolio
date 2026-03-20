@@ -1,15 +1,26 @@
 @reference "../../styles/globals.css";
 
 .navbar {
-  @apply top-0 left-0 w-full z-50  border-b border-gray-100 py-4 flex items-center justify-between px-[150px] h-[45px] mt-[35px];
+  @apply fixed top-0 left-0 w-full z-[100] border-b border-gray-100 py-4 flex items-center justify-between h-[65px] backdrop-blur-md;
+  background-color: rgba(241, 241, 241, 0.95);
+}
+
+.navbar-container {
+  @apply flex items-center justify-between w-full relative z-[120];
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
 }
 
 .logo {
-  @apply h-[45px];
+  @apply h-[35px] md:h-[45px] flex items-center;
+}
+
+.logo img {
+  @apply h-full w-auto;
 }
 
 .nav-links {
-  @apply hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide text-gray-600;
+  @apply hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wide text-gray-600;
 }
 
 .nav-link {
@@ -25,7 +36,7 @@
 }
 
 .cta {
-  @apply flex items-center text-sm font-semibold tracking-tight no-underline;
+  @apply hidden sm:flex items-center text-sm font-semibold tracking-tight no-underline;
 }
 
 .cta-text {
@@ -34,4 +45,27 @@
 
 .cta:hover .cta-text {
   @apply text-black;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  @apply lg:hidden p-2 text-gray-600 hover:text-black transition-colors;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  @apply fixed inset-0 z-[110] flex flex-col pt-[100px] px-6 lg:hidden;
+  background-color: #f1f1f1;
+}
+
+.mobile-nav-links {
+  @apply flex flex-col space-y-8 text-2xl font-bold uppercase;
+}
+
+.mobile-nav-link {
+  @apply flex items-center justify-between border-b border-gray-200 pb-4;
+}
+
+.mobile-cta {
+  @apply mt-12 flex items-center justify-center bg-black text-white py-4 rounded-xl text-lg font-bold;
 }

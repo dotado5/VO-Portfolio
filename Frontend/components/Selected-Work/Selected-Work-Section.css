@@ -1,7 +1,9 @@
 @reference "../../styles/globals.css";
 
 .selected-work-section {
-  @apply w-full mx-auto py-24 px-[150px];
+  @apply w-full mx-auto py-16 md:py-24;
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
 }
 
 .selected-work-header {
@@ -13,9 +15,9 @@
 }
 
 .selected-work-section-title {
-  @apply text-xl md:text-2xl font-black uppercase tracking-widest text-[#2a2a2a];
+  @apply text-[#525252] text-2xl sm:text-3xl md:text-[40px] font-bold uppercase leading-tight;
 }
 
 .selected-work-list {
-  @apply flex flex-col gap-12 md:gap-20;
+  @apply flex flex-col gap-12 md:gap-24;
 }

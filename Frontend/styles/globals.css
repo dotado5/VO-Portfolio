@@ -1,5 +1,36 @@
 @import "tailwindcss";
 
+:root {
+  --spacing-responsive-px: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --spacing-responsive-px: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --spacing-responsive-px: 6rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --spacing-responsive-px: 9.375rem;
+  }
+}
+
+.responsive-px {
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
+}
+
+.responsive-pl {
+  padding-left: var(--spacing-responsive-px);
+}
+
 body {
-  background-color: #f1f1f1;
+  @apply bg-[#f1f1f1] antialiased;
 }

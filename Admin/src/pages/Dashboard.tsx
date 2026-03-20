@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   Plus,
-  LogOut,
   ExternalLink,
   Edit2,
   Trash2,
@@ -12,34 +11,25 @@ import {
   List,
   Loader2,
   RefreshCw,
-  User as UserIcon,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { ProjectService } from "../services/project.service";
-import { AuthService } from "../services/auth.service";
 import { showToast } from "../utils/toast";
-import { useAuthStore } from "../store/authStore";
 import { useProjectStore } from "../store/projectStore";
-import { Project } from "../types/project.type";
+import { Project, CreateProjectDto } from "../types/project.type";
+import { dummyProjects } from "../lib/data";
+import ProjectModal from "../components/ProjectModal";
 
 const Dashboard: React.FC = () => {
-  const { user, isAuthenticated } = useAuthStore();
   const { projects } = useProjectStore();
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
 
   useEffect(() => {
-    if (!isAuthenticated()) {
-      navigate("/login");
-      return;
-    }
-
-    if (projects.length === 0) {
-      loadProjects();
-    }
-  }, [isAuthenticated, navigate, projects.length]);
+    loadProjects();
+  }, []);
 
   const loadProjects = async () => {
     try {
@@ -64,13 +54,36 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleLogout = () => {
-    AuthService.signOut();
-    showToast.info("Signed out successfully.");
-    navigate("/login");
+  const handleAddProject = () => {
+    setEditingProject(null);
+    setIsModalOpen(true);
   };
 
-  const filteredProjects = projects.filter(
+  const handleEditProject = (project: Project) => {
+    setEditingProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleSaveProject = async (data: CreateProjectDto | Project) => {
+    try {
+      if ("id" in data) {
+        // This is an update
+        const updated = await ProjectService.update(data.id, data as any);
+        showToast.success(`Project "${updated.title}" updated successfully.`);
+      } else {
+        // This is a new project
+        const created = await ProjectService.create(data as any);
+        showToast.success(`Project "${created.title}" created successfully.`);
+      }
+    } catch (error) {
+      showToast.error("Failed to save project. Please check your data.");
+      throw error;
+    }
+  };
+
+  const allProjects = [...projects, ...dummyProjects];
+
+  const filteredProjects = allProjects.filter(
     (project: Project) =>
       project.title.toLowerCase().includes(search.toLowerCase()) ||
       project.role.toLowerCase().includes(search.toLowerCase()) ||
@@ -81,45 +94,19 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="container" style={{ paddingBottom: "5rem" }}>
-      <nav className="dashboard-nav">
-        <h2 style={{ fontSize: "1.75rem" }} className="gradient-text">
-          Portfolio Admin
-        </h2>
+      <nav className="dashboard-nav" style={{ padding: "0" }}>
+        <div style={{ flex: 1 }}></div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-          <div
-            className="glass"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.5rem 1rem",
-              borderRadius: "var(--radius-full)",
-              fontSize: "0.875rem",
-              color: "var(--text-secondary)",
-            }}
-          >
-            <UserIcon size={16} />
-            <span>{user?.email}</span>
-          </div>
-
           <div className="search-bar">
             <Search size={18} style={{ color: "var(--text-muted)" }} />
             <input
               type="text"
-              placeholder="Search projects by title, role or skill..."
+              placeholder="Search projects..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-
-          <button
-            onClick={handleLogout}
-            className="btn btn-secondary"
-            style={{ width: "auto", padding: "0.6rem 1rem" }}
-          >
-            <LogOut size={18} />
-          </button>
         </div>
       </nav>
 
@@ -209,7 +196,11 @@ const Dashboard: React.FC = () => {
               <List size={20} />
             </button>
           </div>
-          <button className="btn btn-primary" style={{ width: "auto" }}>
+          <button
+            className="btn btn-primary"
+            style={{ width: "auto" }}
+            onClick={handleAddProject}
+          >
             <Plus size={20} />
             Add Project
           </button>
@@ -350,6 +341,7 @@ const Dashboard: React.FC = () => {
                   <button
                     className="btn btn-secondary"
                     style={{ padding: "0.5rem", width: "auto" }}
+                    onClick={() => handleEditProject(project)}
                   >
                     <Edit2 size={16} />
                   </button>
@@ -387,6 +379,14 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
       )}
+
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSaveProject}
+        project={editingProject}
+        title={editingProject ? "Edit Project" : "Add New Project"}
+      />
     </div>
   );
 };

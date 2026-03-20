@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@reference "../../styles/globals.css";
 
 .contact-form {
   @apply flex flex-col w-full gap-[3rem];

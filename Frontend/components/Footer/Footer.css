@@ -1,7 +1,9 @@
 @reference "../../styles/globals.css";
 
 .footer {
-  @apply w-full flex items-center justify-between px-[150px] py-8 border-t border-gray-100 mt-auto;
+  @apply w-full flex flex-col md:flex-row items-center justify-between py-8 gap-6 border-t border-gray-100 mt-auto;
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
 }
 
 .footer-left {
@@ -17,7 +19,7 @@
 }
 
 .footer-right {
-  @apply text-sm text-gray-500 font-normal;
+  @apply text-sm text-gray-500 font-normal text-center md:text-right;
 }
 
 .copyright-text {
