@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
-import { LogIn, Mail, Lock, Loader2 } from "lucide-react";
+import { LogIn, Mail, Lock, Loader2, Eye, EyeOff } from "lucide-react";
 import { AuthService } from "../services/auth.service";
 import { showToast } from "../utils/toast";
 
@@ -9,6 +9,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -73,14 +74,33 @@ const Login: React.FC = () => {
               }}
             />
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               className="input-field"
-              placeholder="••••••••"
-              style={{ paddingLeft: "3rem" }}
+              placeholder="Enter your password"
+              style={{ paddingLeft: "3rem", paddingRight: "3rem" }}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                position: "absolute",
+                right: "1rem",
+                top: "50%",
+                transform: "translateY(-50%)",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: "0",
+                display: "flex",
+                alignItems: "center",
+                color: "var(--text-muted)",
+              }}
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
           </div>
         </div>
 

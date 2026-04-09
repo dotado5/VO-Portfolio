@@ -26,7 +26,7 @@ export class AuthService {
       data: {
         id: data.user?.id,
         email,
-        createdAt: new Date().toDateString(),
+        createdAt: new Date(),
       },
     });
 

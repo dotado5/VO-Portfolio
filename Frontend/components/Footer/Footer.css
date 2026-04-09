@@ -19,7 +19,7 @@
 }
 
 .footer-right {
-  @apply text-sm text-gray-500 font-normal text-center md:text-right;
+  @apply text-sm font-normal text-center md:text-right;
 }
 
 .copyright-text {

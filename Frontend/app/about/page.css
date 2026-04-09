@@ -25,11 +25,9 @@
 }
 
 .about-me p {
-  @apply text-[24px] leading-[29px] font-bold text-[#696969];
+  @apply text-[24px] leading-[29px] font-bold;
 }
 
 .about-me span {
-  @apply text-[20px] leading-[22px] font-medium text-[#696969];
+  @apply text-[20px] leading-[22px] font-medium;
 }
-
-

@@ -16,7 +16,6 @@ import { ProjectService } from "../services/project.service";
 import { showToast } from "../utils/toast";
 import { useProjectStore } from "../store/projectStore";
 import { Project, CreateProjectDto } from "../types/project.type";
-import { dummyProjects } from "../lib/data";
 import ProjectModal from "../components/ProjectModal";
 
 const Dashboard: React.FC = () => {
@@ -81,7 +80,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const allProjects = [...projects, ...dummyProjects];
+  const allProjects = [...projects];
 
   const filteredProjects = allProjects.filter(
     (project: Project) =>

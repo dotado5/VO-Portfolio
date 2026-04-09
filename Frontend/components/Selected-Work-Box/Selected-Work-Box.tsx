@@ -3,33 +3,38 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import "./Selected-Work-Box.css";
-import { useWorkStore } from "@/store/useWorkStore";
+import { useProjectStore } from "@/store/useProjectStore";
 import { useRouter } from "next/navigation";
+import { Project } from "@/types/project.type";
 
 interface SelectedWorkBoxProps {
-  title: string;
-  description: string;
-  date: string;
-  link: string;
-  imageSrc?: string;
+  project: Project;
   reverse?: boolean;
 }
 
 const SelectedWorkBox = ({
-  title,
-  description,
-  date,
-  link,
-  imageSrc,
+  project,
   reverse = false,
 }: SelectedWorkBoxProps) => {
-  const setSelectedWork = useWorkStore((state) => state.setSelectedWork);
+  const setSelectedProject = useProjectStore(
+    (state) => state.setSelectedProject,
+  );
   const router = useRouter();
 
   const handleClick = () => {
-    setSelectedWork({ title, description, date, link, imageSrc });
-    router.push("/project");
+    setSelectedProject(project);
+    router.push(`/project/${project.id}`);
   };
+
+  const imageSrc = project.images[0] || "";
+  const dateStr = project.delivery_date
+    ? new Date(project.delivery_date).toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric",
+      })
+    : "";
+  const title = project.title;
+  const description = project.background_story.substring(0, 100) + "...";
 
   return (
     <div className={`selected-work-box ${reverse ? "reverse" : ""}`}>
@@ -47,7 +52,7 @@ const SelectedWorkBox = ({
 
       {/* Content */}
       <div className={`selected-work-content ${reverse ? "reverse" : ""}`}>
-        <div className="selected-work-date-badge">{date}</div>
+        <div className="selected-work-date-badge">{dateStr}</div>
         <h3 className="selected-work-title">{title}</h3>
         <p className="selected-work-description">{description}</p>
         <button className="selected-work-link" onClick={handleClick}>

@@ -76,7 +76,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 z-[999] flex flex-col lg:hidden"
+          className="fixed inset-0 z-999 flex flex-col lg:hidden"
           style={{ backgroundColor: "#f1f1f1" }}
         >
           {/* Overlay Header */}
