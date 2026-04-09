@@ -15,11 +15,11 @@
 }
 
 .form-section h1 {
-  @apply text-[#525252] text-2xl sm:text-3xl md:text-[36px] font-[700] leading-[1.2] mb-[7px];
+  @apply text-2xl sm:text-3xl md:text-[36px] font-[700] leading-[1.2] mb-[7px];
 }
 
 .form-section p {
-  @apply text-[#666] text-base sm:text-lg md:text-[18px];
+  @apply text-base sm:text-lg md:text-[18px];
 }
 
 .form-section-form {

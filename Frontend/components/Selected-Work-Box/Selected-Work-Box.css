@@ -33,11 +33,11 @@
 }
 
 .selected-work-description {
-  @apply text-[#5a5a5a] text-sm sm:text-[15px] md:text-base mb-5 sm:mb-6 leading-relaxed max-w-md;
+  @apply text-sm sm:text-[15px] md:text-base mb-5 sm:mb-6 leading-relaxed max-w-md;
 }
 
 .selected-work-link {
-  @apply flex items-center gap-2 text-xs sm:text-sm font-bold text-[#4a4a4a] uppercase transition-colors cursor-pointer;
+  @apply flex items-center gap-2 text-xs sm:text-sm font-bold uppercase transition-colors cursor-pointer;
 }
 
 .selected-work-link:hover {
@@ -51,5 +51,3 @@
 .selected-work-link:hover .selected-work-link-icon {
   @apply bg-black;
 }
-
-

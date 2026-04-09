@@ -17,8 +17,6 @@
 }
 
 .work-experience-type {
-  font-size: 1rem;
-  color: #888888;
   font-weight: 500;
   margin-bottom: 0.25rem;
 }
@@ -43,8 +41,6 @@
 }
 
 .work-experience-description {
-  font-size: 1.1rem;
-  color: #666666;
   line-height: 1.5;
   margin: 0;
   max-width: 800px;

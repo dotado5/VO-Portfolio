@@ -429,3 +429,39 @@ textarea.input-field {
 .modal-content::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+/* Overview & Analytics page layouts */
+.overview-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.overview-stat-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+}
+
+.overview-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .overview-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .overview-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .overview-two-col {
+    grid-template-columns: 1fr;
+  }
+}

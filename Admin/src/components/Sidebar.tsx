@@ -7,8 +7,8 @@ import { showToast } from "../utils/toast";
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    AuthService.signOut();
+  const handleLogout = async () => {
+    await AuthService.signOut();
     showToast.info("Signed out successfully.");
     navigate("/login");
   };

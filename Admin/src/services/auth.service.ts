@@ -11,8 +11,6 @@ export const AuthService = {
   },
 
   async signIn(dto: AuthDto): Promise<AuthResponse> {
-    console.log("dto", dto);
-
     const { data } = await api.post("/auth/signin", {
       email: dto.email,
       password: dto.password,
@@ -22,8 +20,12 @@ export const AuthService = {
     return data;
   },
 
-  signOut() {
-    useAuthStore.getState().clearAuth();
+  async signOut() {
+    try {
+      await api.post("/auth/signout");
+    } finally {
+      useAuthStore.getState().clearAuth();
+    }
   },
 
   getAuthHeader() {
