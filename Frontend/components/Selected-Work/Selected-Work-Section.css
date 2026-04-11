@@ -7,7 +7,7 @@
 }
 
 .selected-work-header {
-  @apply flex items-center gap-3 mb-10;
+  @apply flex items-center gap-3 mb-3;
 }
 
 .selected-work-folder {
@@ -15,7 +15,7 @@
 }
 
 .selected-work-section-title {
-  @apply text-[#525252] text-base md:text-[25px] font-bold uppercase leading-tight;
+  @apply text-[#525252] text-base font-bold uppercase leading-tight;
 }
 
 .selected-work-list {
