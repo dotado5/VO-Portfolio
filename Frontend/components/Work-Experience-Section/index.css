@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .work-experience-section {
-  @apply w-full flex flex-col items-start py-12 md:py-20;
+  @apply w-full flex flex-col items-start py-12 md:py-5;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }

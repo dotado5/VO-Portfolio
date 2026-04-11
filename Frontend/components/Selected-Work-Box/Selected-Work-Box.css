@@ -9,7 +9,7 @@
 }
 
 .selected-work-image-container {
-  @apply w-full md:w-[55%] aspect-[4/3] rounded-[24px] border-[3px] border-[#9ca3af] overflow-hidden relative bg-white;
+  @apply w-full md:w-[45%] aspect-[4/3] rounded-[24px] border-[3px] border-[#9ca3af] overflow-hidden relative bg-white;
 }
 
 .selected-work-image {
