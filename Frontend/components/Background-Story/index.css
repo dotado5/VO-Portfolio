@@ -17,11 +17,9 @@
 }
 
 .content-paragraph {
-  @apply text-lg text-[#666666] leading-[1.6] max-w-[800px];
+  @apply text-base text-[#666666] leading-[1.6] max-w-[800px];
 }
 
 .content-paragraph.font-bold {
   @apply text-[#333333] font-bold;
 }
-
-

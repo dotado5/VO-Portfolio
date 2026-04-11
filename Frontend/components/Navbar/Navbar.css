@@ -59,7 +59,7 @@
 }
 
 .mobile-nav-links {
-  @apply flex flex-col space-y-8 text-2xl font-bold uppercase;
+  @apply flex flex-col space-y-8 text-base font-bold uppercase;
 }
 
 .mobile-nav-link {
@@ -67,5 +67,5 @@
 }
 
 .mobile-cta {
-  @apply mt-12 flex items-center justify-center bg-black text-white py-4 rounded-xl text-lg font-bold;
+  @apply mt-12 flex items-center justify-center bg-black text-white py-4 rounded-xl text-base font-bold;
 }

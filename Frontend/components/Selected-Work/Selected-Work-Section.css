@@ -15,7 +15,7 @@
 }
 
 .selected-work-section-title {
-  @apply text-[#525252] text-2xl sm:text-3xl md:text-[40px] font-bold uppercase leading-tight;
+  @apply text-[#525252] text-base sm:text-[22px] md:text-[32px] font-bold uppercase leading-tight;
 }
 
 .selected-work-list {
