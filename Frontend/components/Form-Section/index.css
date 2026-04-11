@@ -11,15 +11,15 @@
 }
 
 .form-section h2 {
-  @apply flex items-center gap-[10px] text-[#303030] text-[20px] md:text-[24px] font-[700] mb-[20px] uppercase;
+  @apply flex items-center gap-[10px] text-[#303030] text-[16px] md:text-[16px] font-[700] mb-[20px] uppercase;
 }
 
 .form-section h1 {
-  @apply text-2xl sm:text-3xl md:text-[36px] font-[700] leading-[1.2] mb-[7px];
+  @apply text-base sm:text-[22px] md:text-[28px] font-[700] leading-[1.2] mb-[7px];
 }
 
 .form-section p {
-  @apply text-base sm:text-lg md:text-[18px];
+  @apply text-base sm:text-base md:text-[16px];
 }
 
 .form-section-form {

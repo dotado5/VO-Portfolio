@@ -17,7 +17,7 @@
 }
 
 .project-title {
-  @apply text-[#303030] text-[32px] sm:text-[40px] md:text-[36px] font-bold leading-[1.1] tracking-tight;
+  @apply text-[#303030] text-[24px] sm:text-[32px] md:text-[28px] font-bold leading-[1.1] tracking-tight;
 }
 
 .project-date {
@@ -37,15 +37,13 @@
 }
 
 .info-value {
-  @apply text-[#696969] text-[20px] font-medium leading-tight;
+  @apply text-[#696969] text-[16px] font-medium leading-tight;
 }
 
 .skills-list {
-  @apply flex flex-col gap-0.5 text-[#696969] text-[20px] font-medium leading-tight;
+  @apply flex flex-col gap-0.5 text-[#696969] text-[16px] font-medium leading-tight;
 }
 
 .skills-list li {
   @apply list-none;
 }
-
-
