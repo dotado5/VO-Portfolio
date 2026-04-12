@@ -12,7 +12,7 @@
 }
 
 .logo {
-  @apply h-[35px] md:h-[45px] flex items-center mr-7;
+  @apply h-[35px] flex items-center mr-7;
 }
 
 .logo img {
@@ -20,7 +20,7 @@
 }
 
 .nav-links {
-  @apply hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wide text-gray-600;
+  @apply hidden lg:flex items-center space-x-5 text-sm font-medium tracking-wide text-gray-600;
 }
 
 .nav-link {
