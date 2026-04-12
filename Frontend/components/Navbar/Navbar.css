@@ -12,7 +12,7 @@
 }
 
 .logo {
-  @apply h-[35px] flex items-center mr-7;
+  @apply h-[35px] flex items-center mr-1;
 }
 
 .logo img {
@@ -36,15 +36,15 @@
 }
 
 .cta {
-  @apply hidden sm:flex items-center text-sm font-semibold tracking-tight no-underline;
+  @apply hidden sm:flex items-center text-sm tracking-tight no-underline;
 }
 
 .cta-text {
-  @apply mr-3 text-gray-800 uppercase transition-colors;
+  @apply mr-3 text-gray-600 uppercase transition-colors;
 }
 
 .cta:hover .cta-text {
-  @apply text-black;
+  @apply text-gray-800;
 }
 
 /* Mobile Menu Button */
