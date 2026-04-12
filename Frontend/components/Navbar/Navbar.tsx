@@ -39,24 +39,28 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="navbar-container">
           {/* Logo */}
-          <Link href="/" className={`${scriptFont.className} logo`}>
-            <Image src={vo_logo} alt="Logo" priority />
-          </Link>
+
+          <div className="flex items-center gap-4">
+            <Link href="/" className={`${scriptFont.className} logo`}>
+              <Image src={vo_logo} alt="Logo" priority />
+            </Link>
+
+            <div className="nav-links">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`nav-link ${currentPathname === link.href && "nav-link-disabled"}`}
+                >
+                  {link.name}
+                  {link.icon && <Repeat className="nav-link-icon" />}
+                  {link.icon && " WORKS"}
+                </Link>
+              ))}
+            </div>
+          </div>
 
           {/* Desktop Nav Links */}
-          <div className="nav-links">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`nav-link ${currentPathname === link.href && "nav-link-disabled"}`}
-              >
-                {link.name}
-                {link.icon && <Repeat className="nav-link-icon" />}
-                {link.icon && " WORKS"}
-              </Link>
-            ))}
-          </div>
 
           <div className="flex items-center gap-4 md:gap-6 lg:gap-0">
             {/* CTA (Desktop/Tablet) */}

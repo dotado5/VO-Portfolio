@@ -8,7 +8,7 @@ const WorkExperienceSection = () => {
   return (
     <div className="work-experience-section">
       <h1>
-        <Image src={briefcase} alt="Briefcase" />
+        <Image src={briefcase} alt="Briefcase" className="w-6 h-6" />
         WORK EXPERIENCE
       </h1>
 

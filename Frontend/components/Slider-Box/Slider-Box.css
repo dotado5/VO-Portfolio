@@ -1,5 +1,5 @@
 @reference "../../styles/globals.css";
 
 .sliderBox {
-  @apply box-border w-[400px] h-[233px] border-[5px] rounded-[24px] flex items-center justify-center border-[#a1a1a1];
+  @apply box-border w-[350px] h-[233px] border-[5px] rounded-[24px] flex items-center justify-center border-[#a1a1a1];
 }

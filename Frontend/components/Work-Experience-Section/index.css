@@ -7,7 +7,7 @@
 }
 
 .work-experience-section h1 {
-  @apply flex items-center gap-[10px] text-[#303030] text-[16px] font-[700];
+  @apply flex items-center gap-1 text-[#303030] text-[16px] font-[700];
 }
 
 .work-experience-list {

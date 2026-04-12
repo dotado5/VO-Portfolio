@@ -28,7 +28,7 @@ const Hero = () => {
       <div className="hero-text">
         <h1 className="hero-title">
           Hi, I'm Fatoki Victor Oluwabusayo.
-          <span className="text-black">Product Designer</span>
+          <span className="text-[#303030]">Product Designer</span>
         </h1>
 
         {/* Description */}
@@ -40,11 +40,11 @@ const Hero = () => {
 
         {/* Role Details */}
         <p className="hero-details">
-          <span className="font-semibold text-black">
+          <span className="font-semibold text-[#303030]">
             Product Designer &amp; Business Strategist
           </span>{" "}
           by day,{" "}
-          <span className="font-semibold text-black">
+          <span className="font-semibold text-[#303030]">
             Gamer &amp; Arsenal fan
           </span>{" "}
           by Night

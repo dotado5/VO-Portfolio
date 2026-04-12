@@ -19,11 +19,14 @@ const SliderSection = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="exploration"
       >
-        <Image src={magicPen} alt="magicPen" />
+        <Image src={magicPen} alt="magicPen" className="w-6 h-6" />
         RECENT EXPLORATIONS
       </motion.h1>
 
       <InfiniteSlider duration={15}>
+        {color.map((color) => (
+          <SliderBox key={color} color={color} />
+        ))}
         {color.map((color) => (
           <SliderBox key={color} color={color} />
         ))}

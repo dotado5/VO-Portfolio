@@ -1,18 +1,18 @@
 @reference "../../styles/globals.css";
 
 .navbar {
-  @apply fixed top-0 left-0 w-full z-[100] border-b border-gray-100 py-4 flex items-center justify-between h-[65px] backdrop-blur-md;
+  @apply top-0 left-0 w-full z-100 border-b border-gray-100 py-4 flex items-center justify-between h-[65px] backdrop-blur-md mt-4;
   background-color: rgba(241, 241, 241, 0.95);
 }
 
 .navbar-container {
-  @apply flex items-center justify-between w-full relative z-[120];
+  @apply flex items-center justify-between w-full relative z-120;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
 
 .logo {
-  @apply h-[35px] md:h-[45px] flex items-center;
+  @apply h-[35px] md:h-[45px] flex items-center mr-7;
 }
 
 .logo img {
