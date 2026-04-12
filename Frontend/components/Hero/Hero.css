@@ -1,13 +1,14 @@
 @reference "../../styles/globals.css";
 
 .hero {
+  @apply mt-10;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
 
 /* Profile Image Styling */
 .profile-wrapper {
-  @apply mb-8 relative inline-block w-[150px] h-[150px] md:w-[200px] md:h-[200px];
+  @apply relative inline-block w-[150px] h-[150px];
 
   transform: rotate(-3deg);
   transition: transform 0.3s ease;
@@ -18,29 +19,29 @@
 }
 
 .profile-image {
-  @apply w-full h-full object-cover rounded-2xl;
+  @apply w-[150px] h-[150px] object-cover rounded-2xl;
 }
 
 /* Typography Styling */
 .hero-title {
-  @apply text-[28px] md:text-[30px] lg:text-[35px] font-bold leading-[1.1] text-[#525252] tracking-tight mb-8 flex flex-col;
+  @apply text-[28px] md:text-[30px] lg:text-[35px] font-bold leading-none text-[#525252] tracking-tight mb-4 flex flex-col;
 }
 
 .hero-description {
-  @apply text-(--text-primary) max-w-2xl leading-relaxed mb-4;
+  @apply text-(--text-primary) max-w-2xl leading-relaxed;
 }
 
 .hero-details {
-  @apply text-base sm:text-base md:text-[16px] mb-4;
+  @apply text-base sm:text-base md:text-[16px] mb-2 mt-2;
 }
 
 /* Social Links Styling */
 .social-links {
-  @apply flex flex-wrap items-center gap-6 md:gap-8;
+  @apply flex flex-wrap items-center gap-3;
 }
 
 .social-link {
-  @apply flex items-center text-sm sm:text-base font-bold text-zinc-800 no-underline transition-colors hover:text-black;
+  @apply flex items-center text-sm sm:text-base font-bold text-[#3F3F3F] no-underline transition-colors;
 }
 
 .social-link img {

@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .selected-work-box {
-  @apply flex flex-col md:flex-row gap-6 md:gap-12 lg:gap-16 items-center w-full;
+  @apply flex flex-col md:flex-row gap-6 items-start w-full;
 }
 
 .selected-work-box.reverse {
@@ -17,7 +17,7 @@
 }
 
 .selected-work-content {
-  @apply w-full md:w-[45%] flex flex-col justify-center items-start lg:pr-10;
+  @apply w-full md:w-[45%] flex flex-col justify-center items-start lg:pr-10 mt-8;
 }
 
 .selected-work-content.reverse {
@@ -25,15 +25,15 @@
 }
 
 .selected-work-date-badge {
-  @apply bg-[#757575] text-white text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 sm:mb-4;
+  @apply bg-[#757575] text-white text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2;
 }
 
 .selected-work-title {
-  @apply text-base sm:text-base md:text-[18px] font-extrabold text-[#2a2a2a] mb-2 sm:mb-3 leading-tight;
+  @apply text-base sm:text-base md:text-[18px] font-extrabold text-[#2a2a2a] mb-1 leading-tight;
 }
 
 .selected-work-description {
-  @apply text-sm sm:text-[15px] md:text-base mb-5 sm:mb-6 leading-relaxed max-w-md;
+  @apply text-sm sm:text-[15px] md:text-base mb-2 leading-none max-w-md;
 }
 
 .selected-work-link {

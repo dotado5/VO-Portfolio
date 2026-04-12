@@ -10,7 +10,7 @@ const FormSection = () => {
     <div className="form-section">
       <div className="form-section-text">
         <h2>
-          <Image src={messageIcon} alt="Message Icon" />
+          <Image src={messageIcon} alt="Message Icon" className="w-6 h-6" />
           GET IN TOUCH
         </h2>
 

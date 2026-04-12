@@ -15,13 +15,13 @@
 
 @media (min-width: 1024px) {
   :root {
-    --spacing-responsive-px: 6rem;
+    --spacing-responsive-px: 7rem;
   }
 }
 
 @media (min-width: 1280px) {
   :root {
-    --spacing-responsive-px: 9.375rem;
+    --spacing-responsive-px: 18.375rem;
   }
 }
 

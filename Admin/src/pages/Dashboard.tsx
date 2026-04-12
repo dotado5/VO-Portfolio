@@ -213,7 +213,7 @@ const Dashboard: React.FC = () => {
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
-            minHeight: "400px",
+            minHeight: "150px",
             gap: "1rem",
             color: "var(--text-secondary)",
           }}
