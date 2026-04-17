@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .slider-section {
-  @apply flex flex-col gap-[10px] mt-5;
+  @apply flex flex-col gap-[10px] mt-9;
 }
 
 .exploration {
