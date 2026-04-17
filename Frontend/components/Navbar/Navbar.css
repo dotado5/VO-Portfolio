@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .navbar {
-  @apply top-0 left-0 w-full z-100 border-b border-gray-100 py-4 flex items-center justify-between h-[65px] backdrop-blur-md mt-4;
+  @apply top-0 left-0 w-full z-100 border-b border-gray-100 py-4 flex items-center justify-between h-[65px] backdrop-blur-md mt-1;
   background-color: rgba(241, 241, 241, 0.95);
 }
 

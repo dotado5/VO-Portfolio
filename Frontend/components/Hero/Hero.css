@@ -28,11 +28,11 @@
 }
 
 .hero-description {
-  @apply text-(--text-primary) max-w-2xl leading-relaxed;
+  @apply text-(--text-primary) max-w-2xl leading-5;
 }
 
 .hero-details {
-  @apply text-base sm:text-base md:text-[16px] mb-2 mt-2;
+  @apply text-base sm:text-base md:text-[16px] mb-3 mt-1;
 }
 
 /* Social Links Styling */

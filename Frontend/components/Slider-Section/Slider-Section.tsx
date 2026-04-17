@@ -19,7 +19,7 @@ const SliderSection = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="exploration"
       >
-        <Image src={magicPen} alt="magicPen" className="w-6 h-6" />
+        <Image src={magicPen} alt="magicPen" className="w-5 h-5" />
         RECENT EXPLORATIONS
       </motion.h1>
 
