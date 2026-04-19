@@ -5,6 +5,7 @@
   --font-main: "Inter Display", "Inter Display Placeholder", sans-serif;
   --font-heading: "Outfit", sans-serif;
   --text-primary: #707070;
+  --leading-tight: 1.25rem;
 }
 
 @media (min-width: 768px) {

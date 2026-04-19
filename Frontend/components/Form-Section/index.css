@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .form-section {
-  @apply w-full flex flex-col items-start mt-12 md:mt-16;
+  @apply w-full flex flex-col items-start mt-10;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
@@ -15,7 +15,7 @@
 }
 
 .form-section h1 {
-  @apply text-base sm:text-[22px] md:text-[28px] font-[700] leading-[1.2] mb-[7px];
+  @apply text-base sm:text-[22px] md:text-[28px] font-[700] leading-[1.2] mb-[7px] text-[#525252];
 }
 
 .form-section p {
