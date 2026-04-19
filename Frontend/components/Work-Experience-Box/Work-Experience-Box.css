@@ -1,3 +1,5 @@
+@reference "../../styles/globals.css";
+
 .work-experience-box {
   display: flex;
   gap: 3rem;
@@ -34,16 +36,15 @@
 }
 
 .work-experience-title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #222222;
+  font-size: 20px;
+  font-weight: 700;
+  color: #303030;
   margin: 0 0 0.5rem 0;
 }
 
 .work-experience-description {
-  line-height: 1.5;
+  line-height: var(--leading-tight);
   margin: 0;
-  max-width: 800px;
 }
 
 /* Responsive */

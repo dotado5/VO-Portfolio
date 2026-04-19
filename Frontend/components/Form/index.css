@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .contact-form {
-  @apply flex flex-col w-full gap-[3rem];
+  @apply flex flex-col w-full gap-[2rem];
 }
 
 .form-row {

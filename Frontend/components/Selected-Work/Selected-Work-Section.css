@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .selected-work-section {
-  @apply w-full mx-auto py-16 md:py-24;
+  @apply w-full mx-auto py-10;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }

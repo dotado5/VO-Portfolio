@@ -58,7 +58,7 @@ const SelectedWorkBox = ({
         <button className="selected-work-link" onClick={handleClick}>
           Read Case Study
           <div className="selected-work-link-icon">
-            <ArrowUpRight size={14} strokeWidth={3} />
+            <ArrowUpRight size={10} strokeWidth={3} />
           </div>
         </button>
       </div>

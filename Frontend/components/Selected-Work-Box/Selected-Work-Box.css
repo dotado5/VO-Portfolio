@@ -33,11 +33,12 @@
 }
 
 .selected-work-description {
-  @apply text-sm sm:text-[15px] md:text-base mb-2 leading-none max-w-md;
+  line-height: var(--leading-tight);
+  font-size: medium;
 }
 
 .selected-work-link {
-  @apply flex items-center gap-2 text-xs sm:text-sm font-bold uppercase transition-colors cursor-pointer;
+  @apply flex items-center gap-[0.1rem] text-xs font-bold uppercase transition-colors cursor-pointer mt-2;
 }
 
 .selected-work-link:hover {

@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import "./index.css";
 import exportIcon from "@public/assets/export-icon.png";
 import Image from "next/image";
