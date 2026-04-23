@@ -4,11 +4,12 @@ import "./Navbar.css";
 import Link from "next/link";
 import { Repeat, Menu, X, ArrowUpRight } from "lucide-react";
 import { Dancing_Script } from "next/font/google";
-import vo_logo from "@public/assets/fatoki-logo.png";
+import vo_logo from "@public/assets/logo_svg.svg";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import exportIcon from "@public/assets/export-icon.png";
+import { useGlobalStore } from "@/store/useGlobalStore";
 
 const scriptFont = Dancing_Script({
   subsets: ["latin"],
@@ -19,6 +20,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const [currentPathname, setCurrentPathname] = useState(pathname);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isPreloaderVisible } = useGlobalStore();
 
   useEffect(() => {
     setCurrentPathname(pathname);
@@ -33,6 +35,10 @@ const Navbar = () => {
     { name: "Resume", href: "/resume" },
     { name: "Blogs", href: "/blogs" },
   ];
+
+  if (isPreloaderVisible) {
+    return null;
+  }
 
   return (
     <>
