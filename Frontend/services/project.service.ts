@@ -7,26 +7,26 @@ import {
 
 export const projectService = {
   async getAllProjects(): Promise<Project[]> {
-    const response = await api.get<Project[]>("/projects");
+    const response = await api.get<Project[]>("/api/projects");
     return response.data;
   },
 
   async getProjectById(id: number): Promise<Project> {
-    const response = await api.get<Project>(`/projects/${id}`);
+    const response = await api.get<Project>(`/api/projects/${id}`);
     return response.data;
   },
 
   async createProject(data: CreateProjectDto): Promise<Project> {
-    const response = await api.post<Project>("/projects", data);
+    const response = await api.post<Project>("/api/projects", data);
     return response.data;
   },
 
   async updateProject(id: number, data: UpdateProjectDto): Promise<Project> {
-    const response = await api.patch<Project>(`/projects/${id}`, data);
+    const response = await api.patch<Project>(`/api/projects/${id}`, data);
     return response.data;
   },
 
   async deleteProject(id: number): Promise<void> {
-    await api.delete(`/projects/${id}`);
+    await api.delete(`/api/projects/${id}`);
   },
 };
