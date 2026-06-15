@@ -22,7 +22,13 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const originalRequest = error.config;
+    // Don't intercept 401s for login/signup endpoints
+    if (
+      error.response?.status === 401 &&
+      !originalRequest.url?.includes("/api/auth/signin") &&
+      !originalRequest.url?.includes("/api/auth/signup")
+    ) {
       useAuthStore.getState().clearAuth();
       showToast.warning("Your session has expired. Please log in again.");
       window.location.href = "/login";
