@@ -22,10 +22,29 @@ const Login: React.FC = () => {
       showToast.success(`Welcome back!!! ${user.user.email}`);
       window.location.href = "/";
     } catch (error: any) {
-      showToast.error(
-        error.response?.data?.message ||
-          "Failed to sign in. Please check your credentials.",
-      );
+      let errorMessage = "Failed to sign in. Please check your credentials.";
+
+      // Handle Axios Network/CORS errors
+      if (error.message === "Network Error") {
+        errorMessage = "Unable to connect to the server. Please check your connection.";
+      }
+      // Handle explicit API errors returned from our backend/Supabase
+      else if (error.response?.data?.error) {
+        const apiError = error.response.data.error;
+        
+        if (apiError.includes("Invalid login credentials")) {
+          errorMessage = "Incorrect email or password. Please try again.";
+        } else if (apiError.includes("Email not confirmed")) {
+          errorMessage = "Please verify your email address before signing in.";
+        } else if (apiError.includes("rate limit") || error.response?.status === 429) {
+          errorMessage = "Too many login attempts. Please try again later.";
+        } else {
+          // Fallback to the exact error provided by Supabase
+          errorMessage = apiError;
+        }
+      }
+
+      showToast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
