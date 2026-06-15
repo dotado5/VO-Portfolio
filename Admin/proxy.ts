@@ -5,6 +5,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "https://www.vofatoki.work",
   "https://vo-portfolio-virid.vercel.app",
+  'https://vo-portfolio-iahm.vercel.app'
   // Add your accepted URLs here
 ];
 
