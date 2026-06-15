@@ -26,17 +26,21 @@ const Login: React.FC = () => {
 
       // Handle Axios Network/CORS errors
       if (error.message === "Network Error") {
-        errorMessage = "Unable to connect to the server. Please check your connection.";
+        errorMessage =
+          "Unable to connect to the server. Please check your connection.";
       }
       // Handle explicit API errors returned from our backend/Supabase
       else if (error.response?.data?.error) {
         const apiError = error.response.data.error;
-        
+
         if (apiError.includes("Invalid login credentials")) {
           errorMessage = "Incorrect email or password. Please try again.";
         } else if (apiError.includes("Email not confirmed")) {
           errorMessage = "Please verify your email address before signing in.";
-        } else if (apiError.includes("rate limit") || error.response?.status === 429) {
+        } else if (
+          apiError.includes("rate limit") ||
+          error.response?.status === 429
+        ) {
           errorMessage = "Too many login attempts. Please try again later.";
         } else {
           // Fallback to the exact error provided by Supabase
