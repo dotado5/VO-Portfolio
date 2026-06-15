@@ -20,7 +20,7 @@ const Login: React.FC = () => {
     try {
       const user = await AuthService.signIn({ email, password });
       showToast.success(`Welcome back!!! ${user.user.email}`);
-      router.push("/");
+      window.location.href = "/";
     } catch (error: any) {
       showToast.error(
         error.response?.data?.message ||
