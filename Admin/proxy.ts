@@ -25,7 +25,7 @@ export async function proxy(request: NextRequest) {
       );
       preflightHeaders.set(
         "Access-Control-Allow-Headers",
-        "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+        "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
       );
     }
     return new NextResponse(null, { headers: preflightHeaders, status: 204 });
@@ -44,7 +44,7 @@ export async function proxy(request: NextRequest) {
     );
     response.headers.set(
       "Access-Control-Allow-Headers",
-      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
     );
   }
 

@@ -114,7 +114,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
       const filePath = `${fileName}`;
 
       const { error } = await supabase.storage
-        .from("Work Images")
+        .from("Project_images")
         .upload(filePath, file);
 
       if (error) {
@@ -122,7 +122,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
       }
 
       const { data: publicUrlData } = supabase.storage
-        .from("Work Images")
+        .from("Project_images")
         .getPublicUrl(filePath);
 
       return publicUrlData.publicUrl;
