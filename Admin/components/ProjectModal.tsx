@@ -36,8 +36,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
   const [skillsInput, setSkillsInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   useEffect(() => {
@@ -56,8 +56,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
           .split("T")[0],
       });
       setSkillsInput(project.skills.join(", "));
-      setSelectedFile(null);
-      setPreviewUrl(null);
+      setSelectedFiles([]);
+      setPreviewUrls([]);
     } else {
       setFormData({
         title: "",
@@ -71,8 +71,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         delivery_date: new Date().toISOString().split("T")[0],
       });
       setSkillsInput("");
-      setSelectedFile(null);
-      setPreviewUrl(null);
+      setSelectedFiles([]);
+      setPreviewUrls([]);
     }
   }, [project, isOpen]);
 
@@ -93,17 +93,24 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setSelectedFile(file);
-      const url = URL.createObjectURL(file);
-      setPreviewUrl(url);
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setSelectedFiles((prev) => [...prev, ...files]);
+      const urls = files.map((file) => URL.createObjectURL(file));
+      setPreviewUrls((prev) => [...prev, ...urls]);
     }
   };
 
-  const removeImage = () => {
-    setSelectedFile(null);
-    setPreviewUrl(null);
+  const removeImage = (index: number, isExisting: boolean) => {
+    if (isExisting) {
+      setFormData((prev) => ({
+        ...prev,
+        images: prev.images.filter((_, i) => i !== index),
+      }));
+    } else {
+      setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
+      setPreviewUrls((prev) => prev.filter((_, i) => i !== index));
+    }
   };
 
   const uploadImage = async (file: File): Promise<string> => {
@@ -118,6 +125,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         .upload(filePath, file);
 
       if (error) {
+        showToast.error(error.message);
         throw error;
       }
 
@@ -138,9 +146,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
       let finalFormData = { ...formData };
 
-      if (selectedFile) {
-        const imageUrl = await uploadImage(selectedFile);
-        finalFormData.images = [...finalFormData.images, imageUrl];
+      if (selectedFiles.length > 0) {
+        const imageUrls = await Promise.all(
+          selectedFiles.map((file) => uploadImage(file))
+        );
+        finalFormData.images = [...finalFormData.images, ...imageUrls];
       }
 
       await onSave(
@@ -277,61 +287,25 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 </div>
 
                 <div className="input-group form-full">
-                  <label className="input-label">Project Image</label>
+                  <label className="input-label">Project Images</label>
                   <div
                     style={{
                       display: "flex",
-                      flexDirection: "column",
+                      flexWrap: "wrap",
                       gap: "1rem",
                     }}
                   >
-                    {!previewUrl && formData.images.length === 0 ? (
-                      <label
-                        className="upload-area glass"
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          padding: "2rem",
-                          border: "2px dashed var(--glass-border)",
-                          borderRadius: "var(--radius-md)",
-                          cursor: "pointer",
-                          transition: "all 0.3s ease",
-                        }}
-                      >
-                        <ImagePlus
-                          size={32}
-                          style={{
-                            color: "var(--text-muted)",
-                            marginBottom: "0.5rem",
-                          }}
-                        />
-                        <span style={{ color: "var(--text-secondary)" }}>
-                          Click to upload cover image
-                        </span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          style={{ display: "none" }}
-                          onChange={handleFileChange}
-                        />
-                      </label>
-                    ) : (
+                    {formData.images.map((img, index) => (
                       <div
+                        key={`existing-${index}`}
                         style={{ position: "relative", width: "fit-content" }}
                       >
                         <img
-                          src={
-                            previewUrl ||
-                            (formData.images.length > 0
-                              ? formData.images[0]
-                              : "")
-                          }
-                          alt="Project Preview"
+                          src={img}
+                          alt={`Project Preview ${index + 1}`}
                           style={{
-                            maxWidth: "100%",
-                            maxHeight: "300px",
+                            width: "150px",
+                            height: "150px",
                             objectFit: "cover",
                             borderRadius: "var(--radius-md)",
                             border: "1px solid var(--glass-border)",
@@ -339,12 +313,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                         />
                         <button
                           type="button"
-                          onClick={() => {
-                            removeImage();
-                            if (formData.images.length > 0) {
-                              setFormData((prev) => ({ ...prev, images: [] }));
-                            }
-                          }}
+                          onClick={() => removeImage(index, true)}
                           className="btn btn-secondary"
                           style={{
                             position: "absolute",
@@ -360,7 +329,82 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                           <Trash size={16} />
                         </button>
                       </div>
-                    )}
+                    ))}
+                    {previewUrls.map((url, index) => (
+                      <div
+                        key={`preview-${index}`}
+                        style={{ position: "relative", width: "fit-content" }}
+                      >
+                        <img
+                          src={url}
+                          alt={`New Preview ${index + 1}`}
+                          style={{
+                            width: "150px",
+                            height: "150px",
+                            objectFit: "cover",
+                            borderRadius: "var(--radius-md)",
+                            border: "1px solid var(--glass-border)",
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeImage(index, false)}
+                          className="btn btn-secondary"
+                          style={{
+                            position: "absolute",
+                            top: "0.5rem",
+                            right: "0.5rem",
+                            padding: "0.5rem",
+                            color: "var(--error)",
+                            background: "rgba(0,0,0,0.7)",
+                            border: "none",
+                            backdropFilter: "blur(4px)",
+                          }}
+                        >
+                          <Trash size={16} />
+                        </button>
+                      </div>
+                    ))}
+                    <label
+                      className="upload-area glass"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "150px",
+                        height: "150px",
+                        border: "2px dashed var(--glass-border)",
+                        borderRadius: "var(--radius-md)",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      <ImagePlus
+                        size={32}
+                        style={{
+                          color: "var(--text-muted)",
+                          marginBottom: "0.5rem",
+                        }}
+                      />
+                      <span
+                        style={{
+                          color: "var(--text-secondary)",
+                          fontSize: "0.8rem",
+                          textAlign: "center",
+                          padding: "0 0.5rem",
+                        }}
+                      >
+                        Add Image(s)
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        style={{ display: "none" }}
+                        onChange={handleFileChange}
+                      />
+                    </label>
                   </div>
                 </div>
               </div>

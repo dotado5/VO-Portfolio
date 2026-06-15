@@ -82,6 +82,17 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const handleDeleteProject = async (id: number) => {
+    if (window.confirm("Are you sure you want to delete this project?")) {
+      try {
+        await ProjectService.remove(id);
+        showToast.success("Project deleted successfully.");
+      } catch (error) {
+        showToast.error("Failed to delete project.");
+      }
+    }
+  };
+
   const allProjects = [...projects];
 
   const filteredProjects = allProjects.filter(
@@ -347,6 +358,7 @@ const Dashboard: React.FC = () => {
                     <Edit2 size={16} />
                   </button>
                   <button
+                    onClick={() => handleDeleteProject(project.id)}
                     className="btn btn-secondary"
                     style={{
                       padding: "0.5rem",
