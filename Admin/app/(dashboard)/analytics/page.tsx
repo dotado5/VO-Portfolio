@@ -25,8 +25,6 @@ import {
 } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useProjectStore } from "@/store/projectStore";
-
-import { dummyProjects } from "@/lib/data";
 import { ProjectService } from "@/services/project.service";
 import { showToast } from "@/utils/toast";
 import { Project } from "@/types/project.type";
@@ -124,7 +122,7 @@ const Analytics: React.FC = () => {
   const { projects } = useProjectStore();
   const [isLoading, setIsLoading] = useState(false);
 
-  const allProjects = [...projects, ...(typeof dummyProjects !== 'undefined' ? dummyProjects : [])];
+  const allProjects = [...projects];
   const projectsByYear = buildProjectsByYear(allProjects);
   const skillCounts = buildSkillCounts(allProjects);
   const roleDistribution = buildRoleDistribution(allProjects);

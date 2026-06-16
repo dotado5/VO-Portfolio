@@ -4,16 +4,16 @@ import { cookies } from "next/headers";
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ slug: string }> },
 ) {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-  const { id } = await params;
+  const { slug } = await params;
 
   const { data, error } = await supabase
     .from("Project")
     .select("*")
-    .eq("id", id)
+    .eq("slug", slug)
     .single();
 
   if (error) {
@@ -25,18 +25,18 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
-    const { id } = await params;
+    const { slug } = await params;
     const body = await request.json();
     
     const { data, error } = await supabase
       .from("Project")
       .update(body)
-      .eq("id", id)
+      .eq("slug", slug)
       .select()
       .single();
 
@@ -52,16 +52,16 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-  const { id } = await params;
+  const { slug } = await params;
   
   const { data, error } = await supabase
     .from("Project")
     .delete()
-    .eq("id", id)
+    .eq("slug", slug)
     .select()
     .single();
 

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { use, useEffect } from "react";
 import "../page.css";
 import snapshot from "@public/assets/snapshot.png";
@@ -9,40 +8,42 @@ import ProjectSection from "@/components/Background-Story";
 import SliderBox from "@/components/Slider-Box/Slider-Box";
 import FormSection from "@/components/Form-Section";
 import { useProjectStore } from "@/store/useProjectStore";
+import SliderSection from "@/components/Slider-Section/Slider-Section";
 
 interface ProjectPageProps {
   params: Promise<{
-    id: string;
+    slug: string;
   }>;
 }
 
 const colorSwatches = ["bg-[#FFFFFF]", "bg-[#6B1616]", "bg-[#000000]"];
 
 const ProjectPage = ({ params }: ProjectPageProps) => {
-  const { id } = use(params);
-  const projectId = Number(id);
-  const { selectedProject, isLoading, error, fetchProjectById } =
+  const { slug } = use(params);
+  const { selectedProject, isLoading, error, fetchProjectBySlug } =
     useProjectStore();
 
   useEffect(() => {
-    if (!Number.isFinite(projectId)) {
+    if (!slug) {
       return;
     }
 
-    if (selectedProject?.id !== projectId) {
-      void fetchProjectById(projectId);
+    if (selectedProject?.slug !== slug) {
+      void fetchProjectBySlug(slug);
     }
-  }, [fetchProjectById, projectId, selectedProject?.id]);
+  }, [fetchProjectBySlug, slug, selectedProject?.slug]);
 
-  if (!Number.isFinite(projectId)) {
+  if (!slug) {
     return <div className="project-status">Invalid project link.</div>;
   }
 
-  if (error && selectedProject?.id !== projectId) {
-    return <div className="project-status">Failed to load project: {error}</div>;
+  if (error && selectedProject?.slug !== slug) {
+    return (
+      <div className="project-status">Failed to load project: {error}</div>
+    );
   }
 
-  if (isLoading || selectedProject?.id !== projectId) {
+  if (isLoading || selectedProject?.slug !== slug) {
     return <div className="project-status">Loading project...</div>;
   }
 
@@ -74,7 +75,22 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
   return (
     <div>
       <Header />
-      <Image src={snapshot} alt="" className="snapshot" />
+      <div className="snapshot-container">
+        <img
+          src={selectedProject.images?.[0] || snapshot.src}
+          alt={`${selectedProject.title} view 1`}
+          className="snapshot-half"
+        />
+        <img
+          src={
+            selectedProject.images?.[1] ||
+            selectedProject.images?.[0] ||
+            snapshot.src
+          }
+          alt={`${selectedProject.title} view 2`}
+          className="snapshot-half"
+        />
+      </div>
       <ProjectSection
         title="BACKGROUND STORY"
         content={backgroundStoryContent}
@@ -82,15 +98,33 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
       <ProjectSection title="THE PROBLEM" content={problemContent} />
 
       <div className="slider">
-        {colorSwatches.map((color) => (
-          <SliderBox key={color} color={color} />
-        ))}
+        <SliderSection />
       </div>
 
       <ProjectSection title="DESIGN STRATEGY" content={strategyContent} />
       <ProjectSection title="KEY TAKEAWAY" content={takeawayContent} />
 
-      <Image src={snapshot} alt="" className="snapshot" />
+      <div className="snapshot-container">
+        <img
+          src={
+            selectedProject.images?.[2] ||
+            selectedProject.images?.[0] ||
+            snapshot.src
+          }
+          alt={`${selectedProject.title} view 3`}
+          className="snapshot-half"
+        />
+        <img
+          src={
+            selectedProject.images?.[3] ||
+            selectedProject.images?.[1] ||
+            selectedProject.images?.[0] ||
+            snapshot.src
+          }
+          alt={`${selectedProject.title} view 4`}
+          className="snapshot-half"
+        />
+      </div>
       <FormSection />
     </div>
   );

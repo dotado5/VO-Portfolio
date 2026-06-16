@@ -24,6 +24,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 }) => {
   const [formData, setFormData] = useState<CreateProjectDto>({
     title: "",
+    slug: "",
     background_story: "",
     role: "",
     skills: [],
@@ -44,6 +45,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     if (project) {
       setFormData({
         title: project.title,
+        slug: project.slug,
         background_story: project.background_story,
         role: project.role,
         skills: project.skills,
@@ -61,6 +63,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     } else {
       setFormData({
         title: "",
+        slug: "",
         background_story: "",
         role: "",
         skills: [],
@@ -145,6 +148,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
       setIsSubmitting(true);
 
       let finalFormData = { ...formData };
+      
+      // Auto-generate slug if not provided or updating title
+      if (!finalFormData.slug || finalFormData.slug === "") {
+        finalFormData.slug = finalFormData.title
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)+/g, "");
+      }
 
       if (selectedFiles.length > 0) {
         const imageUrls = await Promise.all(
