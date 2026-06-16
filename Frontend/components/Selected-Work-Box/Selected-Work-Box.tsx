@@ -23,7 +23,7 @@ const SelectedWorkBox = ({
 
   const handleClick = () => {
     setSelectedProject(project);
-    router.push(`/project/${project.id}`);
+    router.push(`/project/${project.slug}`);
   };
 
   const imageSrc = project.images[0] || "";

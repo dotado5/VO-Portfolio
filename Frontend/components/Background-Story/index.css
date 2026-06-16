@@ -1,7 +1,9 @@
 @reference "../../styles/globals.css";
 
 .project-section {
-  @apply flex flex-col md:flex-row gap-8 px-[150px] py-16;
+  @apply flex flex-col md:flex-row gap-8 py-16;
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
 }
 
 .section-title-wrapper {

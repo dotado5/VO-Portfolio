@@ -12,7 +12,7 @@ interface ProjectState {
   setProjects: (projects: Project[]) => void;
   setSelectedProject: (project: Project | null) => void;
 
-  fetchProjectById: (id: number) => Promise<Project | undefined>;
+  fetchProjectBySlug: (slug: string) => Promise<Project | undefined>;
 
   clearSelectedProject: () => void;
 }
@@ -28,10 +28,10 @@ export const useProjectStore = create<ProjectState>()(
       setProjects: (projects) => set({ projects }),
       setSelectedProject: (project) => set({ selectedProject: project }),
 
-      fetchProjectById: async (id: number) => {
+      fetchProjectBySlug: async (slug: string) => {
         set({ isLoading: true, error: null });
         try {
-          const project = await projectService.getProjectById(id);
+          const project = await projectService.getProjectBySlug(slug);
           set({ selectedProject: project, isLoading: false });
           return project;
         } catch (error: any) {

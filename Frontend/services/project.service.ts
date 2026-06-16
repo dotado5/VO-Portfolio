@@ -11,8 +11,8 @@ export const projectService = {
     return response.data;
   },
 
-  async getProjectById(id: number): Promise<Project> {
-    const response = await api.get<Project>(`/api/projects/${id}`);
+  async getProjectBySlug(slug: string): Promise<Project> {
+    const response = await api.get<Project>(`/api/projects/${slug}`);
     return response.data;
   },
 

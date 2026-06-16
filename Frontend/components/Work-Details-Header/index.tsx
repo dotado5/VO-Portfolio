@@ -29,7 +29,7 @@ const Header = () => {
       <div className="header-left">
         <div className="client-image-wrapper">
           <Image
-            src={(mounted && selectedProject?.images?.[0]) || smallPic}
+            src={smallPic}
             alt="Client"
             className="client-image"
             fill={!!(mounted && selectedProject?.images?.[0])}

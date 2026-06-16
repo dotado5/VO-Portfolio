@@ -1,7 +1,9 @@
 @reference "../../styles/globals.css";
 
 .work-details-header {
-  @apply flex flex-col md:flex-row justify-between items-start gap-10 md:gap-20 w-full mt-[150px] px-5 sm:px-10 lg:px-[150px] mb-[60px];
+  @apply flex flex-col md:flex-row justify-between items-start gap-10 md:gap-20 w-full mt-[150px] mb-[60px];
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
 }
 
 .header-left {

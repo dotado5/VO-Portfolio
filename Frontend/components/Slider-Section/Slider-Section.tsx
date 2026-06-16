@@ -1,14 +1,21 @@
 "use client";
 
+import { useEffect } from "react";
 import magicPen from "@public/assets/magicpen.svg";
 import Image from "next/image";
 import "./Slider-Section.css";
 import SliderBox from "../Slider-Box/Slider-Box";
 import InfiniteSlider from "../Infinite-Slider/Infinite-Slider";
 import { motion } from "motion/react";
+import { useSliderStore } from "@/store/useSliderStore";
+import { Loader2 } from "lucide-react";
 
 const SliderSection = () => {
-  const color = ["bg-[#FFFFFF]", "bg-[#6B1616]", "bg-[#000000]"];
+  const { images, isLoading, fetchImages } = useSliderStore();
+
+  useEffect(() => {
+    fetchImages();
+  }, [fetchImages]);
 
   return (
     <div className="slider-section">
@@ -24,12 +31,15 @@ const SliderSection = () => {
       </motion.h1>
 
       <InfiniteSlider duration={15}>
-        {color.map((color) => (
-          <SliderBox key={color} color={color} />
-        ))}
-        {color.map((color) => (
-          <SliderBox key={color} color={color} />
-        ))}
+        {isLoading && images.length === 0 ? (
+          <div className="flex justify-center items-center w-full h-[233px]">
+            <Loader2 className="animate-spin text-gray-400" />
+          </div>
+        ) : (
+          images.map((img) => (
+            <SliderBox key={`img-${img.id}`} imageUrl={img.image_url} />
+          ))
+        )}
       </InfiniteSlider>
     </div>
   );
