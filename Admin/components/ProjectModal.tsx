@@ -32,6 +32,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     strategy: "",
     takeaway: "",
     images: [],
+    slider_images: [],
     delivery_date: new Date().toISOString().split("T")[0],
   });
 
@@ -39,6 +40,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+  const [selectedSliderFiles, setSelectedSliderFiles] = useState<File[]>([]);
+  const [sliderPreviewUrls, setSliderPreviewUrls] = useState<string[]>([]);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   useEffect(() => {
@@ -53,6 +56,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         strategy: project.strategy,
         takeaway: project.takeaway,
         images: project.images,
+        slider_images: project.slider_images || [],
         delivery_date: new Date(project.delivery_date)
           .toISOString()
           .split("T")[0],
@@ -60,6 +64,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
       setSkillsInput(project.skills.join(", "));
       setSelectedFiles([]);
       setPreviewUrls([]);
+      setSelectedSliderFiles([]);
+      setSliderPreviewUrls([]);
     } else {
       setFormData({
         title: "",
@@ -71,11 +77,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         strategy: "",
         takeaway: "",
         images: [],
+        slider_images: [],
         delivery_date: new Date().toISOString().split("T")[0],
       });
       setSkillsInput("");
       setSelectedFiles([]);
       setPreviewUrls([]);
+      setSelectedSliderFiles([]);
+      setSliderPreviewUrls([]);
     }
   }, [project, isOpen]);
 
@@ -104,6 +113,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     }
   };
 
+  const handleSliderFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setSelectedSliderFiles((prev) => [...prev, ...files]);
+      const urls = files.map((file) => URL.createObjectURL(file));
+      setSliderPreviewUrls((prev) => [...prev, ...urls]);
+    }
+  };
+
   const removeImage = (index: number, isExisting: boolean) => {
     if (isExisting) {
       setFormData((prev) => ({
@@ -113,6 +131,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     } else {
       setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
       setPreviewUrls((prev) => prev.filter((_, i) => i !== index));
+    }
+  };
+
+  const removeSliderImage = (index: number, isExisting: boolean) => {
+    if (isExisting) {
+      setFormData((prev) => ({
+        ...prev,
+        slider_images: (prev.slider_images || []).filter((_, i) => i !== index),
+      }));
+    } else {
+      setSelectedSliderFiles((prev) => prev.filter((_, i) => i !== index));
+      setSliderPreviewUrls((prev) => prev.filter((_, i) => i !== index));
     }
   };
 
@@ -162,6 +192,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
           selectedFiles.map((file) => uploadImage(file))
         );
         finalFormData.images = [...finalFormData.images, ...imageUrls];
+      }
+
+      if (selectedSliderFiles.length > 0) {
+        const sliderImageUrls = await Promise.all(
+          selectedSliderFiles.map((file) => uploadImage(file))
+        );
+        finalFormData.slider_images = [...(finalFormData.slider_images || []), ...sliderImageUrls];
       }
 
       await onSave(
@@ -298,7 +335,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 </div>
 
                 <div className="input-group form-full">
-                  <label className="input-label">Project Images</label>
+                  <label className="input-label">Project Snapshots (Max 4, mockups/snapshots for details page)</label>
                   <div
                     style={{
                       display: "flex",
@@ -308,12 +345,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                   >
                     {formData.images.map((img, index) => (
                       <div
-                        key={`existing-${index}`}
+                        key={`existing-snap-${index}`}
                         style={{ position: "relative", width: "fit-content" }}
                       >
                         <img
                           src={img}
-                          alt={`Project Preview ${index + 1}`}
+                          alt={`Project Snapshot ${index + 1}`}
                           style={{
                             width: "150px",
                             height: "150px",
@@ -343,12 +380,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     ))}
                     {previewUrls.map((url, index) => (
                       <div
-                        key={`preview-${index}`}
+                        key={`preview-snap-${index}`}
                         style={{ position: "relative", width: "fit-content" }}
                       >
                         <img
                           src={url}
-                          alt={`New Preview ${index + 1}`}
+                          alt={`New Snapshot Preview ${index + 1}`}
                           style={{
                             width: "150px",
                             height: "150px",
@@ -360,6 +397,130 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                         <button
                           type="button"
                           onClick={() => removeImage(index, false)}
+                          className="btn btn-secondary"
+                          style={{
+                            position: "absolute",
+                            top: "0.5rem",
+                            right: "0.5rem",
+                            padding: "0.5rem",
+                            color: "var(--error)",
+                            background: "rgba(0,0,0,0.7)",
+                            border: "none",
+                            backdropFilter: "blur(4px)",
+                          }}
+                        >
+                          <Trash size={16} />
+                        </button>
+                      </div>
+                    ))}
+                    {formData.images.length + previewUrls.length < 4 && (
+                      <label
+                        className="upload-area glass"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: "150px",
+                          height: "150px",
+                          border: "2px dashed var(--glass-border)",
+                          borderRadius: "var(--radius-md)",
+                          cursor: "pointer",
+                          transition: "all 0.3s ease",
+                        }}
+                      >
+                        <ImagePlus
+                          size={32}
+                          style={{
+                            color: "var(--text-muted)",
+                            marginBottom: "0.5rem",
+                          }}
+                        />
+                        <span
+                          style={{
+                            color: "var(--text-secondary)",
+                            fontSize: "0.8rem",
+                            textAlign: "center",
+                            padding: "0 0.5rem",
+                          }}
+                        >
+                          Add Snapshot
+                        </span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          style={{ display: "none" }}
+                          onChange={handleFileChange}
+                        />
+                      </label>
+                    )}
+                  </div>
+                </div>
+
+                <div className="input-group form-full">
+                  <label className="input-label">Project Slider Images (Used in the interactive slider)</label>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "1rem",
+                    }}
+                  >
+                    {(formData.slider_images || []).map((img, index) => (
+                      <div
+                        key={`existing-slider-${index}`}
+                        style={{ position: "relative", width: "fit-content" }}
+                      >
+                        <img
+                          src={img}
+                          alt={`Slider Image ${index + 1}`}
+                          style={{
+                            width: "150px",
+                            height: "150px",
+                            objectFit: "cover",
+                            borderRadius: "var(--radius-md)",
+                            border: "1px solid var(--glass-border)",
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeSliderImage(index, true)}
+                          className="btn btn-secondary"
+                          style={{
+                            position: "absolute",
+                            top: "0.5rem",
+                            right: "0.5rem",
+                            padding: "0.5rem",
+                            color: "var(--error)",
+                            background: "rgba(0,0,0,0.7)",
+                            border: "none",
+                            backdropFilter: "blur(4px)",
+                          }}
+                        >
+                          <Trash size={16} />
+                        </button>
+                      </div>
+                    ))}
+                    {sliderPreviewUrls.map((url, index) => (
+                      <div
+                        key={`preview-slider-${index}`}
+                        style={{ position: "relative", width: "fit-content" }}
+                      >
+                        <img
+                          src={url}
+                          alt={`New Slider Preview ${index + 1}`}
+                          style={{
+                            width: "150px",
+                            height: "150px",
+                            objectFit: "cover",
+                            borderRadius: "var(--radius-md)",
+                            border: "1px solid var(--glass-border)",
+                          }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeSliderImage(index, false)}
                           className="btn btn-secondary"
                           style={{
                             position: "absolute",
@@ -406,14 +567,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                           padding: "0 0.5rem",
                         }}
                       >
-                        Add Image(s)
+                        Add Slider Image
                       </span>
                       <input
                         type="file"
                         accept="image/*"
                         multiple
                         style={{ display: "none" }}
-                        onChange={handleFileChange}
+                        onChange={handleSliderFileChange}
                       />
                     </label>
                   </div>

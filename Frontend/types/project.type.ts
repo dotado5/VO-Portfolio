@@ -9,6 +9,7 @@ export interface Project {
   strategy: string;
   takeaway: string;
   images: string[];
+  slider_images: string[];
   delivery_date: string;
 }
 

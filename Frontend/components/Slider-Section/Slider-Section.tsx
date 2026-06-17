@@ -10,12 +10,24 @@ import { motion } from "motion/react";
 import { useSliderStore } from "@/store/useSliderStore";
 import { Loader2 } from "lucide-react";
 
-const SliderSection = () => {
-  const { images, isLoading, fetchImages } = useSliderStore();
+interface SliderSectionProps {
+  images?: string[];
+}
+
+const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
+  const { images: globalImages, isLoading, fetchImages } = useSliderStore();
+
+  const hasProjectImages = projectSliderImages && projectSliderImages.length > 0;
 
   useEffect(() => {
-    fetchImages();
-  }, [fetchImages]);
+    if (!hasProjectImages) {
+      fetchImages();
+    }
+  }, [fetchImages, hasProjectImages]);
+
+  const imagesToDisplay = hasProjectImages 
+    ? projectSliderImages 
+    : globalImages.map((img) => img.image_url);
 
   return (
     <div className="slider-section">
@@ -27,17 +39,17 @@ const SliderSection = () => {
         className="exploration"
       >
         <Image src={magicPen} alt="magicPen" className="w-5 h-5" />
-        RECENT EXPLORATIONS
+        {hasProjectImages ? "PROJECT GALLERY" : "RECENT EXPLORATIONS"}
       </motion.h1>
 
       <InfiniteSlider duration={15}>
-        {isLoading && images.length === 0 ? (
+        {!hasProjectImages && isLoading && globalImages.length === 0 ? (
           <div className="flex justify-center items-center w-full h-[233px]">
             <Loader2 className="animate-spin text-gray-400" />
           </div>
         ) : (
-          images.map((img) => (
-            <SliderBox key={`img-${img.id}`} imageUrl={img.image_url} />
+          imagesToDisplay.map((url, index) => (
+            <SliderBox key={`img-${index}`} imageUrl={url} />
           ))
         )}
       </InfiniteSlider>

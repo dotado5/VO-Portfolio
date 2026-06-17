@@ -53,18 +53,37 @@ export const ProjectService = {
     // Fetch project to get image URLs
     const project = await this.findOne(id);
     
-    if (project && project.images && project.images.length > 0) {
-      const fileNames = project.images.map((url) => {
-        const parts = url.split("/");
-        return parts[parts.length - 1];
-      });
+    if (project) {
+      // Delete project snapshots
+      if (project.images && project.images.length > 0) {
+        const fileNames = project.images.map((url) => {
+          const parts = url.split("/");
+          return parts[parts.length - 1];
+        });
 
-      const { error: storageError } = await supabase.storage
-        .from("Project_images")
-        .remove(fileNames);
+        const { error: storageError } = await supabase.storage
+          .from("Project_images")
+          .remove(fileNames);
 
-      if (storageError) {
-        console.error("Failed to delete images from storage:", storageError);
+        if (storageError) {
+          console.error("Failed to delete images from storage:", storageError);
+        }
+      }
+
+      // Delete project slider images
+      if (project.slider_images && project.slider_images.length > 0) {
+        const sliderFileNames = project.slider_images.map((url) => {
+          const parts = url.split("/");
+          return parts[parts.length - 1];
+        });
+
+        const { error: storageError } = await supabase.storage
+          .from("Project_images")
+          .remove(sliderFileNames);
+
+        if (storageError) {
+          console.error("Failed to delete slider images from storage:", storageError);
+        }
       }
     }
 
