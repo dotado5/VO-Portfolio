@@ -9,6 +9,7 @@ import InfiniteSlider from "../Infinite-Slider/Infinite-Slider";
 import { motion } from "motion/react";
 import { useSliderStore } from "@/store/useSliderStore";
 import { Loader2 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 interface SliderSectionProps {
   images?: string[];
@@ -16,21 +17,21 @@ interface SliderSectionProps {
 
 const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
   const { images: globalImages, isLoading, fetchImages } = useSliderStore();
-
-  const hasProjectImages = projectSliderImages && projectSliderImages.length > 0;
+  const pathName = usePathname();
+  const isProjectPage = pathName.includes("/project");
 
   useEffect(() => {
-    if (!hasProjectImages) {
+    if (!isProjectPage) {
       fetchImages();
     }
-  }, [fetchImages, hasProjectImages]);
+  }, [fetchImages, isProjectPage]);
 
-  const imagesToDisplay = hasProjectImages 
-    ? projectSliderImages 
+  const imagesToDisplay = isProjectPage
+    ? projectSliderImages
     : globalImages.map((img) => img.image_url);
 
   return (
-    <div className="slider-section">
+    <div className={`slider-section ${globalImages.length > 0 ? "" : "mt-5"}`}>
       <motion.h1
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -38,21 +39,27 @@ const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="exploration"
       >
-        <Image src={magicPen} alt="magicPen" className="w-5 h-5" />
-        {hasProjectImages ? "PROJECT GALLERY" : "RECENT EXPLORATIONS"}
+        {isProjectPage ? (
+          ""
+        ) : (
+          <Image src={magicPen} alt="magicPen" className="w-5 h-5" />
+        )}
+        {isProjectPage ? "" : "RECENT EXPLORATIONS"}
       </motion.h1>
 
-      <InfiniteSlider duration={15}>
-        {!hasProjectImages && isLoading && globalImages.length === 0 ? (
-          <div className="flex justify-center items-center w-full h-[233px]">
-            <Loader2 className="animate-spin text-gray-400" />
-          </div>
-        ) : (
-          imagesToDisplay.map((url, index) => (
-            <SliderBox key={`img-${index}`} imageUrl={url} />
-          ))
-        )}
-      </InfiniteSlider>
+      {imagesToDisplay && imagesToDisplay.length > 0 && (
+        <InfiniteSlider duration={15}>
+          {isLoading && globalImages.length === 0 ? (
+            <div className="flex justify-center items-center w-full h-[233px]">
+              <Loader2 className="animate-spin text-gray-400" />
+            </div>
+          ) : (
+            imagesToDisplay.map((url, index) => (
+              <SliderBox key={`img-${index}`} imageUrl={url} />
+            ))
+          )}
+        </InfiniteSlider>
+      )}
     </div>
   );
 };
