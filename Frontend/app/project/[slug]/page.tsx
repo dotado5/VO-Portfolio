@@ -98,7 +98,7 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
       <ProjectSection title="THE PROBLEM" content={problemContent} />
 
       <div className="slider">
-        <SliderSection />
+        <SliderSection images={selectedProject.slider_images} />
       </div>
 
       <ProjectSection title="DESIGN STRATEGY" content={strategyContent} />

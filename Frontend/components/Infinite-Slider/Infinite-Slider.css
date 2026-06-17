@@ -1,28 +1,47 @@
-.infinite-slider-container {
-  @apply overflow-hidden w-full;
+/* ==========================================================
+   Infinite Slider — Full edge-to-edge marquee
+   ========================================================== */
+
+.infinite-slider-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Intentionally NO left/right padding — spans the full viewport */
 }
 
+/* ---- The scrolling track ---- */
 .infinite-slider-track {
-  @apply flex w-fit;
-  animation: scroll var(--animation-duration, 30s) linear infinite;
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee var(--duration, 30s) linear infinite;
 }
 
-.infinite-slider-content {
-  @apply flex items-center gap-[10px] shrink-0;
-  padding-right: 10px; /* Match the gap */
+.infinite-slider-track.reverse {
+  animation-direction: reverse;
 }
 
-.infinite-slider-track:hover {
+/* Pause on hover for better UX */
+.infinite-slider-wrapper:hover .infinite-slider-track {
   animation-play-state: paused;
 }
 
-@keyframes scroll {
+/* ---- A single repeated set of items ---- */
+.infinite-slider-set {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 12px; /* match the gap so the loop is seamless */
+  flex-shrink: 0;
+}
+
+/* ---- The core animation — moves exactly 1 set width to the left ---- */
+/* Because we render 4 copies we translate -25% to move one full set */
+@keyframes marquee {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
 }
-
-
