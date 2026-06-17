@@ -3,6 +3,7 @@ export interface Project {
   slug: string;
   title: string;
   background_story: string;
+  background_story_sub: string;
   role: string;
   skills: string[];
   problem: string;

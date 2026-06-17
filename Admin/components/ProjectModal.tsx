@@ -26,6 +26,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     title: "",
     slug: "",
     background_story: "",
+    background_story_sub: "",
     role: "",
     skills: [],
     problem: "",
@@ -50,6 +51,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         title: project.title,
         slug: project.slug,
         background_story: project.background_story,
+        background_story_sub: project.background_story_sub || "",
         role: project.role,
         skills: project.skills,
         problem: project.problem,
@@ -71,6 +73,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         title: "",
         slug: "",
         background_story: "",
+        background_story_sub: "",
         role: "",
         skills: [],
         problem: "",
@@ -286,6 +289,22 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     value={formData.background_story}
                     onChange={handleChange}
                     required
+                  />
+                </div>
+
+                <div className="input-group form-full">
+                  <label className="input-label">
+                    Background Story — Subsection
+                    <span style={{ fontWeight: 400, opacity: 0.6, marginLeft: "0.5rem", fontSize: "0.8rem" }}>
+                      (optional · appears unbolded right after the main paragraph)
+                    </span>
+                  </label>
+                  <textarea
+                    name="background_story_sub"
+                    className="input-field"
+                    placeholder="Add a subtle continuation of the background story..."
+                    value={formData.background_story_sub}
+                    onChange={handleChange}
                   />
                 </div>
 

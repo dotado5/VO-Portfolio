@@ -17,9 +17,7 @@
 }
 
 .slider {
-  @apply flex items-center w-full gap-[10px];
-  padding-left: var(--spacing-responsive-px);
-  padding-right: var(--spacing-responsive-px);
+  @apply w-full;
 }
 
 .project-status {

@@ -5,7 +5,6 @@ import "../page.css";
 import snapshot from "@public/assets/snapshot.png";
 import Header from "@/components/Work-Details-Header";
 import ProjectSection from "@/components/Background-Story";
-import SliderBox from "@/components/Slider-Box/Slider-Box";
 import FormSection from "@/components/Form-Section";
 import { useProjectStore } from "@/store/useProjectStore";
 import SliderSection from "@/components/Slider-Section/Slider-Section";
@@ -15,8 +14,6 @@ interface ProjectPageProps {
     slug: string;
   }>;
 }
-
-const colorSwatches = ["bg-[#FFFFFF]", "bg-[#6B1616]", "bg-[#000000]"];
 
 const ProjectPage = ({ params }: ProjectPageProps) => {
   const { slug } = use(params);
@@ -52,6 +49,9 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
       text: selectedProject.background_story,
       isBold: true,
     },
+    ...(selectedProject.background_story_sub
+      ? [{ text: selectedProject.background_story_sub, isBold: false }]
+      : []),
   ];
 
   const problemContent = [
