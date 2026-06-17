@@ -81,15 +81,6 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
           alt={`${selectedProject.title} view 1`}
           className="snapshot-half"
         />
-        <img
-          src={
-            selectedProject.images?.[1] ||
-            selectedProject.images?.[0] ||
-            snapshot.src
-          }
-          alt={`${selectedProject.title} view 2`}
-          className="snapshot-half"
-        />
       </div>
       <ProjectSection
         title="BACKGROUND STORY"
@@ -106,22 +97,8 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
 
       <div className="snapshot-container">
         <img
-          src={
-            selectedProject.images?.[2] ||
-            selectedProject.images?.[0] ||
-            snapshot.src
-          }
+          src={selectedProject.images?.[1] || snapshot.src}
           alt={`${selectedProject.title} view 3`}
-          className="snapshot-half"
-        />
-        <img
-          src={
-            selectedProject.images?.[3] ||
-            selectedProject.images?.[1] ||
-            selectedProject.images?.[0] ||
-            snapshot.src
-          }
-          alt={`${selectedProject.title} view 4`}
           className="snapshot-half"
         />
       </div>

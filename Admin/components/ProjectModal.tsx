@@ -178,7 +178,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
       setIsSubmitting(true);
 
       let finalFormData = { ...formData };
-      
+
       // Auto-generate slug if not provided or updating title
       if (!finalFormData.slug || finalFormData.slug === "") {
         finalFormData.slug = finalFormData.title
@@ -189,16 +189,19 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
       if (selectedFiles.length > 0) {
         const imageUrls = await Promise.all(
-          selectedFiles.map((file) => uploadImage(file))
+          selectedFiles.map((file) => uploadImage(file)),
         );
         finalFormData.images = [...finalFormData.images, ...imageUrls];
       }
 
       if (selectedSliderFiles.length > 0) {
         const sliderImageUrls = await Promise.all(
-          selectedSliderFiles.map((file) => uploadImage(file))
+          selectedSliderFiles.map((file) => uploadImage(file)),
         );
-        finalFormData.slider_images = [...(finalFormData.slider_images || []), ...sliderImageUrls];
+        finalFormData.slider_images = [
+          ...(finalFormData.slider_images || []),
+          ...sliderImageUrls,
+        ];
       }
 
       await onSave(
@@ -335,7 +338,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 </div>
 
                 <div className="input-group form-full">
-                  <label className="input-label">Project Snapshots (Max 4, mockups/snapshots for details page)</label>
+                  <label className="input-label">
+                    Project Snapshots (Max 2, mockups/snapshots for details
+                    page)
+                  </label>
                   <div
                     style={{
                       display: "flex",
@@ -459,7 +465,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 </div>
 
                 <div className="input-group form-full">
-                  <label className="input-label">Project Slider Images (Used in the interactive slider)</label>
+                  <label className="input-label">
+                    Project Slider Images (Used in the interactive slider)
+                  </label>
                   <div
                     style={{
                       display: "flex",

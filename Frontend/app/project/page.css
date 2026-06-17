@@ -7,13 +7,13 @@
 }
 
 .snapshot-container {
-  @apply flex flex-col md:flex-row w-full gap-[2px] h-[600px];
+  @apply flex w-full gap-[2px] h-[600px];
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
 
 .snapshot-half {
-  @apply w-full md:w-1/2 object-cover;
+  @apply w-full object-cover;
 }
 
 .slider {
