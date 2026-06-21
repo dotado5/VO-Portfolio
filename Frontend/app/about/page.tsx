@@ -1,10 +1,33 @@
+"use client";
+
 import Image from "next/image";
 import "./page.css";
 import PhotoSection from "@/components/Photo-Section";
 import WorkExperienceSection from "@/components/Work-Experience-Section";
 import FormSection from "@/components/Form-Section";
+import { useEffect } from "react";
+import { useAboutStore } from "@/store/useAboutStore";
+import { aboutService } from "@/services/about.service";
 
 const page = () => {
+  const { aboutMe, setAboutMe } = useAboutStore();
+
+  useEffect(() => {
+    fetchAboutMe();
+  }, []);
+
+  const fetchAboutMe = async () => {
+    try {
+      const data = await aboutService.getAboutMe();
+      setAboutMe(data);
+    } catch (error) {
+      console.error("Failed to fetch about me", error);
+    }
+  };
+
+  const leadText = aboutMe?.lead_text || "Designing digital experiences...";
+  const descriptionText = aboutMe?.description || "I am a product designer...";
+  const paragraphs = descriptionText.split('\n').filter((p: string) => p.trim() !== '');
   return (
     <div className="about-me-page">
       <div className="about-images-container">
@@ -32,62 +55,13 @@ const page = () => {
 
       <section className="about-me">
         <p className="about-me-lead">
-          Green Potentia is a Nigerian renewable energy company with a bold
-          mission: to end power instability in Nigeria through affordable,
-          accessible solar energy solutions. They are not just a product-based
-          business; they are building a movement around energy education,
-          practical technology, and community empowerment.
+          {leadText}
         </p>
 
         <div className="about-me-desc">
-          <p>
-            Planning an event in Nigeria is a headache. Most celebrations —
-            birthdays, link-ups, housewarmings, engagements — are supposed to be
-            joyful, but they often felt like logistical nightmares. Existing
-            tools never really fit the way we do things. They felt stiff,
-            generic, far removed from how Nigerians actually plan and celebrate,
-            or just incomplete.
-          </p>
-          <p>
-            As a culture, we love to party. But the people organizing these
-            moments, from brides and planners to friends hosting something small
-            for their guys, were dealing with stress that quietly stole from the
-            joy they were trying to create. We wanted to change that. Not just
-            by removing friction for people who already plan, but by lowering
-            the barrier to entry so anyone could decide to host something
-            without fear.
-          </p>
-          <p>
-            Our goal was to simplify the entire process — planning,
-            collaboration, payments, tracking, vendor sourcing — while keeping
-            all the energy, color and magic that makes Nigerian celebrations
-            what they are. We wanted a planning experience that felt vibrant,
-            shareable and fun, without losing clarity or control.
-          </p>
-          <p>
-            Planning an event in Nigeria is a headache. Most celebrations —
-            birthdays, link-ups, housewarmings, engagements — are supposed to be
-            joyful, but they often felt like logistical nightmares. Existing
-            tools never really fit the way we do things. They felt stiff,
-            generic, far removed from how Nigerians actually plan and celebrate,
-            or just incomplete.
-          </p>
-          <p>
-            As a culture, we love to party. But the people organizing these
-            moments, from brides and planners to friends hosting something small
-            for their guys, were dealing with stress that quietly stole from the
-            joy they were trying to create. We wanted to change that. Not just
-            by removing friction for people who already plan, but by lowering
-            the barrier to entry so anyone could decide to host something
-            without fear.
-          </p>
-          <p>
-            Our goal was to simplify the entire process — planning,
-            collaboration, payments, tracking, vendor sourcing — while keeping
-            all the energy, color and magic that makes Nigerian celebrations
-            what they are. We wanted a planning experience that felt vibrant,
-            shareable and fun, without losing clarity or control.
-          </p>
+          {paragraphs.map((p: string, index: number) => (
+            <p key={index}>{p}</p>
+          ))}
         </div>
       </section>
 
