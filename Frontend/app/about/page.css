@@ -1,19 +1,21 @@
 @reference "../../styles/globals.css";
 
 .about-me-page {
-  @apply flex flex-col mt-[100px];
+  @apply flex flex-col mt-6 md:mt-10;
 }
 
 .about-images-container {
-  @apply relative my-12 flex flex-col gap-5 sm:flex-row sm:gap-0 px-[400px];
+  @apply relative my-12 flex flex-row items-center justify-start;
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
 }
 
 .left-image {
-  @apply relative z-10 rotate-0 sm:-rotate-3 md:-rotate-3;
+  @apply relative z-10 -rotate-3 rounded-[32px];
 }
 
 .right-image {
-  @apply relative z-20 ml-0 rotate-0 sm:-ml-[30px] sm:rotate-3 md:-ml-[50px] md:rotate-3;
+  @apply relative z-20 -ml-[30px] sm:-ml-[50px] rotate-3 rounded-[32px];
 }
 
 .about-image {
@@ -21,13 +23,15 @@
 }
 
 .about-me {
-  @apply flex flex-col gap-5 px-[150px];
+  @apply flex flex-col gap-6 w-full;
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
 }
 
-.about-me p {
-  @apply text-[16px] leading-[29px] font-bold;
+.about-me-lead {
+  @apply text-[18px] md:text-[22px] font-bold text-[#303030] leading-[1.6];
 }
 
-.about-me span {
-  @apply text-[16px] leading-[22px] font-medium;
+.about-me-desc {
+  @apply flex flex-col gap-5 text-[15px] md:text-[16px] font-medium text-[#525252] leading-[1.7];
 }
