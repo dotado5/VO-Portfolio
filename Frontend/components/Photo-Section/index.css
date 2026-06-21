@@ -1,16 +1,22 @@
 @reference "../../styles/globals.css";
 
 .photo-section {
-  @apply w-full mt-[60px] px-[150px];
+  @apply w-full mt-[60px];
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
 }
 
 .my-photo {
-  @apply flex gap-[10px] text-[#303030] text-[16px] font-[700] mb-[15px];
+  @apply flex gap-[10px] items-center justify-center sm:justify-start text-[#303030] text-[16px] font-[700];
 }
 
 .photos {
-  @apply w-full gap-3;
+  @apply w-full gap-3 grid justify-center sm:justify-start;
+  grid-template-columns: repeat(auto-fill, 135px);
+}
 
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+@media (min-width: 1280px) {
+  .photos {
+    grid-template-columns: repeat(8, 135px);
+  }
 }

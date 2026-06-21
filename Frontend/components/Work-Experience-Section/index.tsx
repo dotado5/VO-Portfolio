@@ -4,10 +4,12 @@ import WorkExperienceBox from "../Work-Experience-Box/Work-Experience-Box";
 import "./index.css";
 import { workExperience } from "@/constants/default";
 
-const WorkExperienceSection = () => {
+const WorkExperienceSection = ({ homepage }: { homepage: boolean }) => {
   return (
-    <div className="work-experience-section">
-      <h1>
+    <div className={`work-experience-section `}>
+      <h1
+        className={`${homepage ? "" : "items-center justify-center sm:justify-start"}`}
+      >
         <Image src={briefcase} alt="Briefcase" className="w-5 h-5" />
         WORK EXPERIENCE
       </h1>

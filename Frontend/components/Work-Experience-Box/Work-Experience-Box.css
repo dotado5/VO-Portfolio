@@ -19,13 +19,15 @@
 }
 
 .work-experience-type {
+  font-size: 14px;
   font-weight: 500;
+  color: #8f8f8f;
   margin-bottom: 0.25rem;
 }
 
 .work-experience-date {
-  font-size: 1.2rem;
-  color: #444444;
+  font-size: 16px;
+  color: #303030;
   font-weight: 700;
 }
 
@@ -36,14 +38,16 @@
 }
 
 .work-experience-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #303030;
   margin: 0 0 0.5rem 0;
 }
 
 .work-experience-description {
-  line-height: var(--leading-tight);
+  font-size: 15px;
+  color: #525252;
+  line-height: 1.6;
   margin: 0;
 }
 
