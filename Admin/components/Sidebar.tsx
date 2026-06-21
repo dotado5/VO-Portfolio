@@ -2,7 +2,7 @@
 import React from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { LayoutDashboard, Briefcase, BarChart3, LogOut, ImagePlus } from "lucide-react";
+import { LayoutDashboard, Briefcase, BarChart3, LogOut, ImagePlus, User, GraduationCap, Camera } from "lucide-react";
 import { AuthService } from "../services/auth.service";
 import { showToast } from "../utils/toast";
 
@@ -24,6 +24,9 @@ const Sidebar: React.FC = () => {
     },
     { name: "Projects", path: "/dashboard", icon: <Briefcase size={20} /> },
     { name: "Slider", path: "/slider", icon: <ImagePlus size={20} /> },
+    { name: "Photo Gallery", path: "/gallery", icon: <Camera size={20} /> },
+    { name: "About Me", path: "/about", icon: <User size={20} /> },
+    { name: "Experience", path: "/experience", icon: <GraduationCap size={20} /> },
     { name: "Analytics", path: "/analytics", icon: <BarChart3 size={20} /> },
   ];
 

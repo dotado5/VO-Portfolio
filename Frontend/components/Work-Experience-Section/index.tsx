@@ -1,10 +1,29 @@
+"use client";
+
 import Image from "next/image";
 import briefcase from "@public/assets/briefcase.png";
 import WorkExperienceBox from "../Work-Experience-Box/Work-Experience-Box";
 import "./index.css";
-import { workExperience } from "@/constants/default";
+import { useEffect } from "react";
+import { useExperienceStore } from "@/store/useExperienceStore";
+import { experienceService } from "@/services/experience.service";
 
 const WorkExperienceSection = ({ homepage }: { homepage: boolean }) => {
+  const { experiences, setExperiences } = useExperienceStore();
+
+  useEffect(() => {
+    fetchExperiences();
+  }, []);
+
+  const fetchExperiences = async () => {
+    try {
+      const data = await experienceService.getAllExperiences();
+      setExperiences(data || []);
+    } catch (error) {
+      console.error("Failed to fetch experiences", error);
+    }
+  };
+
   return (
     <div className={`work-experience-section `}>
       <h1
@@ -15,14 +34,14 @@ const WorkExperienceSection = ({ homepage }: { homepage: boolean }) => {
       </h1>
 
       <div className="work-experience-list">
-        {workExperience.map((workExperience, index) => (
+        {experiences.map((exp, index) => (
           <WorkExperienceBox
             key={index}
-            type={workExperience.type}
-            date={workExperience.date}
-            role={workExperience.role}
-            company={workExperience.company}
-            description={workExperience.description}
+            type={exp.type}
+            date={exp.date}
+            role={exp.role}
+            company={exp.company}
+            description={exp.description}
           />
         ))}
       </div>
