@@ -1,0 +1,13 @@
+@reference "../../styles/globals.css";
+
+.resume-page {
+  @apply flex flex-col items-center justify-center w-full min-h-[65vh] px-4 text-center;
+}
+
+.resume-page h1 {
+  @apply text-[40px] sm:text-[50px] md:text-[80px] lg:text-[100px] font-bold text-[#303030] leading-none tracking-tight mb-[10px];
+}
+
+.resume-page p {
+  @apply text-[18px] md:text-[20px] lg:text-[22px] font-bold text-[#707070] mb-8;
+}
