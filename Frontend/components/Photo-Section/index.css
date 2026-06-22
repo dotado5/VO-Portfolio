@@ -11,12 +11,12 @@
 }
 
 .photos {
-  @apply w-full gap-3 grid justify-center sm:justify-start;
-  grid-template-columns: repeat(auto-fill, 135px);
+  @apply w-full gap-[8px] grid justify-center sm:justify-start;
+  grid-template-columns: repeat(auto-fill, 130px);
 }
 
 @media (min-width: 1280px) {
   .photos {
-    grid-template-columns: repeat(8, 135px);
+    grid-template-columns: repeat(auto-fill, 130px);
   }
 }
