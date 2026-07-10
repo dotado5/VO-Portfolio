@@ -1,7 +1,8 @@
 @reference "../../styles/globals.css";
 
 .photo-card {
-  @apply border-[5px] border-[#A1A1A1] rounded-[20px] bg-white w-[130px] h-[130px];
+  @apply border-[5px] border-[#A1A1A1] rounded-[20px] bg-white w-full;
+  aspect-ratio: 1 / 1;
 }
 
 
