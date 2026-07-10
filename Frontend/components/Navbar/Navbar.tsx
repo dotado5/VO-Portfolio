@@ -32,7 +32,10 @@ const Navbar = () => {
   const navLinks = [
     { name: "HOME", href: "/", icon: true },
     { name: "About Me", href: "/about" },
-    { name: "Resume", href: "/resume" },
+    {
+      name: "Resume",
+      href: "https://docs.google.com/document/d/1fEY7IGmJxj0oGYadzGVkggP15ytDVT0S19W7r32TbfQ/mobilebasic",
+    },
     { name: "Blogs", href: "/blogs" },
   ];
 
@@ -57,6 +60,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   className={`nav-link ${currentPathname === link.href && "nav-link-disabled"}`}
+                  target={link.name === "Resume" ? "_blank" : "_self"}
                 >
                   {link.name}
                   {link.icon && <Repeat className="nav-link-icon" />}

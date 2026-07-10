@@ -7,7 +7,7 @@
 }
 
 .work-experience-section h1 {
-  @apply w-full flex gap-1 text-[#303030] text-[16px] font-[700] mb-6;
+  @apply w-full flex gap-1 text-[#303030] text-[16px] font-[700] mb-1;
 }
 
 .work-experience-list {
