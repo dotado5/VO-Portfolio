@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .form-section {
-  @apply w-full flex flex-col items-start mt-10;
+  @apply w-full flex flex-col items-start mt-6;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
@@ -11,7 +11,7 @@
 }
 
 .form-section h2 {
-  @apply flex items-center gap-1 text-[#303030] text-[16px] md:text-[16px] font-[700] mb-[20px] uppercase;
+  @apply flex items-center gap-1 text-[#303030] text-[16px] md:text-[16px] font-[700] mb-3 uppercase;
 }
 
 .form-section h1 {

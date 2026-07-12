@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .hero {
-  @apply mt-10;
+  @apply mt-10 mb-4;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
@@ -32,7 +32,7 @@
 }
 
 .hero-details {
-  @apply text-base sm:text-base md:text-[16px] mb-3 mt-1;
+  @apply text-base sm:text-base md:text-[16px] my-1;
 }
 
 /* Social Links Styling */

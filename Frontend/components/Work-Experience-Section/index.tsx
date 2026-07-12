@@ -25,7 +25,7 @@ const WorkExperienceSection = ({ homepage }: { homepage: boolean }) => {
   };
 
   return (
-    <div className={`work-experience-section `}>
+    <div className={`work-experience-section`}>
       <h1
         className={`${homepage ? "" : "items-center justify-center sm:justify-start"}`}
       >

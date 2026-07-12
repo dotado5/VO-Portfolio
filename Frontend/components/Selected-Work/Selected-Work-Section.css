@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .selected-work-section {
-  @apply w-full mx-auto py-10;
+  @apply w-full mx-auto pt-5;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
@@ -19,5 +19,5 @@
 }
 
 .selected-work-list {
-  @apply flex flex-col gap-12 md:gap-24;
+  @apply flex flex-col gap-3 md:gap-8;
 }
