@@ -74,7 +74,11 @@ const Navbar = () => {
 
           <div className="flex items-center gap-4 md:gap-6 lg:gap-0">
             {/* CTA (Desktop/Tablet) */}
-            <Link href="/work-with-me" className="cta group">
+            <Link
+              href="https://scheduler-48c6.vercel.app/"
+              className="cta group"
+              target="_blank"
+            >
               <span className="cta-text">Work with me</span>
               <Image src={exportIcon} alt="Export Icon" />
             </Link>
