@@ -11,11 +11,15 @@ import {
   User as UserIcon,
   RefreshCw,
   Loader2,
+  Eye,
+  PenSquare,
 } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useProjectStore } from "@/store/projectStore";
+import { useBlogStore } from "@/store/blogStore";
 
 import { ProjectService } from "@/services/project.service";
+import { BlogService } from "@/services/blog.service";
 import { showToast } from "@/utils/toast";
 import Link from "next/link";
 
@@ -75,6 +79,7 @@ const fadeUp = {
 const Overview: React.FC = () => {
   const { user } = useAuthStore();
   const { projects } = useProjectStore();
+  const { blogs } = useBlogStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const allProjects = [...projects];
@@ -82,6 +87,13 @@ const Overview: React.FC = () => {
   const topSkills = getTopSkills(allProjects);
   const recentProjects = getRecentProjects(allProjects);
   const avgYear = getAvgDeliveryYear(allProjects);
+
+  const publishedBlogs = blogs.filter((b) => b.status === "published");
+  const totalBlogViews = blogs.reduce((sum, b) => sum + (b.views ?? 0), 0);
+  const mostReadPost =
+    blogs.length > 0
+      ? [...blogs].sort((a, b) => (b.views ?? 0) - (a.views ?? 0))[0]
+      : null;
 
   useEffect(() => {
     handleRefresh(false);
@@ -91,7 +103,7 @@ const Overview: React.FC = () => {
   const handleRefresh = async (notify = true) => {
     try {
       setIsLoading(true);
-      await ProjectService.findAll();
+      await Promise.all([ProjectService.findAll(), BlogService.findAll()]);
       if (notify) showToast.success("Data refreshed.");
     } catch {
       if (notify) showToast.error("Failed to refresh data.");
@@ -392,6 +404,152 @@ const Overview: React.FC = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* ---- blog snapshot ---- */}
+      <motion.div
+        custom={6}
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+        className="glass project-card"
+        style={{ borderRadius: "var(--radius-md)", marginTop: "1.5rem" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "1.5rem",
+          }}
+        >
+          <h3
+            style={{
+              fontSize: "1.1rem",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+            }}
+          >
+            <PenSquare size={18} style={{ color: "var(--accent-primary)" }} />
+            Blog
+          </h3>
+          <Link
+            href="/blogs"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.35rem",
+              fontSize: "0.8rem",
+              color: "var(--accent-primary)",
+              textDecoration: "none",
+            }}
+          >
+            Manage <ArrowRight size={14} />
+          </Link>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "1rem",
+            marginBottom: mostReadPost ? "1.5rem" : 0,
+          }}
+        >
+          {[
+            { label: "Total Posts", value: blogs.length },
+            { label: "Published", value: publishedBlogs.length },
+            {
+              label: "Total Views",
+              value: totalBlogViews.toLocaleString(),
+            },
+          ].map((item) => (
+            <div
+              key={item.label}
+              style={{
+                padding: "1rem",
+                background: "rgba(255,255,255,0.02)",
+                borderRadius: "var(--radius-sm)",
+                border: "1px solid var(--glass-border)",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "0.72rem",
+                  color: "var(--text-muted)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  marginBottom: "0.35rem",
+                }}
+              >
+                {item.label}
+              </p>
+              <p
+                style={{
+                  fontSize: "1.6rem",
+                  fontWeight: 700,
+                  fontFamily: "var(--font-heading)",
+                  color: "var(--accent-primary)",
+                }}
+              >
+                {item.value}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {mostReadPost && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "0.85rem 1rem",
+              background: "hsla(260, 80%, 65%, 0.08)",
+              borderRadius: "var(--radius-sm)",
+              border: "1px solid var(--glass-border)",
+            }}
+          >
+            <div style={{ minWidth: 0 }}>
+              <p
+                style={{
+                  fontSize: "0.72rem",
+                  color: "var(--text-muted)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  marginBottom: "0.2rem",
+                }}
+              >
+                Most Read
+              </p>
+              <p
+                style={{
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {mostReadPost.title}
+              </p>
+            </div>
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.35rem",
+                color: "var(--accent-primary)",
+                fontWeight: 600,
+                whiteSpace: "nowrap",
+                paddingLeft: "1rem",
+              }}
+            >
+              <Eye size={15} />
+              {(mostReadPost.views ?? 0).toLocaleString()}
+            </span>
+          </div>
+        )}
+      </motion.div>
     </div>
   );
 };
