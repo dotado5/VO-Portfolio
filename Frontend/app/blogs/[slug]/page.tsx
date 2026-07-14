@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { ArrowLeft } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import { Blog } from "@/types/blog.type";
+import ViewTracker from "./ViewTracker";
 
 export const revalidate = 0;
 
@@ -71,6 +72,7 @@ export default async function BlogPost({ params }: BlogPageProps) {
 
   return (
     <article className="blog-post">
+      <ViewTracker slug={blog.slug} />
       <Link href="/blogs" className="blog-post-back">
         <ArrowLeft size={18} />
         <span>All posts</span>

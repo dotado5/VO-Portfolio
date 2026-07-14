@@ -9,6 +9,7 @@ import {
   Trash2,
   Calendar,
   Clock,
+  Eye,
   Loader2,
   RefreshCw,
   FileText,
@@ -379,6 +380,18 @@ const BlogsPage: React.FC = () => {
                     >
                       <Clock size={13} />
                       {blog.read_time} min read
+                    </span>
+                    <span
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.3rem",
+                      }}
+                      title={`${blog.views ?? 0} total views`}
+                    >
+                      <Eye size={13} />
+                      {(blog.views ?? 0).toLocaleString()}{" "}
+                      {blog.views === 1 ? "view" : "views"}
                     </span>
                     {(blog.tags || []).slice(0, 3).map((tag) => (
                       <span key={tag} className="badge badge-skill">

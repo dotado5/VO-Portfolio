@@ -22,10 +22,15 @@ import {
   User as UserIcon,
   RefreshCw,
   Loader2,
+  PenSquare,
+  Eye,
+  BookOpen,
 } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useProjectStore } from "@/store/projectStore";
+import { useBlogStore } from "@/store/blogStore";
 import { ProjectService } from "@/services/project.service";
+import { BlogService } from "@/services/blog.service";
 import { showToast } from "@/utils/toast";
 import { Project } from "@/types/project.type";
 
@@ -120,12 +125,27 @@ const fadeUp = {
 const Analytics: React.FC = () => {
   const { user } = useAuthStore();
   const { projects } = useProjectStore();
+  const { blogs } = useBlogStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const allProjects = [...projects];
   const projectsByYear = buildProjectsByYear(allProjects);
   const skillCounts = buildSkillCounts(allProjects);
   const roleDistribution = buildRoleDistribution(allProjects);
+
+  const publishedBlogs = blogs.filter((b) => b.status === "published");
+  const totalBlogViews = blogs.reduce((sum, b) => sum + (b.views ?? 0), 0);
+  const sortedByViews = [...blogs].sort(
+    (a, b) => (b.views ?? 0) - (a.views ?? 0),
+  );
+  const mostReadPost = sortedByViews[0] ?? null;
+  const viewsByPost = sortedByViews
+    .filter((b) => (b.views ?? 0) > 0)
+    .slice(0, 8)
+    .map((b) => ({
+      name: b.title.length > 22 ? `${b.title.slice(0, 22)}…` : b.title,
+      value: b.views ?? 0,
+    }));
 
   const uniqueSkills = new Set(allProjects.flatMap((p) => p.skills)).size;
   const liveCount = projects.length;
@@ -164,6 +184,41 @@ const Analytics: React.FC = () => {
     },
   ];
 
+  const blogStats = [
+    {
+      label: "Total Posts",
+      value: blogs.length,
+      icon: <PenSquare size={20} />,
+      color: "var(--accent-primary)",
+      bg: "hsla(260, 80%, 65%, 0.12)",
+    },
+    {
+      label: "Published",
+      value: publishedBlogs.length,
+      icon: <BookOpen size={20} />,
+      color: "hsl(200, 80%, 60%)",
+      bg: "hsla(200, 80%, 60%, 0.12)",
+    },
+    {
+      label: "Total Views",
+      value: totalBlogViews.toLocaleString(),
+      icon: <Eye size={20} />,
+      color: "hsl(150, 70%, 50%)",
+      bg: "hsla(150, 70%, 50%, 0.12)",
+    },
+    {
+      label: "Most Read",
+      value: mostReadPost
+        ? mostReadPost.title.length > 16
+          ? `${mostReadPost.title.slice(0, 16)}…`
+          : mostReadPost.title
+        : "—",
+      icon: <TrendingUp size={20} />,
+      color: "hsl(40, 90%, 60%)",
+      bg: "hsla(40, 90%, 60%, 0.12)",
+    },
+  ];
+
   useEffect(() => {
     handleRefresh(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -172,7 +227,7 @@ const Analytics: React.FC = () => {
   const handleRefresh = async (notify = true) => {
     try {
       setIsLoading(true);
-      await ProjectService.findAll();
+      await Promise.all([ProjectService.findAll(), BlogService.findAll()]);
       if (notify) showToast.success("Analytics refreshed.");
     } catch {
       if (notify) showToast.error("Failed to refresh.");
@@ -514,6 +569,178 @@ const Analytics: React.FC = () => {
           </ResponsiveContainer>
         </motion.div>
       </div>
+
+      {/* ---- blog performance ---- */}
+      <motion.div
+        custom={7}
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+        style={{ marginTop: "2.75rem", marginBottom: "1.5rem" }}
+      >
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+          }}
+        >
+          <PenSquare size={20} style={{ color: "var(--accent-primary)" }} />
+          Blog Performance
+        </h2>
+        <p
+          style={{
+            color: "var(--text-secondary)",
+            fontSize: "0.9rem",
+            marginTop: "0.25rem",
+          }}
+        >
+          Readership across your published articles.
+        </p>
+      </motion.div>
+
+      <div className="overview-stats-grid" style={{ marginBottom: "1.5rem" }}>
+        {blogStats.map((s, i) => (
+          <motion.div
+            key={s.label}
+            custom={8 + i}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="glass project-card overview-stat-card"
+          >
+            <div
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: "var(--radius-md)",
+                background: s.bg,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: s.color,
+                marginBottom: "1rem",
+              }}
+            >
+              {s.icon}
+            </div>
+            <p
+              style={{
+                fontSize: "0.8rem",
+                color: "var(--text-muted)",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                marginBottom: "0.25rem",
+              }}
+            >
+              {s.label}
+            </p>
+            <p
+              style={{
+                fontSize:
+                  typeof s.value === "string" && s.value.length > 6
+                    ? "1.2rem"
+                    : "2rem",
+                fontWeight: 700,
+                color: s.color,
+                fontFamily: "var(--font-heading)",
+              }}
+            >
+              {s.value}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        custom={12}
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+        className="glass project-card"
+        style={{ borderRadius: "var(--radius-md)" }}
+      >
+        <h3 style={{ fontSize: "1.1rem", marginBottom: "0.35rem" }}>
+          Most Viewed Posts
+        </h3>
+        <p
+          style={{
+            fontSize: "0.85rem",
+            color: "var(--text-muted)",
+            marginBottom: "1.5rem",
+          }}
+        >
+          Your top articles ranked by total views.
+        </p>
+
+        {viewsByPost.length === 0 ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.75rem",
+              minHeight: 200,
+              color: "var(--text-muted)",
+              textAlign: "center",
+            }}
+          >
+            <BookOpen size={36} />
+            <p>No views recorded yet. Share a post to start tracking.</p>
+          </div>
+        ) : (
+          <ResponsiveContainer width="100%" height={Math.max(220, viewsByPost.length * 42)}>
+            <BarChart
+              data={viewsByPost}
+              layout="vertical"
+              margin={{ top: 0, right: 24, left: 40, bottom: 0 }}
+            >
+              <XAxis
+                type="number"
+                allowDecimals={false}
+                tick={{ fill: "var(--text-muted)", fontSize: 11 }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <YAxis
+                type="category"
+                dataKey="name"
+                tick={{ fill: "var(--text-secondary)", fontSize: 11 }}
+                axisLine={false}
+                tickLine={false}
+                width={140}
+              />
+              <Tooltip
+                cursor={{ fill: "rgba(255,255,255,0.03)" }}
+                formatter={(value) => {
+                  const n = Number(value);
+                  return [`${n.toLocaleString()} view${n !== 1 ? "s" : ""}`, "Views"] as [
+                    string,
+                    string,
+                  ];
+                }}
+                contentStyle={{
+                  background: "hsl(220, 20%, 10%)",
+                  border: "1px solid var(--glass-border)",
+                  borderRadius: "var(--radius-sm)",
+                  fontSize: "0.85rem",
+                }}
+              />
+              <Bar dataKey="value" radius={[0, 6, 6, 0]}>
+                {viewsByPost.map((_, index) => (
+                  <Cell
+                    key={`view-cell-${index}`}
+                    fill={CHART_COLORS[index % CHART_COLORS.length]}
+                    fillOpacity={0.85}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        )}
+      </motion.div>
     </div>
   );
 };
