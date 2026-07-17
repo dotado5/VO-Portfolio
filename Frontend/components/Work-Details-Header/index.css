@@ -10,20 +10,24 @@
   @apply flex flex-col gap-1 max-w-[700px];
 }
 
-.client-image-wrapper {
-  @apply w-[100px] h-[70px] relative overflow-hidden rounded-md;
-}
-
-.client-image {
-  @apply object-cover w-full h-full;
-}
-
 .project-title {
   @apply text-[#303030] text-[24px] sm:text-[32px] md:text-[28px] font-bold leading-[1.1] tracking-tight;
 }
 
+.live-site-link {
+  @apply inline-flex items-center gap-1.5 text-[#303030] text-[15px] font-bold uppercase tracking-wide w-fit mt-3 transition-opacity duration-200;
+}
+
+.live-site-link:hover {
+  @apply opacity-70;
+}
+
+.live-site-icon {
+  @apply w-4 h-4 object-contain;
+}
+
 .project-date {
-  @apply bg-[#737373] text-[#F1F1F1] text-[14px] font-medium px-4 py-1.5 rounded-full w-fit tracking-wide mt-2;
+  @apply bg-[#737373] text-[#F1F1F1] text-[14px] font-medium px-4 py-1.5 rounded-full w-fit tracking-wide mb-3;
 }
 
 .header-right {

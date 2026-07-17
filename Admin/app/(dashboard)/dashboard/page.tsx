@@ -19,6 +19,7 @@ import { showToast } from "@/utils/toast";
 import { useProjectStore } from "@/store/projectStore";
 import { Project, CreateProjectDto } from "@/types/project.type";
 import ProjectModal from "@/components/ProjectModal";
+import { stripHtml } from "@/utils/text";
 
 const Dashboard: React.FC = () => {
   const { projects } = useProjectStore();
@@ -303,7 +304,7 @@ const Dashboard: React.FC = () => {
                         overflow: "hidden",
                       }}
                     >
-                      {project.problem}
+                      {stripHtml(project.problem)}
                     </p>
                   )}
 

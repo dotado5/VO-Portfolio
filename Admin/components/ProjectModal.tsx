@@ -4,6 +4,7 @@ import { X, Save, Loader2, ImagePlus, Trash } from "lucide-react";
 import { Project, CreateProjectDto } from "../types/project.type";
 import { createClient } from "@/utils/supabase/client";
 import { showToast } from "../utils/toast";
+import RichTextEditor from "./RichTextEditor";
 
 const supabase = createClient();
 
@@ -31,10 +32,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
     skills: [],
     problem: "",
     strategy: "",
+    outcome: "",
     takeaway: "",
     images: [],
     slider_images: [],
     delivery_date: new Date().toISOString().split("T")[0],
+    live_site_url: "",
   });
 
   const [skillsInput, setSkillsInput] = useState("");
@@ -56,12 +59,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         skills: project.skills,
         problem: project.problem,
         strategy: project.strategy,
+        outcome: project.outcome || "",
         takeaway: project.takeaway,
         images: project.images,
         slider_images: project.slider_images || [],
         delivery_date: new Date(project.delivery_date)
           .toISOString()
           .split("T")[0],
+        live_site_url: project.live_site_url || "",
       });
       setSkillsInput(project.skills.join(", "));
       setSelectedFiles([]);
@@ -78,10 +83,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         skills: [],
         problem: "",
         strategy: "",
+        outcome: "",
         takeaway: "",
         images: [],
         slider_images: [],
         delivery_date: new Date().toISOString().split("T")[0],
+        live_site_url: "",
       });
       setSkillsInput("");
       setSelectedFiles([]);
@@ -282,13 +289,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
 
                 <div className="input-group form-full">
                   <label className="input-label">Background Story</label>
-                  <textarea
-                    name="background_story"
-                    className="input-field"
-                    placeholder="What's the story behind this project?"
+                  <RichTextEditor
                     value={formData.background_story}
-                    onChange={handleChange}
-                    required
+                    onChange={(html) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        background_story: html,
+                      }))
+                    }
+                    onImageUpload={uploadImage}
+                    placeholder="What's the story behind this project?"
                   />
                 </div>
 
@@ -299,48 +309,69 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                       (optional · appears unbolded right after the main paragraph)
                     </span>
                   </label>
-                  <textarea
-                    name="background_story_sub"
-                    className="input-field"
-                    placeholder="Add a subtle continuation of the background story..."
+                  <RichTextEditor
                     value={formData.background_story_sub}
-                    onChange={handleChange}
+                    onChange={(html) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        background_story_sub: html,
+                      }))
+                    }
+                    onImageUpload={uploadImage}
+                    placeholder="Add a subtle continuation of the background story..."
                   />
                 </div>
 
                 <div className="input-group form-full">
                   <label className="input-label">The Problem</label>
-                  <textarea
-                    name="problem"
-                    className="input-field"
-                    placeholder="What problem were you solving?"
+                  <RichTextEditor
                     value={formData.problem}
-                    onChange={handleChange}
-                    required
+                    onChange={(html) =>
+                      setFormData((prev) => ({ ...prev, problem: html }))
+                    }
+                    onImageUpload={uploadImage}
+                    placeholder="What problem were you solving?"
                   />
                 </div>
 
                 <div className="input-group form-full">
                   <label className="input-label">Design Strategy</label>
-                  <textarea
-                    name="strategy"
-                    className="input-field"
-                    placeholder="How did you approach the solution?"
+                  <RichTextEditor
                     value={formData.strategy}
-                    onChange={handleChange}
-                    required
+                    onChange={(html) =>
+                      setFormData((prev) => ({ ...prev, strategy: html }))
+                    }
+                    onImageUpload={uploadImage}
+                    placeholder="How did you approach the solution?"
+                  />
+                </div>
+
+                <div className="input-group form-full">
+                  <label className="input-label">
+                    Project Outcome
+                    <span style={{ fontWeight: 400, opacity: 0.6, marginLeft: "0.5rem", fontSize: "0.8rem" }}>
+                      (optional · appears before Key Takeaway on the project page)
+                    </span>
+                  </label>
+                  <RichTextEditor
+                    value={formData.outcome ?? ""}
+                    onChange={(html) =>
+                      setFormData((prev) => ({ ...prev, outcome: html }))
+                    }
+                    onImageUpload={uploadImage}
+                    placeholder="What was the measurable result or impact of this project?"
                   />
                 </div>
 
                 <div className="input-group form-full">
                   <label className="input-label">Key Takeaway</label>
-                  <textarea
-                    name="takeaway"
-                    className="input-field"
-                    placeholder="What did you learn from this project?"
+                  <RichTextEditor
                     value={formData.takeaway}
-                    onChange={handleChange}
-                    required
+                    onChange={(html) =>
+                      setFormData((prev) => ({ ...prev, takeaway: html }))
+                    }
+                    onImageUpload={uploadImage}
+                    placeholder="What did you learn from this project?"
                   />
                 </div>
 
@@ -353,6 +384,23 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     value={formData.delivery_date}
                     onChange={handleChange}
                     required
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label className="input-label">
+                    Live Site URL
+                    <span style={{ fontWeight: 400, opacity: 0.6, marginLeft: "0.5rem", fontSize: "0.8rem" }}>
+                      (optional · shows a “Visit Live Site” link under the title)
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    name="live_site_url"
+                    className="input-field"
+                    placeholder="https://example.com"
+                    value={formData.live_site_url ?? ""}
+                    onChange={handleChange}
                   />
                 </div>
 
