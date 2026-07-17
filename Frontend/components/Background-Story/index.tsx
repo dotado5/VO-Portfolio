@@ -18,12 +18,11 @@ const ProjectSection = ({ title, content }: ProjectSectionProps) => {
       </div>
       <div className="section-content">
         {content.map((item, index) => (
-          <p
+          <div
             key={index}
-            className={`content-paragraph ${item.isBold ? "font-bold" : ""}`}
-          >
-            {item.text}
-          </p>
+            className={`content-prose ${item.isBold ? "content-prose--lead" : ""}`}
+            dangerouslySetInnerHTML={{ __html: item.text || "" }}
+          />
         ))}
       </div>
     </section>

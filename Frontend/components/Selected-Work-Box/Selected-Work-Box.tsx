@@ -6,6 +6,7 @@ import "./Selected-Work-Box.css";
 import { useProjectStore } from "@/store/useProjectStore";
 import { useRouter } from "next/navigation";
 import { Project } from "@/types/project.type";
+import { stripHtml } from "@/utils/text";
 
 interface SelectedWorkBoxProps {
   project: Project;
@@ -34,7 +35,9 @@ const SelectedWorkBox = ({
       })
     : "";
   const title = project.title;
-  const description = project.background_story.substring(0, 100) + "...";
+  const plainStory = stripHtml(project.background_story);
+  const description =
+    plainStory.length > 100 ? `${plainStory.substring(0, 100)}...` : plainStory;
 
   return (
     <div className={`selected-work-box ${reverse ? "reverse" : ""}`}>

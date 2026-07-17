@@ -8,10 +8,12 @@ export interface Project {
   skills: string[];
   problem: string;
   strategy: string;
+  outcome?: string;
   takeaway: string;
   images: string[];
   slider_images: string[];
   delivery_date: string;
+  live_site_url?: string;
 }
 
 export interface CreateProjectDto extends Omit<Project, "id"> {}

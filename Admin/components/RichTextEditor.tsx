@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
@@ -288,6 +288,19 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       },
     },
   });
+
+  // Tiptap only reads `content` once at init. When the editor is reused for a
+  // different post (or the same post is reloaded after saving), the `value`
+  // prop changes but the document wouldn't update on its own — sync it here.
+  // The guard against the editor's own HTML means this never fires while the
+  // user is typing, so it can't disrupt the cursor.
+  useEffect(() => {
+    if (!editor) return;
+    const incoming = value ?? "";
+    if (incoming !== editor.getHTML()) {
+      editor.commands.setContent(incoming, { emitUpdate: false });
+    }
+  }, [value, editor]);
 
   if (!editor) {
     return (

@@ -5,7 +5,11 @@ import { cookies } from "next/headers";
 export async function GET() {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-  const { data, error } = await supabase.from("WorkExperience").select("*").order("created_at", { ascending: true });
+  const { data, error } = await supabase
+    .from("WorkExperience")
+    .select("*")
+    .order("position", { ascending: true, nullsFirst: false })
+    .order("created_at", { ascending: true });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

@@ -6,7 +6,8 @@ import "./Footer.css";
 
 const Footer = () => {
   const [copied, setCopied] = useState(false);
-  const email = "fatokivictor2@gmail.com";
+  const { CONTACT_RECIPIENT } = process.env;
+  const email = CONTACT_RECIPIENT || "fatokivictor2@gmail.com";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
@@ -17,22 +18,14 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-left">
-        <span className="email-text">{email}</span>
-        <button
-          onClick={handleCopy}
-          className="copy-button"
-          title="Copy email to clipboard"
-        >
-          {copied ? (
-            <Check size={16} className="text-green-500" />
-          ) : (
-            <Copy size={16} />
-          )}
-        </button>
+        <a href={`mailto:${email}`} className="email-text">
+          {email}
+        </a>
       </div>
       <div className="footer-right">
         <p className="copyright-text">
-          ©2026 Fatoki Victor Oluwabusayo — All rights reserved.
+          ©{new Date().getFullYear()} Fatoki Victor Oluwabusayo — All rights
+          reserved.
         </p>
       </div>
     </footer>

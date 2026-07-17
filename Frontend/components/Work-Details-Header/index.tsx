@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import "./index.css";
-import smallPic from "@public/assets/small-pic.png";
+import exportIcon from "@public/assets/export-icon.png";
 import { useProjectStore } from "@/store/useProjectStore";
 import { useEffect, useState } from "react";
 
@@ -27,16 +27,19 @@ const Header = () => {
   return (
     <header className="work-details-header">
       <div className="header-left">
-        <div className="client-image-wrapper">
-          <Image
-            src={smallPic}
-            alt="Client"
-            className="client-image"
-            fill={!!(mounted && selectedProject?.images?.[0])}
-          />
-        </div>
-        <h1 className="project-title">{title}</h1>
         <div className="project-date">{date}</div>
+        <h1 className="project-title">{title}</h1>
+        {mounted && selectedProject?.live_site_url && (
+          <a
+            href={selectedProject.live_site_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="live-site-link"
+          >
+            VISIT LIVE SITE
+            <Image src={exportIcon} alt="" className="live-site-icon" />
+          </a>
+        )}
       </div>
 
       <div className="header-right">

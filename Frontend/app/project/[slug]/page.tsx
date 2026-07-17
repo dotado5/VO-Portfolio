@@ -66,6 +66,14 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
     },
   ];
 
+  const outcomeContent = selectedProject.outcome
+    ? [
+        {
+          text: selectedProject.outcome,
+        },
+      ]
+    : [];
+
   const takeawayContent = [
     {
       text: selectedProject.takeaway,
@@ -93,6 +101,9 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
       </div>
 
       <ProjectSection title="DESIGN STRATEGY" content={strategyContent} />
+      {outcomeContent.length > 0 && (
+        <ProjectSection title="PROJECT OUTCOME" content={outcomeContent} />
+      )}
       <ProjectSection title="KEY TAKEAWAY" content={takeawayContent} />
 
       <div className="snapshot-container">
