@@ -75,7 +75,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4 md:gap-6 lg:gap-0">
             {/* CTA (Desktop/Tablet) */}
             <Link
-              href="https://scheduler-48c6.vercel.app/"
+              href="https://bookings.vofatoki.work/"
               className="cta group"
               target="_blank"
             >
