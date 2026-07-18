@@ -21,6 +21,17 @@ const Footer = () => {
         <a href={`mailto:${email}`} className="email-text">
           {email}
         </a>
+        <button
+          onClick={handleCopy}
+          className="copy-button"
+          title="Copy email to clipboard"
+        >
+          {copied ? (
+            <Check size={16} className="text-green-500" />
+          ) : (
+            <Copy size={16} />
+          )}
+        </button>
       </div>
       <div className="footer-right">
         <p className="copyright-text">
