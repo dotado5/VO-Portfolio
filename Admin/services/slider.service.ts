@@ -8,16 +8,17 @@ export const SliderService = {
     const { data, error } = await supabase
       .from("SliderImage")
       .select("*")
+      .order("position", { ascending: true, nullsFirst: false })
       .order("created_at", { ascending: false });
-      
+
     if (error) throw error;
     return data as SliderImage[];
   },
 
-  async upload(file: File): Promise<SliderImage> {
+  async upload(file: File, position: number): Promise<SliderImage> {
     const fileExt = file.name.split(".").pop();
     const fileName = `${Math.random()}.${fileExt}`;
-    
+
     // Upload to bucket
     const { error: storageError } = await supabase.storage
       .from("Slider_images")
@@ -32,15 +33,26 @@ export const SliderService = {
 
     const imageUrl = publicUrlData.publicUrl;
 
-    // Insert into database
+    // Insert into database (appended to the end of the current order)
     const { data, error } = await supabase
       .from("SliderImage")
-      .insert([{ image_url: imageUrl }])
+      .insert([{ image_url: imageUrl, position }])
       .select()
       .single();
 
     if (error) throw error;
     return data as SliderImage;
+  },
+
+  // Persist a new ordering: each id's array index becomes its position.
+  async updateOrder(orderedIds: number[]): Promise<void> {
+    const results = await Promise.all(
+      orderedIds.map((id, index) =>
+        supabase.from("SliderImage").update({ position: index }).eq("id", id),
+      ),
+    );
+    const failed = results.find((r) => r.error);
+    if (failed?.error) throw failed.error;
   },
 
   async remove(id: number, url: string): Promise<void> {

@@ -48,7 +48,7 @@ const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
       </motion.h1>
 
       {imagesToDisplay && imagesToDisplay.length > 0 && (
-        <InfiniteSlider duration={15}>
+        <InfiniteSlider duration={50}>
           {isLoading && globalImages.length === 0 ? (
             <div className="flex justify-center items-center w-full h-[233px]">
               <Loader2 className="animate-spin text-gray-400" />
