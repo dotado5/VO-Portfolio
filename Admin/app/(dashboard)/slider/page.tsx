@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { Plus, Trash, Loader2, ImagePlus } from "lucide-react";
+import { Plus, Trash, Loader2, ImagePlus, Shuffle } from "lucide-react";
 import { SliderImage } from "@/types/slider.type";
 import { SliderService } from "@/services/slider.service";
 import { showToast } from "@/utils/toast";
@@ -10,6 +10,7 @@ export default function SliderPage() {
   const [images, setImages] = useState<SliderImage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
+  const [isShuffling, setIsShuffling] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -35,9 +36,10 @@ export default function SliderPage() {
       setIsUploading(true);
 
       try {
-        for (const file of files) {
-          const newImage = await SliderService.upload(file);
-          setImages((prev) => [newImage, ...prev]);
+        const startPos = images.length;
+        for (let i = 0; i < files.length; i++) {
+          const newImage = await SliderService.upload(files[i], startPos + i);
+          setImages((prev) => [...prev, newImage]);
         }
         showToast.success("Images uploaded successfully!");
       } catch (error) {
@@ -67,11 +69,48 @@ export default function SliderPage() {
     }
   };
 
+  const handleShuffle = async () => {
+    if (images.length < 2 || isShuffling) return;
+
+    // Fisher–Yates shuffle on a copy.
+    const shuffled = [...images];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    const renumbered = shuffled.map((img, index) => ({
+      ...img,
+      position: index,
+    }));
+
+    const previous = images;
+    setImages(renumbered); // optimistic
+
+    try {
+      setIsShuffling(true);
+      await SliderService.updateOrder(renumbered.map((img) => img.id));
+      showToast.success("Slider order shuffled!");
+    } catch (error) {
+      console.error("Failed to shuffle slider order:", error);
+      setImages(previous); // revert to previous order
+      showToast.error("Failed to save the shuffled order.");
+    } finally {
+      setIsShuffling(false);
+    }
+  };
+
   if (isLoading) {
     return (
       <div
         className="flex items-center justify-center w-full h-full min-h-[500px]"
-        style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", height: "100%", minHeight: "500px" }}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+          minHeight: "500px",
+        }}
       >
         <Loader2 className="animate-spin text-muted" size={48} />
       </div>
@@ -79,11 +118,51 @@ export default function SliderPage() {
   }
 
   return (
-    <div style={{ width: "100%", maxWidth: "1200px", margin: "0 auto", padding: "2rem" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-        <h1 style={{ fontSize: "2rem", fontWeight: "bold", margin: 0 }}>Global Slider</h1>
-        
-        <div>
+    <div
+      style={{
+        width: "100%",
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "2rem",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "2rem",
+        }}
+      >
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold", margin: 0 }}>
+          Global Slider
+        </h1>
+
+        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+          <button
+            className="btn btn-secondary"
+            onClick={handleShuffle}
+            disabled={isShuffling || isUploading || images.length < 2}
+            title={
+              images.length < 2
+                ? "Add at least 2 images to shuffle"
+                : "Shuffle the order images appear in the slider"
+            }
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              width: "auto",
+            }}
+          >
+            {isShuffling ? (
+              <Loader2 size={20} className="animate-spin" />
+            ) : (
+              <Shuffle size={20} />
+            )}
+            {isShuffling ? "Shuffling..." : "Shuffle Order"}
+          </button>
+
           <input
             type="file"
             accept="image/*"
@@ -122,10 +201,16 @@ export default function SliderPage() {
             border: "1px dashed var(--glass-border)",
           }}
         >
-          <ImagePlus size={48} style={{ color: "var(--text-muted)", marginBottom: "1rem" }} />
-          <h3 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>No slider images yet</h3>
+          <ImagePlus
+            size={48}
+            style={{ color: "var(--text-muted)", marginBottom: "1rem" }}
+          />
+          <h3 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+            No slider images yet
+          </h3>
           <p style={{ color: "var(--text-secondary)", marginBottom: "1.5rem" }}>
-            Upload images to be displayed in the global slider on the frontend homepage.
+            Upload images to be displayed in the global slider on the frontend
+            homepage.
           </p>
           <button
             className="btn btn-primary"
@@ -184,8 +269,12 @@ export default function SliderPage() {
                   cursor: "pointer",
                   transition: "all 0.2s ease",
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.8)")}
-                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.6)")}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.8)")
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.6)")
+                }
               >
                 <Trash size={18} />
               </button>

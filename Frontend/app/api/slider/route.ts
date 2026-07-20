@@ -8,6 +8,7 @@ export async function GET() {
   const { data, error } = await supabase
     .from("SliderImage")
     .select("*")
+    .order("position", { ascending: true, nullsFirst: false })
     .order("created_at", { ascending: false });
 
   if (error) {
