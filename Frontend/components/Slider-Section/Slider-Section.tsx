@@ -31,7 +31,7 @@ const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
     : globalImages.map((img) => img.image_url);
 
   return (
-    <div className={`slider-section ${globalImages.length > 0 ? "" : "mt-5"}`}>
+    <div className="slider-section">
       <motion.h1
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}

@@ -3,7 +3,9 @@
 /* The section adds the labelled heading with responsive left padding,
    but the slider track itself MUST break out to the full viewport width */
 .slider-section {
-  @apply flex flex-col gap-[8px];
+  @apply flex flex-col;
+  gap: var(--spacing-title-content);
+  margin-top: var(--spacing-section);
 }
 
 .exploration {

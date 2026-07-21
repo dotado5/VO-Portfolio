@@ -31,7 +31,7 @@ const PhotoSection = () => {
 
   return (
     <div className="photo-section">
-      <h1 className="my-photo mb-5">
+      <h1 className="my-photo">
         <Image src={folder} alt="folder" className="w-5 h-5 object-contain" />
         MY PHOTO WALL
       </h1>

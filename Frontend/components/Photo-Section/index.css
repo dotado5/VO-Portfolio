@@ -1,13 +1,15 @@
 @reference "../../styles/globals.css";
 
 .photo-section {
-  @apply w-full mt-[60px];
+  @apply w-full;
+  margin-top: var(--spacing-section);
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
 
 .my-photo {
-  @apply flex gap-[10px] items-center justify-center sm:justify-start text-[#303030] text-[16px] font-[700];
+  @apply flex gap-[10px] items-center justify-start text-[#303030] text-[16px] font-[700];
+  margin-bottom: var(--spacing-title-content);
 }
 
 .photos {

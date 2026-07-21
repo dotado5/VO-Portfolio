@@ -40,7 +40,7 @@
 }
 
 .cta-text {
-  @apply mr-3 text-gray-600 uppercase transition-colors;
+  @apply mr-1 text-gray-600 uppercase transition-colors;
 }
 
 .cta:hover .cta-text {
@@ -67,5 +67,5 @@
 }
 
 .mobile-cta {
-  @apply mt-12 flex items-center justify-center bg-black text-white py-4 rounded-xl text-base font-bold;
+  @apply mt-12 flex items-center justify-center bg-black text-white py-4 rounded-xl text-base font-bold uppercase;
 }

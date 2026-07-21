@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "motion/react";
 import "./index.css";
 import exportIcon from "@public/assets/export-icon.png";
 import Image from "next/image";
@@ -75,14 +76,17 @@ const Form = () => {
           required
         ></textarea>
       </div>
-      <button
+      <motion.button
         type="submit"
         className="submit-button"
         disabled={status === "sending"}
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.15 }}
       >
         {status === "sending" ? "SENDING..." : "SEND MESSAGE"}
         <Image src={exportIcon} alt="Export Icon" />
-      </button>
+      </motion.button>
       {feedback && (
         <p
           className={`form-feedback ${

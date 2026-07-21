@@ -9,12 +9,20 @@
   overflow: hidden;
   border: 4px solid #d4d4d4;
   background-color: #e8e8e8;
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .sliderBox {
+    width: 220px;
+    height: 160px;
+    border-radius: 14px;
+    border-width: 3px;
+  }
 }
 
 .sliderBox:hover {
   border-color: #a1a1a1;
-  transform: scale(1.02);
 }
 
 .sliderBox-img {
@@ -22,11 +30,11 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .sliderBox:hover .sliderBox-img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .sliderBox-placeholder {

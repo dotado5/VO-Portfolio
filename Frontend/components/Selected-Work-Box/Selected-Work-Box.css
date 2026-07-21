@@ -1,7 +1,7 @@
 @reference "../../styles/globals.css";
 
 .selected-work-box {
-  @apply flex flex-col md:flex-row gap-6 items-start w-full;
+  @apply flex flex-col md:flex-row gap-3 md:gap-6 items-start w-full;
 }
 
 .selected-work-box.reverse {
@@ -17,24 +17,29 @@
 }
 
 .selected-work-content {
-  @apply w-full md:flex-1 flex flex-col justify-center items-start mt-8 md:mt-[40px];
+  @apply w-full md:flex-1 flex flex-col justify-center items-start mt-1 md:mt-[40px];
 }
 
 .selected-work-date-badge {
-  @apply bg-[#757575] text-white text-[10px] px-2 pt-0.75 pb-0.5 rounded-full uppercase tracking-wider mb-2 flex;
+  @apply bg-[#757575] text-white text-[10px] px-2 pt-0.75 pb-0.5 rounded-full uppercase tracking-wider mb-2 mt-1 md:mt-0 flex order-2 md:order-1;
 }
 
 .selected-work-title {
-  @apply text-base sm:text-base md:text-[18px] font-extrabold text-[#2a2a2a] mb-1 leading-tight;
+  @apply text-base sm:text-base md:text-[18px] font-extrabold text-[#2a2a2a] mb-1 leading-tight order-1 md:order-2;
 }
 
 .selected-work-description {
+  @apply order-3;
   line-height: var(--leading-tight);
   font-size: medium;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .selected-work-link {
-  @apply flex items-center gap-[0.1rem] text-xs font-bold uppercase transition-colors cursor-pointer mt-2;
+  @apply flex items-center gap-[0.1rem] text-xs font-bold uppercase text-[#3F3F3F] transition-colors cursor-pointer mt-2 order-4;
 }
 
 .selected-work-link:hover {

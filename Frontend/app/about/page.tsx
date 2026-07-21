@@ -8,6 +8,8 @@ import FormSection from "@/components/Form-Section";
 import { useEffect } from "react";
 import { useAboutStore } from "@/store/useAboutStore";
 import { aboutService } from "@/services/about.service";
+import { motion } from "motion/react";
+import { fadeInUp, staggerContainer } from "@/utils/motion";
 
 const page = () => {
   const { aboutMe, setAboutMe } = useAboutStore();
@@ -25,12 +27,18 @@ const page = () => {
     }
   };
 
-  const leadText = aboutMe?.lead_text || "Designing digital experiences...";
-  const descriptionText = aboutMe?.description || "I am a product designer...";
+  const leadText = aboutMe?.lead_text || "";
+  const descriptionText = aboutMe?.description || "";
   const paragraphs = descriptionText.split('\n').filter((p: string) => p.trim() !== '');
+
   return (
     <div className="about-me-page">
-      <div className="about-images-container">
+      <motion.div
+        className="about-images-container"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+      >
         <div className="left-image">
           <Image
             src="/assets/left-side.png"
@@ -51,19 +59,33 @@ const page = () => {
             priority
           />
         </div>
-      </div>
+      </motion.div>
 
-      <section className="about-me">
-        <p className="about-me-lead">
-          {leadText}
-        </p>
+      {(leadText || paragraphs.length > 0) && (
+        <motion.section
+          className="about-me"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={staggerContainer}
+        >
+          {leadText && (
+            <motion.p className="about-me-lead" variants={fadeInUp}>
+              {leadText}
+            </motion.p>
+          )}
 
-        <div className="about-me-desc">
-          {paragraphs.map((p: string, index: number) => (
-            <p key={index}>{p}</p>
-          ))}
-        </div>
-      </section>
+          {paragraphs.length > 0 && (
+            <motion.div className="about-me-desc" variants={staggerContainer}>
+              {paragraphs.map((p: string, index: number) => (
+                <motion.p key={index} variants={fadeInUp}>
+                  {p}
+                </motion.p>
+              ))}
+            </motion.div>
+          )}
+        </motion.section>
+      )}
 
       <PhotoSection />
       <WorkExperienceSection homepage={false} />

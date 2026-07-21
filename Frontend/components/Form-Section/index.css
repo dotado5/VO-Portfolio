@@ -1,7 +1,8 @@
 @reference "../../styles/globals.css";
 
 .form-section {
-  @apply w-full flex flex-col items-start mt-6;
+  @apply w-full flex flex-col items-start;
+  margin-top: var(--spacing-section);
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
@@ -23,11 +24,6 @@
 }
 
 .form-section-form {
-  @apply flex-1 w-full mt-[20px];
-}
-
-@media (max-width: 768px) {
-  .form-section {
-    @apply my-[50px];
-  }
+  @apply flex-1 w-full;
+  margin-top: var(--spacing-title-content);
 }

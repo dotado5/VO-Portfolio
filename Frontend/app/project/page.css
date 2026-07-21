@@ -8,6 +8,7 @@
 
 .snapshot-container {
   @apply flex w-full gap-[2px] h-[600px];
+  margin-top: var(--spacing-section);
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }

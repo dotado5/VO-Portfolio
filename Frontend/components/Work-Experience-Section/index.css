@@ -1,15 +1,17 @@
 @reference "../../styles/globals.css";
 
 .work-experience-section {
-  @apply w-full flex flex-col items-start mt-5;
+  @apply w-full flex flex-col items-start;
+  margin-top: var(--spacing-section);
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
 
 .work-experience-section h1 {
-  @apply w-full flex gap-1 text-[#303030] text-[16px] font-[700] mb-3;
+  @apply w-full flex gap-1 text-[#303030] text-[16px] font-[700];
+  margin-bottom: var(--spacing-title-content);
 }
 
 .work-experience-list {
-  @apply w-full flex flex-col gap-3 md:gap-8;
+  @apply w-full flex flex-col;
 }

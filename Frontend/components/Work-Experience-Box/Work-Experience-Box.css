@@ -3,11 +3,17 @@
 .work-experience-box {
   display: flex;
   gap: 3rem;
+  padding: 1rem 0;
   border-bottom: 1px solid #e5e5e5;
+}
+
+.work-experience-box:first-child {
+  padding-top: 0.25rem;
 }
 
 .work-experience-box:last-child {
   border-bottom: none;
+  padding-bottom: 0;
 }
 
 .work-experience-left {
@@ -38,7 +44,7 @@
 
 .work-experience-title {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 800;
   color: #303030;
   margin: 0 0 0.5rem 0;
 }
@@ -54,8 +60,8 @@
 @media (max-width: 900px) {
   .work-experience-box {
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.5rem 0;
+    gap: 0;
+    padding: 0.75rem 0;
   }
 
   /* Dissolve the right column so the title can be ordered ahead of the date */
@@ -65,7 +71,8 @@
 
   .work-experience-title {
     order: 1;
-    margin-bottom: 0;
+    margin-bottom: 0.25rem;
+    font-size: 16px;
   }
 
   .work-experience-left {
@@ -74,6 +81,7 @@
     align-items: baseline;
     gap: 0.75rem;
     min-width: unset;
+    margin-bottom: 0.5rem;
   }
 
   .work-experience-type {

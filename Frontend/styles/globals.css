@@ -2,6 +2,8 @@
 
 :root {
   --spacing-responsive-px: 1.5rem;
+  --spacing-section: 30px;
+  --spacing-title-content: 8px;
   --font-main: "Inter Display", "Inter Display Placeholder", sans-serif;
   --font-heading: "Outfit", sans-serif;
   --text-primary: #707070;
@@ -11,6 +13,8 @@
 @media (min-width: 768px) {
   :root {
     --spacing-responsive-px: 3rem;
+    --spacing-section: 28px;
+    --spacing-title-content: 12px;
   }
 }
 
@@ -24,6 +28,10 @@
   :root {
     --spacing-responsive-px: 15.375rem;
   }
+}
+
+.section-spacing {
+  margin-top: var(--spacing-section);
 }
 
 .responsive-px {

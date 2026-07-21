@@ -132,9 +132,14 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 className={`mobile-nav-link ${currentPathname === link.href && "text-gray-400"}`}
+                target={link.name === "Resume" ? "_blank" : "_self"}
                 onClick={() => setIsMenuOpen(false)}
               >
-                <span>{link.name}</span>
+                <span className="flex items-center">
+                  {link.name}
+                  {link.icon && <Repeat className="nav-link-icon" />}
+                  {link.icon && " WORKS"}
+                </span>
                 <ArrowUpRight size={24} />
               </Link>
             ))}
@@ -147,11 +152,13 @@ const Navbar = () => {
             }}
           >
             <Link
-              href="/work-with-me"
+              href="https://bookings.vofatoki.work/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mobile-cta mt-8"
               onClick={() => setIsMenuOpen(false)}
             >
-              Work with me
+              WORK WITH ME
             </Link>
           </div>
         </div>

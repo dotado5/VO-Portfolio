@@ -1,11 +1,11 @@
 @reference "../../styles/globals.css";
 
 .about-me-page {
-  @apply flex flex-col mt-6 md:mt-10;
+  @apply flex flex-col mt-20 md:mt-8;
 }
 
 .about-images-container {
-  @apply relative my-12 flex flex-row items-center justify-start;
+  @apply relative mt-6 mb-2 sm:mb-8 flex flex-row items-center justify-start;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
 }
@@ -15,17 +15,25 @@
 }
 
 .right-image {
-  @apply relative z-20 -ml-[30px] sm:-ml-[50px] rotate-3 rounded-[32px];
+  @apply relative z-20 -ml-[24px] sm:-ml-[50px] rotate-3 rounded-[32px];
 }
 
 .about-image {
-  @apply rounded-[20px] object-cover transition-transform duration-300 hover:scale-[1.02];
+  @apply rounded-[20px] object-cover transition-transform duration-300 hover:scale-[1.02] max-w-[130px] sm:max-w-[240px] h-auto;
 }
 
 .about-me {
-  @apply flex flex-col gap-6 w-full;
+  @apply flex flex-col w-full;
+  gap: var(--spacing-title-content);
+  margin-top: 12px;
   padding-left: var(--spacing-responsive-px);
   padding-right: var(--spacing-responsive-px);
+}
+
+@media (min-width: 768px) {
+  .about-me {
+    margin-top: var(--spacing-section);
+  }
 }
 
 .about-me-lead {
