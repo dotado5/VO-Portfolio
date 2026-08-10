@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 import { useProjectStore } from "@/store/useProjectStore";
 import { useRouter } from "next/navigation";
 import { Project } from "@/types/project.type";
-import { stripHtml } from "@/utils/text";
+import { stripHtml, formatDateMonthYearUTC } from "@/utils/text";
 
 interface SelectedWorkBoxProps {
   project: Project;
@@ -29,12 +29,7 @@ const SelectedWorkBox = ({
   };
 
   const imageSrc = project.images[0] || "";
-  const dateStr = project.delivery_date
-    ? new Date(project.delivery_date).toLocaleDateString("en-US", {
-        month: "long",
-        year: "numeric",
-      })
-    : "";
+  const dateStr = formatDateMonthYearUTC(project.delivery_date);
   const title = project.title;
   const plainStory = stripHtml(project.background_story);
   const description = plainStory;

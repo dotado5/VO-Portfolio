@@ -36,15 +36,6 @@ async function getBlogs(): Promise<BlogCard[]> {
   return (data as BlogCard[]) ?? [];
 }
 
-const formatDate = (value?: string | null) =>
-  value
-    ? new Date(value).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : "";
-
 export default async function BlogsPage() {
   const blogs = await getBlogs();
 
@@ -64,7 +55,7 @@ export default async function BlogsPage() {
         <p>Thoughts on design, product, and the craft behind them.</p>
       </header>
 
-      <BlogGrid blogs={blogs} formatDate={formatDate} />
+      <BlogGrid blogs={blogs} />
     </div>
   );
 }
