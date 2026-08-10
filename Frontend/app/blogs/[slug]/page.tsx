@@ -33,14 +33,9 @@ async function getBlog(slug: string): Promise<Blog | null> {
   return data as Blog;
 }
 
-const formatDate = (value?: string | null) =>
-  value
-    ? new Date(value).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : "";
+import { formatDateUTC } from "@/utils/text";
+
+const formatDate = formatDateUTC;
 
 export async function generateMetadata({ params }: BlogPageProps) {
   const { slug } = await params;

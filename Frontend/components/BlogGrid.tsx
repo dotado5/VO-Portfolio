@@ -5,6 +5,8 @@ import { motion } from "motion/react";
 import { fadeInUp, staggerContainer } from "@/utils/motion";
 import { Blog } from "@/types/blog.type";
 
+import { formatDateUTC } from "@/utils/text";
+
 type BlogCard = Pick<
   Blog,
   "id" | "slug" | "title" | "excerpt" | "cover_image" | "tags" | "read_time" | "published_at"
@@ -12,10 +14,9 @@ type BlogCard = Pick<
 
 interface BlogGridProps {
   blogs: BlogCard[];
-  formatDate: (value?: string | null) => string;
 }
 
-export default function BlogGrid({ blogs, formatDate }: BlogGridProps) {
+export default function BlogGrid({ blogs }: BlogGridProps) {
   return (
     <motion.div
       className="blogs-grid"
@@ -53,7 +54,7 @@ export default function BlogGrid({ blogs, formatDate }: BlogGridProps) {
               )}
 
               <div className="blog-card-meta">
-                <span>{formatDate(blog.published_at)}</span>
+                <span>{formatDateUTC(blog.published_at)}</span>
                 <span className="blog-card-dot">·</span>
                 <span>{blog.read_time} min read</span>
               </div>
