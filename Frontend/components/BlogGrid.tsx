@@ -26,7 +26,7 @@ export default function BlogGrid({ blogs }: BlogGridProps) {
     >
       {blogs.map((blog) => (
         <motion.div key={blog.id} variants={fadeInUp}>
-          <Link href={`/blogs/${blog.slug}`} className="blog-card">
+          <Link href={`/journals/${blog.slug}`} className="blog-card">
             <div className="blog-card-thumb">
               {blog.cover_image ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -37,16 +37,6 @@ export default function BlogGrid({ blogs }: BlogGridProps) {
             </div>
 
             <div className="blog-card-body">
-              {blog.tags?.length > 0 && (
-                <div className="blog-card-tags">
-                  {blog.tags.slice(0, 2).map((tag) => (
-                    <span key={tag} className="blog-tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-
               <h2 className="blog-card-title">{blog.title}</h2>
 
               {blog.excerpt && (
@@ -55,8 +45,10 @@ export default function BlogGrid({ blogs }: BlogGridProps) {
 
               <div className="blog-card-meta">
                 <span>{formatDateUTC(blog.published_at)}</span>
-                <span className="blog-card-dot">·</span>
-                <span>{blog.read_time} min read</span>
+                <span className="blog-card-dot">●</span>
+                <span>
+                  {blog.read_time} {blog.read_time === 1 ? "Min" : "Mins"} Read
+                </span>
               </div>
             </div>
           </Link>
