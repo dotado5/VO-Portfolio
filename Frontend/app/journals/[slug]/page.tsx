@@ -68,7 +68,7 @@ export default async function BlogPost({ params }: BlogPageProps) {
   return (
     <article className="blog-post">
       <ViewTracker slug={blog.slug} />
-      <Link href="/blogs" className="blog-post-back">
+      <Link href="/journals" className="blog-post-back">
         <ArrowLeft size={18} />
         <span>All posts</span>
       </Link>
