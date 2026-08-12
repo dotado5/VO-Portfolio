@@ -41,7 +41,7 @@ const page = () => {
       >
         <div className="left-image">
           <Image
-            src="/assets/left-side.png"
+            src="/assets/left-side-new.png"
             alt="Left side portrait"
             width={240}
             height={300}
@@ -51,7 +51,7 @@ const page = () => {
         </div>
         <div className="right-image">
           <Image
-            src="/assets/right-side.png"
+            src="/assets/right-side-new.png"
             alt="Right side portrait"
             width={240}
             height={300}
