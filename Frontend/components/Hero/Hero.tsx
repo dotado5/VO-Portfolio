@@ -9,9 +9,9 @@ import { fadeInUp, staggerContainer } from "@/utils/motion";
 
 const Hero = () => {
   const socials = [
-    { name: "LINKEDIN", href: "#" },
-    { name: "TWITTER", href: "#" },
-    { name: "CONTRA", href: "#" },
+    { name: "LINKEDIN", href: "https://www.linkedin.com/in/fatokivictoroluwabusayo/" },
+    { name: "TWITTER", href: "https://x.com/therealbusayor" },
+    { name: "CONTRA", href: "http://vofatoki.work/" },
   ];
 
   return (
