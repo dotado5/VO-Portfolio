@@ -1,0 +1,214 @@
+@reference "../../styles/globals.css";
+
+/* ---------- Empty / coming-soon state ---------- */
+.blogs-page {
+  @apply flex flex-col items-center justify-center w-full min-h-[65vh] px-4 text-center;
+}
+
+.blogs-page h1 {
+  @apply text-[40px] sm:text-[50px] md:text-[80px] lg:text-[100px] font-bold text-[#303030] leading-none tracking-tight mb-[10px];
+}
+
+.blogs-page p {
+  @apply text-[18px] md:text-[20px] lg:text-[22px] font-bold text-[#707070] mb-8;
+}
+
+/* ---------- Blog list ---------- */
+.blogs-list {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: var(--spacing-responsive-px);
+  padding-right: var(--spacing-responsive-px);
+}
+
+.blogs-list-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: calc(100vh - 80px);
+  max-width: 640px;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+  box-sizing: border-box;
+}
+
+.blogs-list-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.blogs-list-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.blogs-list-icon img {
+  width: clamp(44px, 6vw, 56px);
+  height: clamp(44px, 6vw, 56px);
+  display: block;
+}
+
+.blogs-list-header h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.blogs-list-header p {
+  margin-top: 1.25rem;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.55;
+  color: #707070;
+  max-width: 46ch;
+}
+
+/* ---------- Journals grid (horizontal cards, 2 columns) ---------- */
+.blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 3.5rem;
+  row-gap: 0;
+}
+
+@media (min-width: 901px) {
+  .blogs-grid>*:last-child:nth-child(odd) {
+    grid-column: span 2;
+  }
+  .blogs-grid>*:last-child:nth-child(odd) .blog-card-thumb {
+    flex: 0 0 15%;
+    max-width: 15%;
+  }
+  .blogs-grid>*:nth-child(-n+2) .blog-card {
+    padding-top: 0;
+  }
+  /* Bridge the column gap for the bottom stroke between left and right cards */
+  .blogs-grid>*:nth-child(odd):not(:last-child) .blog-card::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    right: -3.5rem;
+    width: 3.5rem;
+    height: 1px;
+    background-color: #e2e2e2;
+  }
+}
+
+@media (max-width: 900px) {
+  .blogs-grid>*:first-child .blog-card {
+    padding-top: 0;
+  }
+}
+
+.blog-card {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid #e2e2e2;
+  transition: opacity 0.2s ease;
+}
+
+.blog-card:hover {
+  opacity: 0.85;
+}
+
+.blog-card-thumb {
+  flex: 0 0 30%;
+  max-width: 30%;
+  aspect-ratio: 16 / 11;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #e6e6e6;
+}
+
+.blog-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.blog-card:hover .blog-card-thumb img {
+  transform: scale(1.04);
+}
+
+.blog-card-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ededed 0%, #dcdcdc 100%);
+}
+
+.blog-card-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card-title {
+  font-family: var(--font-heading);
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  font-weight: 600;
+  color: #262626;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-excerpt {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #7a7a7a;
+  margin-bottom: 0.3rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #9a9a9a;
+  margin-top: 0px;
+}
+
+.blog-card-dot {
+  font-size: 0.5rem;
+  opacity: 0.7;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .blogs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-card-thumb {
+    flex-basis: 38%;
+    max-width: 38%;
+  }
+
+  .blog-card-excerpt {
+    -webkit-line-clamp: 2;
+  }
+}

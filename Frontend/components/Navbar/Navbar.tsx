@@ -36,7 +36,7 @@ const Navbar = () => {
       name: "Resume",
       href: "https://docs.google.com/document/d/1fEY7IGmJxj0oGYadzGVkggP15ytDVT0S19W7r32TbfQ/mobilebasic",
     },
-    { name: "Blogs", href: "/blogs" },
+    { name: "Journals", href: "/journals" },
   ];
 
   if (isPreloaderVisible) {
