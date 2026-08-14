@@ -48,6 +48,9 @@ export async function generateMetadata({ params }: BlogPageProps) {
   return {
     title: `${blog.title} - VO Fatoki`,
     description: blog.excerpt || undefined,
+    alternates: {
+      canonical: `/journals/${slug}`,
+    },
     openGraph: {
       title: blog.title,
       description: blog.excerpt || undefined,

@@ -1,0 +1,18 @@
+# Fatoki Victor Oluwabusayo - Portfolio
+
+This is the public portfolio website of Fatoki Victor Oluwabusayo, a Product (UI/UX) Designer and Business Strategist specializing in user research, design strategy, and product design.
+
+## Core Pages
+- **Homepage (`/`):** Hero introduction, work sliders, selected projects list, work experience, and contact forms.
+- **About (`/about`):** Detailed background story, philosophy, design approach, and capabilities.
+- **Resume (`/resume`):** Professional background, roles, skills, and strategic experiences.
+- **Journals (`/journals`):** Collection of articles, case studies, thoughts, and lessons on product design and strategy.
+- **Dynamic Projects (`/project/[slug]`):** Individual case study details including problem, strategy, outcome, and takeaways.
+
+## Key APIs & Data Sources
+- **Supabase Integration:** Dynamic content such as blogs and project details are fetched via Supabase SSR client.
+- **Sitemap (`/sitemap.xml`):** Auto-generated dynamic list of all indexable pages.
+- **Open Graph Image (`/opengraph-image.png`):** High-resolution preview image for social sharing cards.
+
+## Metadata & Search
+- Standardized SEO meta tags, Open Graph tags, and Twitter Card details are configured for optimal sharing previews.
