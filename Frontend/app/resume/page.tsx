@@ -3,6 +3,9 @@ import "./page.css";
 export const metadata = {
   title: "Resume - VO Fatoki",
   description: "View my professional resume.",
+  alternates: {
+    canonical: "/resume",
+  },
 };
 
 export default function ResumePage() {

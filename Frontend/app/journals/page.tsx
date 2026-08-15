@@ -9,6 +9,9 @@ import journalsIcon from "@public/assets/journals-icon.png";
 export const metadata = {
   title: "Journals - VO Fatoki",
   description: "Read my latest thoughts and articles on design, product and process.",
+  alternates: {
+    canonical: "/journals",
+  },
 };
 
 // Always fetch fresh so newly published posts appear without a rebuild.
