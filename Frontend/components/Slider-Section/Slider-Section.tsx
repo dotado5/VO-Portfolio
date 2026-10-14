@@ -11,6 +11,8 @@ import { useSliderStore } from "@/store/useSliderStore";
 import { Loader2 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
+import { fadeInUp, defaultViewport, smoothEase } from "@/utils/motion";
+
 interface SliderSectionProps {
   images?: string[];
 }
@@ -33,10 +35,10 @@ const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
   return (
     <div className="slider-section">
       <motion.h1
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={fadeInUp}
         className="exploration"
       >
         {isProjectPage ? (
@@ -48,17 +50,24 @@ const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
       </motion.h1>
 
       {imagesToDisplay && imagesToDisplay.length > 0 && (
-        <InfiniteSlider duration={50}>
-          {isLoading && globalImages.length === 0 ? (
-            <div className="flex justify-center items-center w-full h-[233px]">
-              <Loader2 className="animate-spin text-gray-400" />
-            </div>
-          ) : (
-            imagesToDisplay.map((url, index) => (
-              <SliderBox key={`img-${index}`} imageUrl={url} />
-            ))
-          )}
-        </InfiniteSlider>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={defaultViewport}
+          transition={{ duration: 0.6, ease: smoothEase, delay: 0.1 }}
+        >
+          <InfiniteSlider duration={50}>
+            {isLoading && globalImages.length === 0 ? (
+              <div className="flex justify-center items-center w-full h-[233px]">
+                <Loader2 className="animate-spin text-gray-400" />
+              </div>
+            ) : (
+              imagesToDisplay.map((url, index) => (
+                <SliderBox key={`img-${index}`} imageUrl={url} />
+              ))
+            )}
+          </InfiniteSlider>
+        </motion.div>
       )}
     </div>
   );

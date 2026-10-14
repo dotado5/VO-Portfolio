@@ -12,14 +12,14 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Fatoki Victor Oluwabusayo || Product Designer & Business Strategist",
+  title: "Fatoki Victor Oluwabusayo || Product Designer & Business Analyst",
   description:
-    "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Strategist that specialize in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
+    "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst that specialize in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
   openGraph: {
     title:
-      "Fatoki Victor Oluwabusayo || Product Designer & Business Strategist",
+      "Fatoki Victor Oluwabusayo || Product Designer & Business Analyst",
     description:
-      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Strategist that specialize in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
+      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst that specialize in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
     url: "./",
     siteName: "Fatoki Victor Oluwabusayo Portfolio",
     images: [
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Fatoki Victor Oluwabusayo || Product Designer & Business Strategist",
+      "Fatoki Victor Oluwabusayo || Product Designer & Business Analyst",
     description:
-      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Strategist that specialize in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
+      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst that specialize in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
     images: ["/opengraph-image.png"],
   },
 };
@@ -52,7 +52,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Fatoki Victor Oluwabusayo",
-    jobTitle: "Product Designer & Business Strategist",
+    jobTitle: "Product Designer & Business Analyst",
     url: siteUrl,
     sameAs: [
       "https://www.linkedin.com/in/fatokivictoroluwabusayo/",

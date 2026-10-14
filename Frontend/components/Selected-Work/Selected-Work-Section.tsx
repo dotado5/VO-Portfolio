@@ -7,6 +7,9 @@ import { useEffect } from "react";
 import { useProjectStore } from "@/store/useProjectStore";
 import { projectService } from "@/services/project.service";
 
+import { motion } from "motion/react";
+import { fadeInUp, defaultViewport } from "@/utils/motion";
+
 const SelectedWorkSection = () => {
   const { projects, isLoading, error, setProjects } = useProjectStore();
 
@@ -26,10 +29,16 @@ const SelectedWorkSection = () => {
 
   return (
     <section className="selected-work-section">
-      <div className="selected-work-header">
+      <motion.div
+        className="selected-work-header"
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={fadeInUp}
+      >
         <Image src={folder} alt="folder" className="selected-work-folder" />
         <h2 className="selected-work-section-title">Selected Works</h2>
-      </div>
+      </motion.div>
 
       {isLoading && <p>Loading projects...</p>}
       {error && <p>Error: {error}</p>}

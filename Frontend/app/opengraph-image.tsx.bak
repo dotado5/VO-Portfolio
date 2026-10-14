@@ -6,7 +6,7 @@ import path from "path";
 export const runtime = "nodejs";
 
 // Image metadata
-export const alt = "Fatoki Victor Oluwabusayo || Product Designer & Business Strategist";
+export const alt = "Fatoki Victor Oluwabusayo || Product Designer & Business Analyst";
 export const size = {
   width: 1200,
   height: 630,
@@ -175,7 +175,7 @@ export default async function Image() {
                 margin: 0,
               }}
             >
-              <span style={{ color: "#525252", fontWeight: 700 }}>Product Designer &amp; Business Strategist</span> by day,{" "}
+              <span style={{ color: "#525252", fontWeight: 700 }}>Product Designer &amp; Business Analyst</span> by day,{" "}
               <span style={{ color: "#525252", fontWeight: 700 }}>Gamer &amp; Arsenal fan</span> by Night
             </p>
           </div>

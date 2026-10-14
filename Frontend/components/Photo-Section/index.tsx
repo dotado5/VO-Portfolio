@@ -8,6 +8,9 @@ import { useEffect } from "react";
 import { useGalleryStore } from "@/store/useGalleryStore";
 import { galleryService } from "@/services/gallery.service";
 
+import { motion } from "motion/react";
+import { fadeInUp, staggerContainer, defaultViewport } from "@/utils/motion";
+
 const PhotoSection = () => {
   const { images, setImages } = useGalleryStore();
 
@@ -31,16 +34,28 @@ const PhotoSection = () => {
 
   return (
     <div className="photo-section">
-      <h1 className="my-photo">
+      <motion.h1
+        className="my-photo"
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={fadeInUp}
+      >
         <Image src={folder} alt="folder" className="w-5 h-5 object-contain" />
         MY PHOTO WALL
-      </h1>
+      </motion.h1>
 
-      <div className="photos">
+      <motion.div
+        className="photos"
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={staggerContainer}
+      >
         {displayItems.map((item, index) => (
           <PhotoCard key={item.id || index} imageUrl={item.image_url} />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -8,6 +8,9 @@ import { useEffect } from "react";
 import { useExperienceStore } from "@/store/useExperienceStore";
 import { experienceService } from "@/services/experience.service";
 
+import { motion } from "motion/react";
+import { fadeInUp, defaultViewport } from "@/utils/motion";
+
 const WorkExperienceSection = ({ homepage }: { homepage: boolean }) => {
   const { experiences, setExperiences } = useExperienceStore();
 
@@ -26,12 +29,16 @@ const WorkExperienceSection = ({ homepage }: { homepage: boolean }) => {
 
   return (
     <div className={`work-experience-section`}>
-      <h1
+      <motion.h1
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={fadeInUp}
         className={`${homepage ? "" : "items-center justify-start"}`}
       >
         <Image src={briefcase} alt="Briefcase" className="w-5 h-5" />
         WORK EXPERIENCE
-      </h1>
+      </motion.h1>
 
       <div className="work-experience-list">
         {experiences.map((exp, index) => (

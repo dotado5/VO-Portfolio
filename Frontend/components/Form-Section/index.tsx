@@ -5,7 +5,7 @@ import Image from "next/image";
 import Form from "../Form";
 import "./index.css";
 import { motion } from "motion/react";
-import { fadeInUp, staggerContainer } from "@/utils/motion";
+import { fadeInUp, staggerContainer, defaultViewport } from "@/utils/motion";
 
 const FormSection = () => {
   return (
@@ -13,7 +13,7 @@ const FormSection = () => {
       className="form-section"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={defaultViewport}
       variants={staggerContainer}
     >
       <motion.div className="form-section-text" variants={fadeInUp}>

@@ -6,6 +6,9 @@ import exportIcon from "@public/assets/export-icon.png";
 import { useProjectStore } from "@/store/useProjectStore";
 import { useEffect, useState } from "react";
 
+import { motion } from "motion/react";
+import { fadeInUp, staggerContainer } from "@/utils/motion";
+
 const Header = () => {
   const selectedProject = useProjectStore((state) => state.selectedProject);
   const [mounted, setMounted] = useState(false);
@@ -25,8 +28,13 @@ const Header = () => {
       : "JANUARY '25";
 
   return (
-    <header className="work-details-header">
-      <div className="header-left">
+    <motion.header
+      className="work-details-header"
+      initial="hidden"
+      animate="visible"
+      variants={staggerContainer}
+    >
+      <motion.div className="header-left" variants={fadeInUp}>
         <div className="project-date">{date}</div>
         <h1 className="project-title">{title}</h1>
         {mounted && selectedProject?.live_site_url && (
@@ -40,9 +48,9 @@ const Header = () => {
             <Image src={exportIcon} alt="" className="live-site-icon" />
           </a>
         )}
-      </div>
+      </motion.div>
 
-      <div className="header-right">
+      <motion.div className="header-right" variants={fadeInUp}>
         <div className="info-block">
           <h3 className="info-label">ROLE:</h3>
           <p className="info-value">
@@ -67,8 +75,8 @@ const Header = () => {
             )}
           </ul>
         </div>
-      </div>
-    </header>
+      </motion.div>
+    </motion.header>
   );
 };
 

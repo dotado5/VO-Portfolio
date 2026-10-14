@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About - VO Fatoki",
-  description: "Learn more about Fatoki Victor Oluwabusayo, Product (UI/UX) Designer & Business Strategist.",
+  description: "Learn more about Fatoki Victor Oluwabusayo, Product (UI/UX) Designer & Business Analyst.",
   alternates: {
     canonical: "/about",
   },

@@ -6,6 +6,8 @@ import { Blog } from "@/types/blog.type";
 import BlogGrid from "@/components/BlogGrid";
 import journalsIcon from "@public/assets/journals-icon.png";
 
+import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
+
 export const metadata = {
   title: "Journals - VO Fatoki",
   description: "Read my latest thoughts and articles on design, product and process.",
@@ -46,28 +48,30 @@ export default async function BlogsPage() {
 
   if (blogs.length === 0) {
     return (
-      <div className="blogs-page">
+      <ScrollReveal className="blogs-page">
         <h1>COMING SOON</h1>
         <p>Kindly check back soon, I&apos;m still writing</p>
-      </div>
+      </ScrollReveal>
     );
   }
 
   return (
     <div className="blogs-list">
-      <header className="blogs-list-header">
-        <div className="blogs-list-title">
-          <span className="blogs-list-icon">
-            <Image src={journalsIcon} alt="" width={56} height={56} priority />
-          </span>
-          <h1>Journals</h1>
-        </div>
-        <p>
-          Thoughts, ideas, stories, and observations on things I find
-          interesting. Some to learn from, some to talk about, and some just to
-          get out of my head.
-        </p>
-      </header>
+      <ScrollReveal>
+        <header className="blogs-list-header">
+          <div className="blogs-list-title">
+            <span className="blogs-list-icon">
+              <Image src={journalsIcon} alt="" width={56} height={56} priority />
+            </span>
+            <h1>Journals</h1>
+          </div>
+          <p>
+            Thoughts, ideas, stories, and observations on things I find
+            interesting. Some to learn from, some to talk about, and some just to
+            get out of my head.
+          </p>
+        </header>
+      </ScrollReveal>
 
       <BlogGrid blogs={blogs} />
     </div>

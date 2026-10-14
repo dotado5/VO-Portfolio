@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useAboutStore } from "@/store/useAboutStore";
 import { aboutService } from "@/services/about.service";
 import { motion } from "motion/react";
-import { fadeInUp, staggerContainer } from "@/utils/motion";
+import { fadeInUp, staggerContainer, defaultViewport } from "@/utils/motion";
 
 const page = () => {
   const { aboutMe, setAboutMe } = useAboutStore();
@@ -66,7 +66,7 @@ const page = () => {
           className="about-me"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-40px" }}
+          viewport={defaultViewport}
           variants={staggerContainer}
         >
           {leadText && (

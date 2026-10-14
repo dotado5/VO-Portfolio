@@ -1,8 +1,16 @@
+"use client";
+
 import "./index.css";
+import { motion } from "motion/react";
+import { fadeInUp } from "@/utils/motion";
 
 const PhotoCard = ({ imageUrl }: { imageUrl?: string }) => {
   return (
-    <div className="photo-card" style={{ overflow: "hidden", position: "relative" }}>
+    <motion.div
+      variants={fadeInUp}
+      className="photo-card"
+      style={{ overflow: "hidden", position: "relative" }}
+    >
       {imageUrl && (
         <img 
           src={imageUrl} 
@@ -10,7 +18,7 @@ const PhotoCard = ({ imageUrl }: { imageUrl?: string }) => {
           style={{ width: "100%", height: "100%", objectFit: "cover" }} 
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 

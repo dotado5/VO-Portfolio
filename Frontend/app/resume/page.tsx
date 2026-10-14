@@ -8,11 +8,13 @@ export const metadata = {
   },
 };
 
+import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
+
 export default function ResumePage() {
   return (
-    <div className="resume-page">
+    <ScrollReveal className="resume-page">
       <h1>COMING SOON</h1>
       <p>Kindly check back soon, I'm still writing</p>
-    </div>
+    </ScrollReveal>
   );
 }

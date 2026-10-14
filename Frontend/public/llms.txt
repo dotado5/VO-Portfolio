@@ -1,6 +1,6 @@
 # Fatoki Victor Oluwabusayo - Portfolio
 
-This is the public portfolio website of Fatoki Victor Oluwabusayo, a Product (UI/UX) Designer and Business Strategist specializing in user research, design strategy, and product design.
+This is the public portfolio website of Fatoki Victor Oluwabusayo, a Product (UI/UX) Designer and Business Analyst specializing in user research, design strategy, and product design.
 
 ## Core Pages
 - **Homepage (`/`):** Hero introduction, work sliders, selected projects list, work experience, and contact forms.

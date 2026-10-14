@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { fadeInUp, staggerContainer } from "@/utils/motion";
+import { fadeInUp, staggerContainer, defaultViewport } from "@/utils/motion";
 import { Blog } from "@/types/blog.type";
 
 import { formatDateUTC } from "@/utils/text";
@@ -21,7 +21,8 @@ export default function BlogGrid({ blogs }: BlogGridProps) {
     <motion.div
       className="blogs-grid"
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={defaultViewport}
       variants={staggerContainer}
     >
       {blogs.map((blog) => (

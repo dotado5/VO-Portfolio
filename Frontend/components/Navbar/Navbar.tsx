@@ -34,7 +34,7 @@ const Navbar = () => {
     { name: "About Me", href: "/about" },
     {
       name: "Resume",
-      href: "https://docs.google.com/document/d/1fEY7IGmJxj0oGYadzGVkggP15ytDVT0S19W7r32TbfQ/mobilebasic",
+      href: "https://docs.google.com/document/d/1kXGV49TvrmxkwZd9jhbFn2fjcQc_YU1a/edit?usp=sharing&ouid=114486917588987690366&rtpof=true&sd=true",
     },
     { name: "Journals", href: "/journals" },
   ];

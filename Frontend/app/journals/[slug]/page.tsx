@@ -60,6 +60,8 @@ export async function generateMetadata({ params }: BlogPageProps) {
   };
 }
 
+import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
+
 export default async function BlogPost({ params }: BlogPageProps) {
   const { slug } = await params;
   const blog = await getBlog(slug);
@@ -71,42 +73,48 @@ export default async function BlogPost({ params }: BlogPageProps) {
   return (
     <article className="blog-post">
       <ViewTracker slug={blog.slug} />
-      <Link href="/journals" className="blog-post-back">
-        <ArrowLeft size={18} />
-        <span>All posts</span>
-      </Link>
+      <ScrollReveal>
+        <Link href="/journals" className="blog-post-back">
+          <ArrowLeft size={18} />
+          <span>All posts</span>
+        </Link>
 
-      <header className="blog-post-header">
-        {blog.tags?.length > 0 && (
-          <div className="blog-post-tags">
-            {blog.tags.map((tag) => (
-              <span key={tag} className="blog-tag">
-                {tag}
-              </span>
-            ))}
+        <header className="blog-post-header">
+          {blog.tags?.length > 0 && (
+            <div className="blog-post-tags">
+              {blog.tags.map((tag) => (
+                <span key={tag} className="blog-tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <h1 className="blog-post-title">{blog.title}</h1>
+
+          <div className="blog-post-meta">
+            <span>{formatDate(blog.published_at)}</span>
+            <span className="blog-card-dot">·</span>
+            <span>{blog.read_time} min read</span>
           </div>
-        )}
-
-        <h1 className="blog-post-title">{blog.title}</h1>
-
-        <div className="blog-post-meta">
-          <span>{formatDate(blog.published_at)}</span>
-          <span className="blog-card-dot">·</span>
-          <span>{blog.read_time} min read</span>
-        </div>
-      </header>
+        </header>
+      </ScrollReveal>
 
       {blog.cover_image && (
-        <div className="blog-post-cover">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={blog.cover_image} alt={blog.title} />
-        </div>
+        <ScrollReveal delay={0.1}>
+          <div className="blog-post-cover">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={blog.cover_image} alt={blog.title} />
+          </div>
+        </ScrollReveal>
       )}
 
-      <div
-        className="blog-content"
-        dangerouslySetInnerHTML={{ __html: blog.content || "" }}
-      />
+      <ScrollReveal delay={0.15}>
+        <div
+          className="blog-content"
+          dangerouslySetInnerHTML={{ __html: blog.content || "" }}
+        />
+      </ScrollReveal>
     </article>
   );
 }

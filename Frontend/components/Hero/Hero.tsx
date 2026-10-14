@@ -53,7 +53,7 @@ const Hero = () => {
         {/* Role Details */}
         <motion.p className="hero-details" variants={fadeInUp}>
           <span className="font-semibold text-[#303030]">
-            Product Designer &amp; Business Strategist
+            Product Designer &amp; Business Analyst
           </span>{" "}
           by day,{" "}
           <span className="font-semibold text-[#303030]">

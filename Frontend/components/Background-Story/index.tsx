@@ -2,7 +2,7 @@
 
 import "./index.css";
 import { motion } from "motion/react";
-import { fadeInUp, staggerContainer } from "@/utils/motion";
+import { fadeInUp, staggerContainer, defaultViewport } from "@/utils/motion";
 
 interface ContentItem {
   text: string;
@@ -20,7 +20,7 @@ const ProjectSection = ({ title, content }: ProjectSectionProps) => {
       className="project-section"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={defaultViewport}
       variants={staggerContainer}
     >
       <motion.div className="section-title-wrapper" variants={fadeInUp}>

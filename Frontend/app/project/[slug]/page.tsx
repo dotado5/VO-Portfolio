@@ -9,6 +9,9 @@ import FormSection from "@/components/Form-Section";
 import { useProjectStore } from "@/store/useProjectStore";
 import SliderSection from "@/components/Slider-Section/Slider-Section";
 
+import { motion } from "motion/react";
+import { defaultViewport, smoothEase } from "@/utils/motion";
+
 interface ProjectPageProps {
   params: Promise<{
     slug: string;
@@ -83,13 +86,19 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
   return (
     <div>
       <Header />
-      <div className="snapshot-container">
+      <motion.div
+        className="snapshot-container"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={defaultViewport}
+        transition={{ duration: 0.6, ease: smoothEase }}
+      >
         <img
           src={selectedProject.images?.[0] || snapshot.src}
           alt={`${selectedProject.title} view 1`}
           className="snapshot-half"
         />
-      </div>
+      </motion.div>
       <ProjectSection
         title="BACKGROUND STORY"
         content={backgroundStoryContent}
@@ -106,13 +115,19 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
       )}
       <ProjectSection title="KEY TAKEAWAY" content={takeawayContent} />
 
-      <div className="snapshot-container">
+      <motion.div
+        className="snapshot-container"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={defaultViewport}
+        transition={{ duration: 0.6, ease: smoothEase }}
+      >
         <img
           src={selectedProject.images?.[1] || snapshot.src}
           alt={`${selectedProject.title} view 3`}
           className="snapshot-half"
         />
-      </div>
+      </motion.div>
       <FormSection />
     </div>
   );
