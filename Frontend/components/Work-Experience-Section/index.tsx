@@ -11,12 +11,24 @@ import { experienceService } from "@/services/experience.service";
 import { motion } from "motion/react";
 import { fadeInUp, defaultViewport } from "@/utils/motion";
 
-const WorkExperienceSection = ({ homepage }: { homepage: boolean }) => {
+interface WorkExperienceSectionProps {
+  homepage: boolean;
+  initialExperiences?: any[];
+}
+
+const WorkExperienceSection = ({
+  homepage,
+  initialExperiences,
+}: WorkExperienceSectionProps) => {
   const { experiences, setExperiences } = useExperienceStore();
 
   useEffect(() => {
-    fetchExperiences();
-  }, []);
+    if (initialExperiences && initialExperiences.length > 0) {
+      setExperiences(initialExperiences);
+    } else {
+      fetchExperiences();
+    }
+  }, [initialExperiences, setExperiences]);
 
   const fetchExperiences = async () => {
     try {
@@ -27,6 +39,9 @@ const WorkExperienceSection = ({ homepage }: { homepage: boolean }) => {
     }
   };
 
+  const displayExperiences =
+    experiences.length > 0 ? experiences : initialExperiences || [];
+
   return (
     <div className={`work-experience-section`}>
       <motion.h1
@@ -36,14 +51,14 @@ const WorkExperienceSection = ({ homepage }: { homepage: boolean }) => {
         variants={fadeInUp}
         className={`${homepage ? "" : "items-center justify-start"}`}
       >
-        <Image src={briefcase} alt="Briefcase" className="w-5 h-5" />
+        <Image src={briefcase} alt="" aria-hidden="true" className="w-5 h-5" />
         WORK EXPERIENCE
       </motion.h1>
 
       <div className="work-experience-list">
-        {experiences.map((exp, index) => (
+        {displayExperiences.map((exp, index) => (
           <WorkExperienceBox
-            key={index}
+            key={exp.id || index}
             type={exp.type}
             date={exp.date}
             role={exp.role}

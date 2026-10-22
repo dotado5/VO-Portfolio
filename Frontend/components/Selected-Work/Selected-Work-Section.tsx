@@ -10,22 +10,35 @@ import { projectService } from "@/services/project.service";
 import { motion } from "motion/react";
 import { fadeInUp, defaultViewport } from "@/utils/motion";
 
-const SelectedWorkSection = () => {
+import { Project } from "@/types/project.type";
+
+interface SelectedWorkSectionProps {
+  initialProjects?: Project[];
+}
+
+const SelectedWorkSection = ({ initialProjects }: SelectedWorkSectionProps) => {
   const { projects, isLoading, error, setProjects } = useProjectStore();
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    if (initialProjects && initialProjects.length > 0) {
+      setProjects(initialProjects);
+    } else {
+      fetchProjects();
+    }
+  }, [initialProjects, setProjects]);
 
   const fetchProjects = async () => {
     try {
-      const projects = await projectService.getAllProjects();
-      setProjects(projects);
-      return projects;
+      const fetched = await projectService.getAllProjects();
+      setProjects(fetched);
+      return fetched;
     } catch (error: any) {
       console.log(error.message || "Failed to fetch projects");
     }
   };
+
+  const displayProjects =
+    projects.length > 0 ? projects : initialProjects || [];
 
   return (
     <section className="selected-work-section">
@@ -36,15 +49,20 @@ const SelectedWorkSection = () => {
         viewport={defaultViewport}
         variants={fadeInUp}
       >
-        <Image src={folder} alt="folder" className="selected-work-folder" />
+        <Image
+          src={folder}
+          alt=""
+          aria-hidden="true"
+          className="selected-work-folder"
+        />
         <h2 className="selected-work-section-title">Selected Works</h2>
       </motion.div>
 
-      {isLoading && <p>Loading projects...</p>}
-      {error && <p>Error: {error}</p>}
+      {isLoading && displayProjects.length === 0 && <p>Loading projects...</p>}
+      {error && displayProjects.length === 0 && <p>Error: {error}</p>}
 
       <div className="selected-work-list">
-        {projects.map((project, index) => (
+        {displayProjects.map((project, index) => (
           <SelectedWorkBox
             key={project.id}
             project={project}

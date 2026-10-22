@@ -50,8 +50,8 @@ const Navbar = () => {
           {/* Logo */}
 
           <div className="flex items-center gap-4">
-            <Link href="/" className={`${scriptFont.className} logo`}>
-              <Image src={vo_logo} alt="Logo" priority />
+            <Link href="/" className={`${scriptFont.className} logo`} aria-label="Fatoki Victor Oluwabusayo - Home">
+              <Image src={vo_logo} alt="Fatoki Victor Oluwabusayo" priority />
             </Link>
 
             <div className="nav-links">
@@ -80,11 +80,11 @@ const Navbar = () => {
               target="_blank"
             >
               <span className="cta-text">Work with me</span>
-              <Image src={exportIcon} alt="Export Icon" />
+              <Image src={exportIcon} alt="" aria-hidden="true" />
             </Link>
 
             {/* Mobile Menu Button */}
-            <button className="mobile-menu-btn" onClick={toggleMenu}>
+            <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Open mobile menu">
               <Menu size={28} />
             </button>
           </div>
@@ -109,8 +109,9 @@ const Navbar = () => {
               href="/"
               className={`${scriptFont.className} logo`}
               onClick={() => setIsMenuOpen(false)}
+              aria-label="Fatoki Victor Oluwabusayo - Home"
             >
-              <Image src={vo_logo} alt="Logo" priority />
+              <Image src={vo_logo} alt="Fatoki Victor Oluwabusayo" priority />
             </Link>
             <button
               className="p-2 text-gray-600 hover:text-black transition-colors"

@@ -9,9 +9,12 @@ import { fadeInUp, staggerContainer } from "@/utils/motion";
 
 const Hero = () => {
   const socials = [
-    { name: "LINKEDIN", href: "https://www.linkedin.com/in/fatokivictoroluwabusayo/" },
+    {
+      name: "LINKEDIN",
+      href: "https://www.linkedin.com/in/fatokivictoroluwabusayo/",
+    },
     { name: "TWITTER", href: "https://x.com/therealbusayor" },
-    { name: "CONTRA", href: "http://vofatoki.work/" },
+    { name: "EMAIL", href: "mailto:fatokivictor2@gmail.com" },
   ];
 
   return (
@@ -69,10 +72,15 @@ const Hero = () => {
               key={link.name}
               href={link.href}
               className="social-link"
-              target="_blank"
-              rel="noopener noreferrer"
+              target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+              rel={
+                link.href.startsWith("mailto:")
+                  ? undefined
+                  : "noopener noreferrer"
+              }
             >
-              {link.name} <Image src={exportIcon} alt="Export Icon" />
+              {link.name}{" "}
+              <Image src={exportIcon} alt="" aria-hidden="true" />
             </a>
           ))}
         </motion.div>

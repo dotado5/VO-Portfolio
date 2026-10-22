@@ -8,18 +8,21 @@ const siteUrl =
   process.env.NEXT_PUBLIC_APP_URL ||
   (process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000");
+    : "https://www.vofatoki.work");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Fatoki Victor Oluwabusayo || Product Designer & Business Analyst",
   description:
-    "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst that specialize in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
+    "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst who specializes in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title:
       "Fatoki Victor Oluwabusayo || Product Designer & Business Analyst",
     description:
-      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst that specialize in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
+      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst who specializes in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
     url: "./",
     siteName: "Fatoki Victor Oluwabusayo Portfolio",
     images: [
@@ -38,7 +41,7 @@ export const metadata: Metadata = {
     title:
       "Fatoki Victor Oluwabusayo || Product Designer & Business Analyst",
     description:
-      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst that specialize in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
+      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst who specializes in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
     images: ["/opengraph-image.png"],
   },
 };
@@ -52,12 +55,24 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Fatoki Victor Oluwabusayo",
+    alternateName: ["VO Fatoki", "Victor Oluwabusayo Fatoki"],
     jobTitle: "Product Designer & Business Analyst",
     url: siteUrl,
+    email: "mailto:fatokivictor2@gmail.com",
+    description:
+      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst who specializes in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
     sameAs: [
       "https://www.linkedin.com/in/fatokivictoroluwabusayo/",
       "https://x.com/therealbusayor",
-      "http://vofatoki.work/",
+    ],
+    knowsAbout: [
+      "Product Design",
+      "UI/UX Design",
+      "Business Analysis",
+      "Design Systems",
+      "User Research",
+      "Interaction Design",
+      "Product Strategy",
     ],
   };
 

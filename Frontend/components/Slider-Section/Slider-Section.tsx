@@ -44,7 +44,12 @@ const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
         {isProjectPage ? (
           ""
         ) : (
-          <Image src={magicPen} alt="magicPen" className="w-5 h-5" />
+          <Image
+            src={magicPen}
+            alt=""
+            aria-hidden="true"
+            className="w-5 h-5"
+          />
         )}
         {isProjectPage ? "" : "RECENT EXPLORATIONS"}
       </motion.h1>

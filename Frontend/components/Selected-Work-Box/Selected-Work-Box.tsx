@@ -2,10 +2,10 @@
 
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import "./Selected-Work-Box.css";
 import { motion } from "motion/react";
 import { useProjectStore } from "@/store/useProjectStore";
-import { useRouter } from "next/navigation";
 import { Project } from "@/types/project.type";
 import { stripHtml, formatDateMonthYearUTC } from "@/utils/text";
 
@@ -21,21 +21,18 @@ const SelectedWorkBox = ({
   const setSelectedProject = useProjectStore(
     (state) => state.setSelectedProject,
   );
-  const router = useRouter();
 
-  const handleClick = () => {
-    setSelectedProject(project);
-    router.push(`/project/${project.slug}`);
-  };
-
-  const imageSrc = project.images[0] || "";
+  const imageSrc = project.images?.[0] || "";
   const dateStr = formatDateMonthYearUTC(project.delivery_date);
   const title = project.title;
   const plainStory = stripHtml(project.background_story);
-  const description = plainStory;
+  const description =
+    plainStory ||
+    stripHtml(project.background_story_sub) ||
+    stripHtml(project.problem);
 
   return (
-    <motion.div
+    <motion.article
       className={`selected-work-box ${reverse ? "reverse" : ""}`}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -45,38 +42,47 @@ const SelectedWorkBox = ({
       {/* Image container */}
       <div className="selected-work-image-container">
         {imageSrc && (
-          <Image
-            src={imageSrc}
-            alt={title}
-            fill
-            className="selected-work-image"
-          />
+          <Link
+            href={`/project/${project.slug}`}
+            onClick={() => setSelectedProject(project)}
+            aria-label={`View case study: ${title}`}
+            className="block w-full h-full relative"
+          >
+            <Image
+              src={imageSrc}
+              alt={title}
+              fill
+              className="selected-work-image"
+            />
+          </Link>
         )}
       </div>
 
       {/* Content */}
       <div className={`selected-work-content ${reverse ? "reverse" : ""}`}>
         <div className="selected-work-date-badge">{dateStr}</div>
-        <h3 className="selected-work-title">{title}</h3>
+        <h3 className="selected-work-title">
+          <Link
+            href={`/project/${project.slug}`}
+            onClick={() => setSelectedProject(project)}
+            className="hover:underline text-inherit"
+          >
+            {title}
+          </Link>
+        </h3>
         <p className="selected-work-description">{description}</p>
-        <motion.button
-          className="selected-work-link"
-          onClick={handleClick}
-          whileHover="hover"
+        <Link
+          href={`/project/${project.slug}`}
+          onClick={() => setSelectedProject(project)}
+          className="selected-work-link group"
         >
           Read Case Study
-          <motion.div
-            className="selected-work-link-icon"
-            variants={{
-              hover: { x: 2, y: -2 },
-            }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
+          <div className="selected-work-link-icon transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
             <ArrowUpRight size={10} strokeWidth={3} />
-          </motion.div>
-        </motion.button>
+          </div>
+        </Link>
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 

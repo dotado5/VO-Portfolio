@@ -41,7 +41,12 @@ const PhotoSection = () => {
         viewport={defaultViewport}
         variants={fadeInUp}
       >
-        <Image src={folder} alt="folder" className="w-5 h-5 object-contain" />
+        <Image
+          src={folder}
+          alt=""
+          aria-hidden="true"
+          className="w-5 h-5 object-contain"
+        />
         MY PHOTO WALL
       </motion.h1>
 

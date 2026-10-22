@@ -85,7 +85,7 @@ const Form = () => {
         transition={{ duration: 0.15 }}
       >
         {status === "sending" ? "SENDING..." : "SEND MESSAGE"}
-        <Image src={exportIcon} alt="Export Icon" />
+        <Image src={exportIcon} alt="" aria-hidden="true" />
       </motion.button>
       {feedback && (
         <p
