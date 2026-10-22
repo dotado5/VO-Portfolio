@@ -53,26 +53,50 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Fatoki Victor Oluwabusayo",
-    alternateName: ["VO Fatoki", "Victor Oluwabusayo Fatoki"],
-    jobTitle: "Product Designer & Business Analyst",
-    url: siteUrl,
-    email: "mailto:fatokivictor2@gmail.com",
-    description:
-      "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst who specializes in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
-    sameAs: [
-      "https://www.linkedin.com/in/fatokivictoroluwabusayo/",
-      "https://x.com/therealbusayor",
-    ],
-    knowsAbout: [
-      "Product Design",
-      "UI/UX Design",
-      "Business Analysis",
-      "Design Systems",
-      "User Research",
-      "Interaction Design",
-      "Product Strategy",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        url: siteUrl,
+        name: "Fatoki Victor Oluwabusayo",
+        alternateName: ["VO Fatoki", "Fatoki Victor Oluwabusayo Portfolio"],
+        description:
+          "Portfolio of Fatoki Victor Oluwabusayo, Product (UI/UX) Designer and Business Analyst.",
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": `${siteUrl}/#profilepage`,
+        url: siteUrl,
+        name: "Fatoki Victor Oluwabusayo || Product Designer & Business Analyst",
+        isPartOf: {
+          "@id": `${siteUrl}/#website`,
+        },
+        mainEntity: {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          name: "Fatoki Victor Oluwabusayo",
+          alternateName: ["VO Fatoki", "Victor Oluwabusayo Fatoki"],
+          jobTitle: "Product Designer & Business Analyst",
+          url: siteUrl,
+          image: `${siteUrl}/opengraph-image.png`,
+          email: "mailto:fatokivictor2@gmail.com",
+          description:
+            "Fatoki Victor Oluwabusayo is a Product (UI/UX) Designer and Business Analyst who specializes in predicting what your users want before they do and designing it beautifully. So your product doesn't just look good, it sells better.",
+          sameAs: [
+            "https://www.linkedin.com/in/fatokivictoroluwabusayo/",
+            "https://x.com/therealbusayor",
+          ],
+          knowsAbout: [
+            "Product Design",
+            "UI/UX Design",
+            "Business Analysis",
+            "Design Systems",
+            "User Research",
+            "Interaction Design",
+            "Product Strategy",
+          ],
+        },
+      },
     ],
   };
 
