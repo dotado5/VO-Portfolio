@@ -10,6 +10,7 @@ import { fadeInUp, staggerContainer, defaultViewport } from "@/utils/motion";
 const FormSection = () => {
   return (
     <motion.div
+      id="contact"
       className="form-section"
       initial="hidden"
       whileInView="visible"
