@@ -42,7 +42,7 @@ const Hero = () => {
       {/* Main Heading */}
       <motion.div className="hero-text" variants={staggerContainer}>
         <motion.h1 className="hero-title" variants={fadeInUp}>
-          Hi, I'm Fatoki Victor Oluwabusayo.
+          Hi, I&apos;m Fatoki Victor Oluwabusayo.{" "}
           <span className="text-[#303030]">Product Designer</span>
         </motion.h1>
 

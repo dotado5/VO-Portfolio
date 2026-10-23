@@ -11,11 +11,13 @@
   @apply flex-1 w-full lg:w-[70%];
 }
 
-.form-section h2 {
+.form-section-label,
+.form-section .form-section-label {
   @apply flex items-center gap-1 text-[#303030] text-[16px] md:text-[16px] font-[700] mb-3 uppercase;
 }
 
-.form-section h1 {
+.form-section h1,
+.form-section h2 {
   @apply text-base sm:text-[22px] md:text-[28px] font-[700] leading-[1.2] mb-[7px] text-[#303030];
 }
 

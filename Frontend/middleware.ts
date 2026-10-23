@@ -3,6 +3,7 @@ import { createClient } from '@/utils/supabase/middleware'
 
 const allowedOrigins = [
   'http://localhost:3000',
+  'https://vofatoki.work',
   'https://www.vofatoki.work',
   'https://vo-portfolio-virid.vercel.app'
   // Add your accepted URLs here

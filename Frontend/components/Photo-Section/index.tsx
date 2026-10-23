@@ -34,7 +34,7 @@ const PhotoSection = () => {
 
   return (
     <div className="photo-section">
-      <motion.h1
+      <motion.h2
         className="my-photo"
         initial="hidden"
         whileInView="visible"
@@ -48,7 +48,7 @@ const PhotoSection = () => {
           className="w-5 h-5 object-contain"
         />
         MY PHOTO WALL
-      </motion.h1>
+      </motion.h2>
 
       <motion.div
         className="photos"

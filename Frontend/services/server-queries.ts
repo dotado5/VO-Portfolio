@@ -60,3 +60,22 @@ export async function getAboutMe(): Promise<any | null> {
     return null;
   }
 }
+
+export async function getSliderImages(): Promise<string[]> {
+  try {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from("SliderImage")
+      .select("image_url")
+      .order("position", { ascending: true, nullsFirst: false })
+      .order("created_at", { ascending: false });
+    if (error) {
+      console.error("Error fetching slider images server-side:", error.message);
+      return [];
+    }
+    return (data || []).map((item: any) => item.image_url);
+  } catch (err) {
+    console.error("Server fetch slider images failed:", err);
+    return [];
+  }
+}

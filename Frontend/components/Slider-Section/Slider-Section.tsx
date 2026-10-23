@@ -15,26 +15,33 @@ import { fadeInUp, defaultViewport, smoothEase } from "@/utils/motion";
 
 interface SliderSectionProps {
   images?: string[];
+  initialImages?: string[];
 }
 
-const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
+const SliderSection = ({
+  images: projectSliderImages,
+  initialImages,
+}: SliderSectionProps) => {
   const { images: globalImages, isLoading, fetchImages } = useSliderStore();
   const pathName = usePathname();
   const isProjectPage = pathName.includes("/project");
 
   useEffect(() => {
-    if (!isProjectPage) {
+    if (!isProjectPage && (!initialImages || initialImages.length === 0)) {
       fetchImages();
     }
-  }, [fetchImages, isProjectPage]);
+  }, [fetchImages, isProjectPage, initialImages]);
 
+  const globalUrls = globalImages.map((img) => img.image_url);
   const imagesToDisplay = isProjectPage
     ? projectSliderImages
-    : globalImages.map((img) => img.image_url);
+    : globalUrls.length > 0
+    ? globalUrls
+    : initialImages;
 
   return (
     <div className="slider-section">
-      <motion.h1
+      <motion.h2
         initial="hidden"
         whileInView="visible"
         viewport={defaultViewport}
@@ -52,7 +59,7 @@ const SliderSection = ({ images: projectSliderImages }: SliderSectionProps) => {
           />
         )}
         {isProjectPage ? "" : "RECENT EXPLORATIONS"}
-      </motion.h1>
+      </motion.h2>
 
       {imagesToDisplay && imagesToDisplay.length > 0 && (
         <motion.div

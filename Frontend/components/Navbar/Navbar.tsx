@@ -39,10 +39,6 @@ const Navbar = () => {
     { name: "Journals", href: "/journals" },
   ];
 
-  if (isPreloaderVisible) {
-    return null;
-  }
-
   return (
     <>
       <nav className="navbar">

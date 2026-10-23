@@ -18,15 +18,15 @@ const FormSection = () => {
       variants={staggerContainer}
     >
       <motion.div className="form-section-text" variants={fadeInUp}>
-        <h2>
+        <div className="form-section-label">
           <Image src={messageIcon} alt="" aria-hidden="true" className="w-5 h-5" />
           GET IN TOUCH
-        </h2>
+        </div>
 
-        <h1>
+        <h2>
           Always looking for meaningful problems, fun teams, and ideas worth
           building.
-        </h1>
+        </h2>
         <p>
           If this sounds like you, let’s connect. You can also email me directly at{" "}
           <a

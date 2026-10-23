@@ -5,7 +5,7 @@ export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = (
-    process.env.NEXT_PUBLIC_APP_URL || "https://www.vofatoki.work"
+    process.env.NEXT_PUBLIC_APP_URL || "https://vofatoki.work"
   ).replace(/\/$/, "");
 
   const routes: MetadataRoute.Sitemap = [

@@ -43,10 +43,15 @@ const Form = () => {
     <form className="contact-form" onSubmit={handleSubmit}>
       <div className="form-row">
         <div className="form-group">
+          <label htmlFor="name" className="sr-only">
+            Your Name
+          </label>
           <input
             type="text"
             id="name"
+            name="name"
             placeholder="Name"
+            aria-label="Your Name"
             className="form-input"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -54,10 +59,15 @@ const Form = () => {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="email" className="sr-only">
+            Your Email Address
+          </label>
           <input
             type="email"
             id="email"
+            name="email"
             placeholder="Email Address"
+            aria-label="Your Email Address"
             className="form-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -66,9 +76,14 @@ const Form = () => {
         </div>
       </div>
       <div className="form-group">
+        <label htmlFor="message" className="sr-only">
+          Your Message
+        </label>
         <textarea
           id="message"
+          name="message"
           placeholder="Message"
+          aria-label="Your Message"
           className="form-textarea"
           rows={1}
           value={message}

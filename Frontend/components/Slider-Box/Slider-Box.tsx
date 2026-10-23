@@ -13,8 +13,9 @@ const SliderBox = ({ color, imageUrl }: SliderBoxProps) => {
       {imageUrl ? (
         <img
           src={imageUrl}
-          alt="Slider Item"
+          alt="Design exploration by Victor Fatoki"
           className="sliderBox-img"
+          loading="lazy"
         />
       ) : (
         <div className="sliderBox-placeholder" />

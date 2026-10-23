@@ -44,7 +44,7 @@ const WorkExperienceSection = ({
 
   return (
     <div className={`work-experience-section`}>
-      <motion.h1
+      <motion.h2
         initial="hidden"
         whileInView="visible"
         viewport={defaultViewport}
@@ -53,7 +53,7 @@ const WorkExperienceSection = ({
       >
         <Image src={briefcase} alt="" aria-hidden="true" className="w-5 h-5" />
         WORK EXPERIENCE
-      </motion.h1>
+      </motion.h2>
 
       <div className="work-experience-list">
         {displayExperiences.map((exp, index) => (
